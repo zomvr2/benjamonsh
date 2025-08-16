@@ -9,6 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.12.8"
+    "@fontsource/montserrat": "^5.2.6",
+    "@fontsource/nanum-pen-script": "^5.2.6",
+    "@tailwindcss/vite": "^4.1.12",
+    "astro": "^5.12.8",
+    "tailwindcss": "^4.1.12"
   }
 }

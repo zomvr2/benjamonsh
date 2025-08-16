@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@import "@fontsource/montserrat/300.css";
+@import "@fontsource/montserrat/400.css";
+@import "@fontsource/montserrat/500.css";
+@import "@fontsource/montserrat/700.css";
+@import "@fontsource/montserrat/800.css";
+@import "@fontsource/montserrat/900.css";
+@import "@fontsource/nanum-pen-script/400.css";
+
+@theme {
+  --font-sans: 'Montserrat', 'sans-serif';
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #FFF7F7;
+}
+
+.nanum-pen {
+  font-family: "Nanum Pen Script", cursive;
+  font-weight: 400;
+  display: inline-block;
+  vertical-align: middle;
+  color: #193cb8;
+}
