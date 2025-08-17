@@ -3,17 +3,8 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-import { GET as spotifyAPI } from "./api/spotify";
-
-let song = { isPlaying: false };
-try {
-  const res = await spotifyAPI();
-  // spotifyAPI returns a Response created in the API file; parse it:
-  song = await res.json();
-} catch (err) {
-  console.error("spotify API call failed during build:", err);
-  song = { isPlaying: false };
-}
+const res = await fetch(Astro.url.origin + "/api/spotify");
+const song = await res.json();
 
 const favoriteSongs = ["2vCty4hAoeqMpu90X48FAM", "6y0HWXD9L1VocIivzrznIT", "1lvveqa2wWop6IKu7hYrJH"];
 ---
