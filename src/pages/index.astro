@@ -14,13 +14,13 @@ import Footer from "../components/Footer.astro";
 	</head>
 	<body>
 		<Header />
-		<main class="px-[60px]">
-			<section class="py-12 flex flex-col gap-7">
+		<main class="px-5 md:px-[60px]">
+			<section class="max-w-[1024px] mx-auto py-12 flex flex-col gap-7">
 				<div class="flex flex-col gap-1">
 					<h1 class="font-medium text-4xl">¡Hola! Soy Benjamín,</h1>
 					<h2 class="font-black text-6xl">
 						Desarrollo web y de apps móviles para hacer <span
-							class="text-blue-500">crecer</span
+							class="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">crecer</span
 						> tu negocio 🚀
 					</h2>
 					<p class="font-medium text-lg text-[#333333]">
@@ -28,10 +28,10 @@ import Footer from "../components/Footer.astro";
 						destacar.
 					</p>
 				</div>
-				<div class="flex flex-row gap-3.5">
+				<div class="flex flex-col md:flex-row gap-3.5">
 					<a
 						href="/contacto"
-						class="flex items-center gap-1 font-medium bg-[#000000] text-white px-7 py-2 rounded-xl text-lg text-center"
+						class="flex w-full md:w-fit items-center gap-1 font-medium bg-[#000000] text-white px-7 py-4 md:py-2 rounded-xl text-lg text-center"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ import Footer from "../components/Footer.astro";
 					<div class="flex flex-row gap-3.5">
 						<a
 							href="/contacto"
-							class="flex items-center gap-1 font-medium bg-white text-black px-7 py-2 rounded-xl text-lg border border-[#CCC] text-center"
+							class="flex w-full md:w-fit items-center gap-1 font-medium bg-white text-black px-7 py-4 md:py-2 rounded-xl text-lg border border-[#CCC] text-center"
 						>
 							Ver proyectos</a
 						>

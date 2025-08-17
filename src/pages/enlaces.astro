@@ -20,11 +20,11 @@ const favoriteSongs = ["2vCty4hAoeqMpu90X48FAM", "6y0HWXD9L1VocIivzrznIT"];
 	<body>
 		<Header />
 		<main
-			class="container mx-auto py-12 flex flex-col items-center justify-center"
+			class="max-w-[512px] mx-auto py-12 px-5 flex flex-col"
 		>
 			{
 				song.isPlaying && (
-					<section class="flex flex-col gap-[10px] min-w-1/4">
+					<section class="flex flex-col gap-[10px]">
 						<p class="font-bold text-lg text-center">
 							benjamonsh está escuchando ahora
 						</p>
@@ -95,7 +95,7 @@ const favoriteSongs = ["2vCty4hAoeqMpu90X48FAM", "6y0HWXD9L1VocIivzrznIT"];
 					</section>
 				)
 			}
-			<section class="flex flex-col gap-4 mt-8 w-1/4">
+			<section class="flex flex-col gap-4 mt-8">
 				<h2 class="font-bold text-3xl text-center">Mis Enlaces</h2>
 				<ul class="flex flex-col gap-3">
 					<li>
