@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* Fontsource imports (Montserrat is the global font; Nanum Pen Script available via .font-nanum) */
+@import "@fontsource-variable/montserrat/index.css";
+@import "@fontsource/nanum-pen-script/index.css";
+
+:root {
+  --background: #FFF7F7;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* Use the variable Montserrat font if available, fall back to system sans */
+  font-family: "MontserratVariable", "Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+.font-nanum {
+  font-family: "Nanum Pen Script", cursive;
+  font-weight: 400;
+  display: inline-block;
+  vertical-align: middle;
+  color: #193cb8;
+}

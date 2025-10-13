@@ -1,0 +1,89 @@
+export default function Footer() {
+  return (
+    <footer
+      className="p-[60px] flex flex-col-reverse md:flex-row items-center justify-between gap-5"
+    >
+      <p className="font-normal text-[#A3A3A3] text-base text-center">
+        &copy; {new Date().getFullYear()} benjamonsh. Todos los derechos reservados.
+      </p>
+      <div className="flex gap-4">
+        <a href="/enlaces" target="_self">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#000"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            className="icon icon-tabler icons-tabler-outline icon-tabler-link"
+          ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+            d="M9 15l6 -6"></path><path
+              d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464"></path><path
+                d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463"
+              ></path></svg
+          >
+        </a>
+        <a href="https://github.com/zomvr2" target="_blank">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#000"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            className="icon icon-tabler icons-tabler-outline icon-tabler-brand-github"
+          ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+            d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+          ></path></svg
+          >
+        </a>
+        <a href="https://www.instagram.com/benjamonsh/" target="_blank">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#000"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            className="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram"
+          ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+            d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z"
+          ></path><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path><path
+            d="M16.5 7.5v.01"></path></svg
+          >
+        </a>
+        <a
+          href="https://open.spotify.com/user/0h5li5o0jmc9r1pw12lxt4jvn"
+          target="_blank"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#000"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            className="icon icon-tabler icons-tabler-outline icon-tabler-brand-spotify"
+          ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+            d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path
+              d="M8 11.973c2.5 -1.473 5.5 -.973 7.5 .527"></path><path
+                d="M9 15c1.5 -1 4 -1 5 .5"></path><path d="M7 9c2 -1 6 -2 10 .5"
+                ></path></svg
+          >
+        </a>
+      </div>
+    </footer>
+  );
+}

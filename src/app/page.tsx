@@ -1,0 +1,59 @@
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+export default function Home() {
+  return (
+    <>
+      <Header />
+      <main className="px-5 md:px-[60px]">
+        <section className="max-w-[1024px] mx-auto py-12 flex flex-col gap-7">
+          <div className="flex flex-col gap-1">
+            <h1 className="font-medium text-4xl">¡Hola! Soy Benjamín,</h1>
+            <h2 className="font-black text-6xl">
+              Desarrollo web y de apps móviles para hacer <span
+                className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">crecer</span
+              > tu negocio 🚀
+            </h2>
+            <p className="font-medium text-lg text-[#333333]">
+              Creo soluciones digitales que impulsan tu negocio y te ayudan a
+              destacar.
+            </p>
+          </div>
+          <div className="flex flex-col md:flex-row gap-3.5">
+            <a
+              href="/contacto"
+              className="flex w-full md:w-fit items-center gap-1 font-medium bg-[#000000] text-white px-7 py-4 md:py-2 rounded-xl text-lg text-center transition-all hover:scale-105 hover:shadow-lg"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="icon icon-tabler icons-tabler-outline icon-tabler-bubble-text"
+              ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+                d="M7 10h10"></path><path d="M9 14h5"></path><path
+                  d="M12.4 3a5.34 5.34 0 0 1 4.906 3.239a5.333 5.333 0 0 1 -1.195 10.6a4.26 4.26 0 0 1 -5.28 1.863l-3.831 2.298v-3.134a2.668 2.668 0 0 1 -1.795 -3.773a4.8 4.8 0 0 1 2.908 -8.933a5.33 5.33 0 0 1 4.287 -2.16"
+                ></path>
+              </svg>
+              Habla conmigo</a
+            >
+            <div className="flex flex-row gap-3.5">
+              <a
+                href="/contacto"
+                className="flex w-full md:w-fit items-center gap-1 font-medium bg-white text-black px-7 py-4 md:py-2 rounded-xl text-lg border border-[#CCC] text-center transition-all hover:scale-105 hover:shadow-lg"
+              >
+                Ver proyectos</a
+              >
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}
