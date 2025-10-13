@@ -14,7 +14,7 @@ export default function Header() {
           <li><a href="/proyectos" className="font-medium text-base">Proyectos</a></li>
           <li className="hidden lg:block">
             <a
-              href="/contacto"
+              href="mailto:zodev@proton.me"
               className="font-medium text-base text-white bg-blue-800 px-4 py-2 rounded-lg"
             >¡Quiero un sitio web!</a>
           </li>

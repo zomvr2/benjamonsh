@@ -1,11 +1,16 @@
 export default function Footer() {
   return (
     <footer
-      className="p-[60px] flex flex-col-reverse md:flex-row items-center justify-between gap-5"
+      className="p-[60px] flex flex-col-reverse md:flex-row items-center justify-between gap-5 bg-[#3b1e8e]"
     >
-      <p className="font-normal text-[#A3A3A3] text-base text-center">
-        &copy; {new Date().getFullYear()} benjamonsh. Todos los derechos reservados.
-      </p>
+      <div>
+        <p className="font-semibold text-gray-200 text-base text-center md:text-left">
+          Hecho por benjamooooooooooonsh :)
+        </p>
+        <p className="font-normal text-gray-200 text-base text-center md:text-left mt-3">
+          &copy; {new Date().getFullYear()} benjamonsh. Todos los derechos reservados.
+        </p>
+      </div>
       <div className="flex gap-4">
         <a href="/enlaces" target="_self">
           <svg
@@ -14,7 +19,7 @@ export default function Footer() {
             height="30"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#000"
+            stroke="#fff"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -33,7 +38,7 @@ export default function Footer() {
             height="30"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#000"
+            stroke="#fff"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -50,7 +55,7 @@ export default function Footer() {
             height="30"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#000"
+            stroke="#fff"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -71,7 +76,7 @@ export default function Footer() {
             height="30"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#000"
+            stroke="#fff"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
