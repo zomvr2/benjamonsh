@@ -93,12 +93,12 @@ export default function Home() {
           <p className="font-medium text-lg">¡Tu proyecto podría estar aquí! <a href="/#contacto" className="text-[#6C48C5]">Cuéntame tu idea.</a></p>
         </ section>
 
-        <section id="contacto" className="max-w-[1024px] mx-auto py-12 flex flex-col gap-7">
+        <section id="contacto" className="max-w-[1024px] mx-auto flex flex-col gap-7 py-12">
           <div>
             <h3 className="text-lg text-center md:text-left text-blue-800 font-bold">Contacto</h3>
             <h2 className="text-3xl text-center md:text-left font-bold">¿Tienes una buena idea en mente? ¡Cuentamela!</h2>
           </div>
-          <section className="grid grid-rows-2 md:grid-cols-2 gap-4">
+          <section className="grid grid-rows-2 md:grid-rows-none md:grid-cols-2 gap-4">
             <article className="bg-white border border-[#CCCCCC] rounded-2xl p-7 gap-2.5">
               <div className="flex flex-row gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-messages"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" /><path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" /></svg>
@@ -118,6 +118,7 @@ export default function Home() {
           </section>
         </section>
       </main>
+
       <Footer />
     </>
   );

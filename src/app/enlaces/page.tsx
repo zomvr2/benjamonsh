@@ -27,7 +27,7 @@ export default function Enlaces() {
   useEffect(() => {
     fetchSong();
 
-    const refreshInterval = setInterval(fetchSong, 30000);
+    const refreshInterval = setInterval(fetchSong, 15000);
     return () => clearInterval(refreshInterval);
   }, []);
 
@@ -117,7 +117,7 @@ export default function Enlaces() {
               <a
                 href="https://github.com/zomvr2"
                 target="_blank"
-                className="flex flex-row items-center bg-white border border-[#CCC] rounded-2xl transition-all hover:scale-105 hover:shadow-lg"
+                className="flex flex-row items-center bg-white border border-[#CCC] rounded-2xl hover:bg-[#F9F7FF] cursor-pointer transition-all"
               >
                 <div className="bg-black p-[15px] rounded-xl">
                   <svg
@@ -140,7 +140,7 @@ export default function Enlaces() {
               <a
                 href="https://open.spotify.com/user/0h5li5o0jmc9r1pw12lxt4jvn"
                 target="_blank"
-                className="flex flex-row items-center bg-white border border-[#CCC] rounded-2xl transition-all hover:scale-105 hover:shadow-lg"
+                className="flex flex-row items-center bg-white border border-[#CCC] rounded-2xl hover:bg-[#F9F7FF] cursor-pointer transition-all"
               >
                 <div className="bg-black p-[15px] rounded-xl">
                   <svg
@@ -163,7 +163,7 @@ export default function Enlaces() {
               <a
                 href="https://www.instagram.com/benjamonsh/"
                 target="_blank"
-                className="flex flex-row items-center bg-white border border-[#CCC] rounded-2xl transition-all hover:scale-105 hover:shadow-lg"
+                className="flex flex-row items-center bg-white border border-[#CCC] rounded-2xl hover:bg-[#F9F7FF] cursor-pointer transition-all"
               >
                 <div className="bg-black p-[15px] rounded-xl">
                   <svg
@@ -186,7 +186,7 @@ export default function Enlaces() {
               <a
                 href="mailto:zodev@proton.dev"
                 target="_blank"
-                className="flex flex-row items-center bg-white border border-[#CCC] rounded-2xl transition-all hover:scale-105 hover:shadow-lg"
+                className="flex flex-row items-center bg-white border border-[#CCC] rounded-2xl hover:bg-[#F9F7FF] cursor-pointer transition-all"
               >
                 <div className="bg-black p-[15px] rounded-xl">
                   <svg
