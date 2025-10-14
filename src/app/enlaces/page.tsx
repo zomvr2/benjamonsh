@@ -5,14 +5,22 @@ import Footer from "@/components/Footer";
 import { Album, ExternalIDS, Item, Track, Welcome } from "@/types/SpotifyStream"
 
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function Enlaces() {
   const [song, setSong] = useState<Item | null>(null);
+  const [previousSongId, setPreviousSongId] = useState<string | null>(null);
 
   const fetchSong = async () => {
     const res = await fetch("https://beta-api.stats.fm/api/v1/users/benjamonsh/streams/current");
     const data = (await res.json()) as Welcome;
-    if (data?.item) setSong(data.item)
+    if (data?.item) {
+      const currentSongId = data.item.track.externalIds.spotify[0];
+      if (currentSongId !== previousSongId) {
+        setPreviousSongId(currentSongId);
+      }
+      setSong(data.item);
+    }
   };
 
   const favoriteSongs = [
@@ -23,6 +31,10 @@ export default function Enlaces() {
     "6VYe3CyriXVeFmZaORgQK7", // Escala - Abrildefresa
     "1jAXoJOn5ulibhT4aMxW21", // 29/2 - Abrildefresa
   ];
+
+  const isFavoriteSong = song && favoriteSongs.find(
+    (fav) => fav === song.track.externalIds.spotify[0]
+  );
 
   useEffect(() => {
     fetchSong();
@@ -43,70 +55,84 @@ export default function Enlaces() {
               <p className="font-bold text-lg text-center">
                 benjamonsh está escuchando ahora
               </p>
-              <div className="bg-white border border-[#CCC] rounded-2xl">
-                <div className="flex flex-row gap-[10px] bg-[#121212] rounded-2xl p-2.5 items-center">
-                  <img
-                    src={song.track.albums[0].image}
-                    alt={song.track.name}
-                    width="50"
-                    height="50"
-                    className="rounded-lg"
-                  />
-                  <div className="flex flex-col justify-center">
-                    <p className="text-white font-bold text-lg leading-6 line-clamp-1 text-ellipsis">
-                      {song.track.name}
-                    </p>
-                    <p className="text-[#A3A3A3] font-normal text-base leading-5 line-clamp-1 text-ellipsis">
-                      {song.track.artists.map((artist) => artist.name).join(", ")}
-                    </p>
-                  </div>
-                  <a href={`https://open.spotify.com/track/${song.track.externalIds.spotify[0]}`} target="_blank" className="ml-auto">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="40"
-                      height="40"
-                      viewBox="0 0 24 24"
-                      fill="#1DB954"
-                      className="icon icon-tabler icons-tabler-filled icon-tabler-brand-spotify"
-                    >
-                      <>
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M17 3.34a10 10 0 1 1 -15 8.66l.005 -.324a10 10 0 0 1 14.995 -8.336m-2.168 11.605c-1.285 -1.927 -4.354 -2.132 -6.387 -.777a1 1 0 0 0 1.11 1.664c1.195 -.797 3.014 -.675 3.613 .223a1 1 0 1 0 1.664 -1.11m1.268 -3.245c-2.469 -1.852 -5.895 -2.187 -8.608 -.589a1 1 0 0 0 1.016 1.724c1.986 -1.171 4.544 -.92 6.392 .465a1 1 0 0 0 1.2 -1.6m1.43 -3.048c-3.677 -2.298 -7.766 -2.152 -10.977 -.546a1 1 0 0 0 .894 1.788c2.635 -1.317 5.997 -1.437 9.023 .454a1 1 0 1 0 1.06 -1.696" />
-                      </>
-                    </svg>
-                  </a>
-                </div>
-                {favoriteSongs.find(
-                  (fav) =>
-                    fav === song.track.externalIds.spotify[0],
-                ) && (
-                    <div className="flex flex-row gap-2 p-[15px] items-center">
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={song.track.externalIds.spotify[0]}
+                  initial={{ x: 100, opacity: 0 }} 
+                  animate={{ x: 0, opacity: 1 }} 
+                  exit={{ x: -100, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="bg-white border border-[#CCC] rounded-2xl"
+                >
+                  <div className="flex flex-row gap-[10px] bg-[#121212] rounded-2xl p-2.5 items-center">
+                    <img
+                      src={song.track.albums[0].image}
+                      alt={song.track.name}
+                      width="50"
+                      height="50"
+                      className="rounded-lg"
+                    />
+                    <div className="flex flex-col justify-center">
+                      <p className="text-white font-bold text-lg leading-6 line-clamp-1 text-ellipsis">
+                        {song.track.name}
+                      </p>
+                      <p className="text-[#A3A3A3] font-normal text-base leading-5 line-clamp-1 text-ellipsis">
+                        {song.track.artists.map((artist) => artist.name).join(", ")}
+                      </p>
+                    </div>
+                    <a href={`https://open.spotify.com/track/${song.track.externalIds.spotify[0]}`} target="_blank" className="ml-auto">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
+                        width="40"
+                        height="40"
                         viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#6C48C5"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        className="icon icon-tabler icons-tabler-outline icon-tabler-sparkles"
+                        fill="#1DB954"
+                        className="icon icon-tabler icons-tabler-filled icon-tabler-brand-spotify"
                       >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6z" />
+                        <>
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M17 3.34a10 10 0 1 1 -15 8.66l.005 -.324a10 10 0 0 1 14.995 -8.336m-2.168 11.605c-1.285 -1.927 -4.354 -2.132 -6.387 -.777a1 1 0 0 0 1.11 1.664c1.195 -.797 3.014 -.675 3.613 .223a1 1 0 1 0 1.664 -1.11m1.268 -3.245c-2.469 -1.852 -5.895 -2.187 -8.608 -.589a1 1 0 0 0 1.016 1.724c1.986 -1.171 4.544 -.92 6.392 .465a1 1 0 0 0 1.2 -1.6m1.43 -3.048c-3.677 -2.298 -7.766 -2.152 -10.977 -.546a1 1 0 0 0 .894 1.788c2.635 -1.317 5.997 -1.437 9.023 .454a1 1 0 1 0 1.06 -1.696" />
+                        </>
                       </svg>
-                      <div>
-                        <p className="font-black text-[15px] leading-4">
-                          Joyita Oficial
-                        </p>
-                        <p className="font-medium text-[#A3A3A3] text-[12px] leading-4">
-                          de las fav del momento de benjamonsh
-                        </p>
-                      </div>
-                    </div>
-                  )}
-              </div>
+                    </a>
+                  </div>
+                  <AnimatePresence>
+                    {isFavoriteSong && (
+                      <motion.div 
+                        initial={{ y: -20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: -20, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="flex flex-row gap-2 p-[15px] items-center"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#6C48C5"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="icon icon-tabler icons-tabler-outline icon-tabler-sparkles"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6z" />
+                        </svg>
+                        <div>
+                          <p className="font-black text-[15px] leading-4">
+                            Joyita Oficial
+                          </p>
+                          <p className="font-medium text-[#A3A3A3] text-[12px] leading-4">
+                            de las fav del momento de benjamonsh
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              </AnimatePresence>
             </section>
           )
         }
