@@ -6,6 +6,7 @@ import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import type { Metadata } from "next";
 import readingTime from "reading-time";
+import { useMDXComponents } from "@/mdx-components";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -24,6 +25,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
   const filePath = path.join(process.cwd(), "src", "content", `${slug}.mdx`);
   const fileContent = await fs.readFile(filePath, "utf-8");
   const { data, content } = matter(fileContent);
+  const components = useMDXComponents();
 
   const rt = readingTime(content);
 
@@ -71,7 +73,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
         </div>
       </div>
       <section className="max-w-[1024px] mx-auto py-7">
-        <MDXRemote source={content} />
+        <MDXRemote source={content} components={components} />
       </section>
     </main>
   );

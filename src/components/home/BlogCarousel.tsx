@@ -1,7 +1,6 @@
 "use client";
 import { PostMeta } from "@/lib/blogFunctions";
 import useEmblaCarousel from "embla-carousel-react";
-import Link from "next/link";
 
 interface BlogCarouselProps {
   posts: PostMeta[];
@@ -16,7 +15,7 @@ export default function BlogCarousel({ posts }: BlogCarouselProps) {
         <div className="embla__viewport overflow-hidden" ref={emblaRef}>
           <div className="embla__container flex gap-4">
           {posts.map((post) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`} className="group embla__slide flex-[0_0_90%] sm:flex-[0_0_70%] md:flex-[0_0_50%] lg:flex-[0_0_40%] min-w-0">
+            <a key={post.slug} href={`/blog/${post.slug}`} className="group embla__slide flex-[0_0_90%] sm:flex-[0_0_70%] md:flex-[0_0_50%] lg:flex-[0_0_40%] min-w-0">
             <article
               className="
                 relative rounded-3xl overflow-hidden
@@ -47,7 +46,7 @@ export default function BlogCarousel({ posts }: BlogCarouselProps) {
                 </p>
               </div>
             </article>
-            </Link>
+            </a>
           ))}
           </div>
         </div>
