@@ -1,4 +1,5 @@
 import "@/app/globals.css";
+import Analytics from "@/components/Analytics";
 
 export const metadata = {
   title: {
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es-CL">
       <body>
+        <Analytics />
         {children}
       </body>
     </html>
