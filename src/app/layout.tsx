@@ -1,11 +1,6 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import "@/app/globals.css";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es-CL">
       <body>
