@@ -10,7 +10,7 @@ export default function BlogCarousel({ posts }: BlogCarouselProps) {
   const [emblaRef] = useEmblaCarousel({ loop: false, align: "center" });
 
   return (
-    <section className="embla -mx-5 md:-mx-[60px] py-12">
+    <section className="embla -mx-5 md:-mx-[60px]">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="embla__viewport overflow-hidden" ref={emblaRef}>
           <div className="embla__container flex gap-4">

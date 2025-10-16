@@ -10,11 +10,11 @@ export default function Header() {
       </a>
       <nav className="bg-white lg:bg-transparent border-t border-b lg:border-0 border-[#CCC] w-full lg:w-fit py-3 flex flex-row items-center justify-center">
         <ul className="flex flex-row gap-8">
-          <li><a href="/blog" className="font-medium text-base">Blog</a></li>
-          <li><a href="/proyectos" className="font-medium text-base">Proyectos</a></li>
+          <li><a href="/#blog" className="font-medium text-base">Blog</a></li>
+          <li><a href="/#proyectos" className="font-medium text-base">Proyectos</a></li>
           <li className="hidden lg:block">
             <a
-              href="mailto:zodev@proton.me"
+              href="/#contacto"
               className="font-medium text-base text-white bg-blue-800 px-4 py-2 rounded-lg"
             >¡Quiero un sitio web!</a>
           </li>

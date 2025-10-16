@@ -2,6 +2,21 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BlogSection from "@/components/home/BlogSection";
 
+export const metadata = {
+  title: "Inicio",
+  description: "¡Hola! Soy Benjamin Delgado, conocido como Benjamonsh. Desarrollo web y de apps móviles para hacer crecer tu negocio 🚀. Creo soluciones digitales que impulsan tu negocio y te ayudan a destacar.",
+  openGraph: {
+    title: "Benjamonsh - Desarrollo Web y Apps Móviles",
+    description: "¡Hola! Soy Benjamin Delgado, conocido como Benjamonsh. Desarrollo web y de apps móviles para hacer crecer tu negocio 🚀.",
+    url: "https://benjamonsh.vercel.app",
+    type: "website",
+  },
+  twitter: {
+    title: "Benjamonsh - Desarrollo Web y Apps Móviles",
+    description: "¡Hola! Soy Benjamin Delgado, conocido como Benjamonsh. Desarrollo web y de apps móviles para hacer crecer tu negocio 🚀.",
+  },
+};
+
 export default function Home() {
   return (
     <>
