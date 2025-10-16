@@ -5,7 +5,7 @@ export default function Header() {
     >
       <a href="/">
         <h1 className="font-black text-3xl">
-          benjamonsh<span className="font-nanum">.tech</span>
+          benjamonsh<span className="font-nanum">.dev</span>
         </h1>
       </a>
       <nav className="bg-white lg:bg-transparent border-t border-b lg:border-0 border-[#CCC] w-full lg:w-fit py-3 flex flex-row items-center justify-center">
