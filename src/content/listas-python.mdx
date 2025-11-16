@@ -1,0 +1,377 @@
+---
+title: "La Evolución de Python: De Hobby a Gigante Tecnológico"
+description: "Python pasó de ser un proyecto personal a convertirse en uno de los lenguajes más influyentes del mundo. Este artículo recorre su desarrollo, sus hitos más importantes y cómo llegó a dominar tantos campos de la tecnología."
+date: "2025-11-15"
+cover: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1169&auto=format&fit=crop"
+tags: ["programación", "python", "historia", "tecnología"]
+---
+
+
+# 🐍 Apuntes de Listas en Python — Desde lo más básico hasta lo avanzado
+
+Las **listas** son una de las herramientas más importantes para cualquier persona que esté comenzando a programar en Python. Aquí encontrarás una explicación clara, progresiva y con ejemplos simples que tu alumno podrá entender sin atascarse.
+
+---
+
+## 📌 1. ¿Qué es una lista en Python?
+
+Una **lista** sirve para guardar **varios valores** dentro de una sola variable.
+
+* Se escribe con **corchetes** `[]`
+* Cada elemento va separado por **comas**
+
+```python
+numeros = [10, 20, 30, 40]
+nombres = ["Ana", "Luis", "Pedro"]
+mixta = [1, "hola", 3.5, True]
+```
+
+También puede estar vacía:
+
+```python
+vacia = []
+```
+
+---
+
+## 📌 2. Índices: cómo funcionan las posiciones
+
+Cada elemento dentro de una lista tiene un **índice** (posición).
+
+Python empieza a contar desde **0**:
+
+```python
+frutas = ["manzana", "pera", "plátano", "uva"]
+# índices:      0         1         2         3
+```
+
+Acceder a elementos:
+
+```python
+print(frutas[0])  # manzana
+print(frutas[3])  # uva
+```
+
+Si intentas usar un índice que no existe:
+
+```python
+print(frutas[10])
+```
+
+Obtendrás: `IndexError`
+
+### 🧠 Tip para no confundirse
+
+El **primer** elemento está en la posición **0**.
+
+---
+
+## 📌 3. Índices negativos
+
+Los índices negativos cuentan desde el final:
+
+```python
+frutas = ["manzana", "pera", "plátano", "uva"]
+# índices negativos: -4      -3       -2      -1
+```
+
+Ejemplos:
+
+```python
+print(frutas[-1])  # uva  (último)
+print(frutas[-2])  # plátano
+```
+
+---
+
+## 📌 4. Modificar elementos de una lista
+
+Las listas son **mutables**, o sea, se pueden cambiar.
+
+```python
+numeros = [10, 20, 30]
+numeros[1] = 99
+print(numeros)  # [10, 99, 30]
+```
+
+---
+
+## 📌 5. Agregar elementos
+
+### ✔ `append()` — Agregar al final
+
+```python
+frutas = ["manzana", "pera"]
+frutas.append("plátano")
+print(frutas)  # ["manzana", "pera", "plátano"]
+```
+
+### ✔ `insert()` — Agregar en una posición específica
+
+```python
+frutas = ["manzana", "plátano"]
+frutas.insert(1, "pera")
+print(frutas)  # ["manzana", "pera", "plátano"]
+```
+
+---
+
+## 📌 6. Largo de una lista — `len()`
+
+```python
+frutas = ["manzana", "pera", "plátano"]
+print(len(frutas))  # 3
+```
+
+---
+
+## 📌 7. Eliminar elementos
+
+### ✔ `remove()` — eliminar por valor
+
+```python
+frutas = ["manzana", "pera", "plátano", "pera"]
+frutas.remove("pera")
+print(frutas)  # ["manzana", "plátano", "pera"]
+```
+
+### ✔ `pop()` — eliminar por índice
+
+```python
+frutas = ["manzana", "pera", "plátano"]
+eliminado = frutas.pop(1)
+print(eliminado)  # "pera"
+print(frutas)     # ["manzana", "plátano"]
+```
+
+Sin índice → borra el último:
+
+```python
+frutas.pop()
+```
+
+---
+
+## 📌 8. Recorrer una lista con un `for`
+
+### Modo simple:
+
+```python
+frutas = ["manzana", "pera", "plátano"]
+
+for fruta in frutas:
+    print(fruta)
+```
+
+### Usando índices:
+
+```python
+frutas = ["manzana", "pera", "plátano"]
+
+for i in range(len(frutas)):
+    print(i, frutas[i])
+```
+
+---
+
+## 📌 9. Revisar si un elemento está en la lista — `in`
+
+```python
+frutas = ["manzana", "pera", "plátano"]
+
+print("pera" in frutas)    # True
+print("sandía" in frutas)  # False
+```
+
+---
+
+## 📌 10. Slicing — obtener sublistas
+
+Sintaxis: `lista[inicio:fin]`
+Incluye `inicio`, excluye `fin`.
+
+```python
+numeros = [10, 20, 30, 40, 50]
+
+print(numeros[1:4])  # [20, 30, 40]
+print(numeros[:3])   # [10, 20, 30]
+print(numeros[2:])   # [30, 40, 50]
+```
+
+---
+
+## 📌 11. Listas dentro de listas
+
+```python
+matriz = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+
+print(matriz[0])     # [1, 2, 3]
+print(matriz[0][1])  # 2
+```
+
+---
+
+# 📚 Diccionario de Funciones y Métodos de Listas en Python
+
+Aquí están los métodos más importantes, con explicaciones cortas y ejemplos simples.
+
+---
+
+## 🔹 `len(lista)`
+
+Devuelve el número de elementos.
+
+```python
+numeros = [5, 10, 15]
+print(len(numeros))  # 3
+```
+
+---
+
+## 🔹 `append(x)`
+
+Agrega `x` al final.
+
+```python
+nombres = ["Ana", "Luis"]
+nombres.append("Pedro")
+print(nombres)
+```
+
+---
+
+## 🔹 `insert(indice, x)`
+
+Inserta `x` en esa posición.
+
+```python
+numeros = [10, 30]
+numeros.insert(1, 20)
+print(numeros)  # [10, 20, 30]
+```
+
+---
+
+## 🔹 `remove(x)`
+
+Elimina la **primera** aparición de `x`.
+
+```python
+numeros = [1, 2, 2, 3]
+numeros.remove(2)
+print(numeros)
+```
+
+---
+
+## 🔹 `pop(indice)` / `pop()`
+
+Elimina y devuelve un elemento.
+
+```python
+frutas = ["manzana", "pera", "plátano"]
+x = frutas.pop(1)
+print(x)
+```
+
+---
+
+## 🔹 `clear()`
+
+Deja la lista vacía.
+
+```python
+numeros = [1, 2, 3]
+numeros.clear()
+print(numeros)  # []
+```
+
+---
+
+## 🔹 `index(x)`
+
+Devuelve el índice de la primera aparición.
+
+```python
+frutas = ["manzana", "pera", "plátano"]
+print(frutas.index("pera"))  # 1
+```
+
+---
+
+## 🔹 `count(x)`
+
+Cuenta cuántas veces aparece `x`.
+
+```python
+numeros = [1, 2, 2, 3, 2]
+print(numeros.count(2))  # 3
+```
+
+---
+
+## 🔹 `sort()`
+
+Ordena la lista.
+
+```python
+numeros = [5, 1, 4, 2]
+numeros.sort()
+print(numeros)
+```
+
+---
+
+## 🔹 `reverse()`
+
+Invierte el orden.
+
+```python
+nums = [1, 2, 3]
+nums.reverse()
+print(nums)  # [3, 2, 1]
+```
+
+---
+
+## 🔹 `copy()`
+
+Crea una copia independiente.
+
+```python
+original = [1, 2, 3]
+copia = original.copy()
+copia.append(4)
+
+print(original)
+print(copia)
+```
+
+---
+
+## 🔹 `list(iterable)`
+
+Convierte algo en lista.
+
+```python
+r = range(5)
+numeros = list(r)
+print(numeros)  # [0, 1, 2, 3, 4]
+```
+
+---
+
+## 🔹 Funciones útiles: `min()`, `max()`, `sum()`
+
+```python
+numeros = [5, 10, 3]
+
+print(min(numeros))  # 3
+print(max(numeros))  # 10
+print(sum(numeros))  # 18
+```
+
+---
