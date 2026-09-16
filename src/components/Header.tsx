@@ -1,25 +1,38 @@
-export default function Header() {
+import Link from "next/link";
+import Wordmark from "@/components/Wordmark";
+
+const ITEMS = [
+  { href: "/proyectos", label: "Proyectos" },
+  { href: "/blog", label: "Blog" },
+  { href: "/enlaces", label: "Enlaces" },
+];
+
+export default function Header({ current }: { current?: string }) {
   return (
-    <header
-      className="py-[30px] lg:px-[60px] flex flex-col lg:flex-row gap-5 items-center justify-between"
-    >
-      <a href="/">
-        <h1 className="font-black text-3xl">
-          benjamonsh<span className="font-nanum">.dev</span>
-        </h1>
-      </a>
-      <nav className="bg-white lg:bg-transparent border-t border-b lg:border-0 border-[#CCC] w-full lg:w-fit py-3 flex flex-row items-center justify-center">
-        <ul className="flex flex-row gap-8">
-          <li><a href="/#blog" className="font-medium text-base">Blog</a></li>
-          <li><a href="/#proyectos" className="font-medium text-base">Proyectos</a></li>
-          <li className="hidden lg:block">
-            <a
-              href="/#contacto"
-              className="font-medium text-base text-white bg-blue-800 px-4 py-2 rounded-lg"
-            >¡Quiero un sitio web!</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <>
+      <a className="skip" href="#contenido">Saltar al contenido</a>
+      <header className="site-head">
+        <div className="wrap">
+          <Wordmark />
+          <nav className="nav" aria-label="Principal">
+            {ITEMS.map((item) => (
+              <Link key={item.href} href={item.href} aria-current={current === item.href ? "page" : undefined}>
+                {item.label}
+              </Link>
+            ))}
+            <Link className="btn" href="/contacto">Cuéntame tu proyecto</Link>
+          </nav>
+          <details className="menu">
+            <summary>Menú</summary>
+            <nav className="menu-panel" aria-label="Principal">
+              {ITEMS.map((item) => (
+                <Link key={item.href} href={item.href}>{item.label}</Link>
+              ))}
+              <Link href="/contacto">Cuéntame tu proyecto</Link>
+            </nav>
+          </details>
+        </div>
+      </header>
+    </>
   );
 }

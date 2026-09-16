@@ -1,30 +1,23 @@
 ---
-title: "Listas en Python: La Guía Completa para Principiantes"
+title: "Listas en Python: la guía completa para principiantes"
 description: "Un tutorial claro y práctico para entender cómo funcionan las listas en Python: índices, métodos, trucos y ejemplos explicados paso a paso."
 date: "2025-11-15"
 cover: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1169&auto=format&fit=crop"
+color: "cian"
 tags: ["python", "programación", "listas", "tutorial"]
 ---
 
-# 🐍 Listas en Python: Guía Completa para Principiantes
+Las **listas** son una de las estructuras más importantes de Python. Sirven para guardar varios valores y trabajar con ellos en orden. En este tutorial vamos desde lo básico (qué es una lista, índices, métodos) hasta un ejemplo práctico de **ordenamiento paso a paso**.
 
-Las **listas** son una de las estructuras más importantes en Python. Se usan para guardar varios valores y trabajar con ellos de forma ordenada.  
-En este tutorial veremos desde lo básico (qué es una lista, índices, métodos) hasta un ejemplo práctico de **ordenamiento paso a paso**.
+## 1. ¿Qué es una lista?
 
----
-
-## 📌 1. ¿Qué es una lista en Python?
-
-Una **lista** sirve para guardar **varios valores** dentro de una sola variable.
-
-- Se escribe con **corchetes** `[]`
-- Cada elemento va separado por **comas**
+Una lista guarda **varios valores** dentro de una sola variable. Se escribe con corchetes `[]` y cada elemento va separado por comas.
 
 ```python
 numeros = [10, 20, 30, 40]
 nombres = ["Ana", "Luis", "Pedro"]
 mixta = [1, "hola", 3.5, True]
-````
+```
 
 También puede estar vacía:
 
@@ -32,60 +25,38 @@ También puede estar vacía:
 vacia = []
 ```
 
----
+## 2. Índices: cómo funcionan las posiciones
 
-## 📌 2. Índices: cómo funcionan las posiciones
-
-Cada elemento dentro de una lista tiene un **índice** (posición).
-
-Python empieza a contar desde **0**:
+Cada elemento tiene un **índice**, su posición. Python empieza a contar desde **0**:
 
 ```python
 frutas = ["manzana", "pera", "plátano", "uva"]
-# índices:      0         1         2         3
-```
+# índices:      0         1         2        3
 
-Acceder a elementos:
-
-```python
 print(frutas[0])  # manzana
 print(frutas[3])  # uva
 ```
 
-Si intentas usar un índice que no existe:
+Si usas un índice que no existe, por ejemplo `frutas[10]`, obtienes un `IndexError`.
 
-```python
-print(frutas[10])
-```
+> Regla mental: el primer elemento está en la posición 0.
 
-Obtendrás un error: `IndexError`.
-
-> Regla mental: El **primer** elemento está en la posición **0**.
-
----
-
-## 📌 3. Índices negativos
+## 3. Índices negativos
 
 Los índices negativos cuentan desde el final:
 
 ```python
 frutas = ["manzana", "pera", "plátano", "uva"]
-# índices positivos:  0        1         2         3
-# índices negativos: -4       -3        -2        -1
-```
+# positivos:   0        1         2        3
+# negativos:  -4       -3        -2       -1
 
-Ejemplos:
-
-```python
-print(frutas[-1])  # uva  (último)
+print(frutas[-1])  # uva (último)
 print(frutas[-2])  # plátano
 ```
 
----
+## 4. Modificar elementos
 
-## 📌 4. Modificar elementos de una lista
-
-Las listas son **mutables**, es decir, se pueden cambiar.
+Las listas son **mutables**: se pueden cambiar.
 
 ```python
 numeros = [10, 20, 30]
@@ -93,11 +64,9 @@ numeros[1] = 99
 print(numeros)  # [10, 99, 30]
 ```
 
----
+## 5. Agregar elementos
 
-## 📌 5. Agregar elementos
-
-### ✔ `append()` — Agregar al final
+`append()` agrega al final:
 
 ```python
 frutas = ["manzana", "pera"]
@@ -105,7 +74,7 @@ frutas.append("plátano")
 print(frutas)  # ["manzana", "pera", "plátano"]
 ```
 
-### ✔ `insert()` — Agregar en una posición específica
+`insert()` agrega en una posición específica:
 
 ```python
 frutas = ["manzana", "plátano"]
@@ -113,20 +82,16 @@ frutas.insert(1, "pera")
 print(frutas)  # ["manzana", "pera", "plátano"]
 ```
 
----
-
-## 📌 6. Largo de una lista — `len()`
+## 6. Largo de una lista
 
 ```python
 frutas = ["manzana", "pera", "plátano"]
 print(len(frutas))  # 3
 ```
 
----
+## 7. Eliminar elementos
 
-## 📌 7. Eliminar elementos
-
-### ✔ `remove()` — eliminar por valor
+`remove()` elimina por valor (solo la primera aparición):
 
 ```python
 frutas = ["manzana", "pera", "plátano", "pera"]
@@ -134,374 +99,113 @@ frutas.remove("pera")
 print(frutas)  # ["manzana", "plátano", "pera"]
 ```
 
-### ✔ `pop()` — eliminar por índice
+`pop()` elimina por índice y devuelve el elemento. Sin índice, borra el último:
 
 ```python
 frutas = ["manzana", "pera", "plátano"]
 eliminado = frutas.pop(1)
 print(eliminado)  # "pera"
 print(frutas)     # ["manzana", "plátano"]
+frutas.pop()      # quita "plátano"
 ```
 
-Sin índice → borra el último:
+## 8. Recorrer una lista con `for`
+
+Modo simple:
 
 ```python
-frutas.pop()
-```
-
----
-
-## 📌 8. Recorrer una lista con un `for`
-
-### Modo simple:
-
-```python
-frutas = ["manzana", "pera", "plátano"]
-
 for fruta in frutas:
     print(fruta)
 ```
 
-### Usando índices:
+Usando índices:
 
 ```python
-frutas = ["manzana", "pera", "plátano"]
-
 for i in range(len(frutas)):
     print(i, frutas[i])
 ```
 
----
-
-## 📌 9. Revisar si un elemento está en la lista — `in`
+## 9. Revisar si un elemento está en la lista
 
 ```python
 frutas = ["manzana", "pera", "plátano"]
-
 print("pera" in frutas)    # True
 print("sandía" in frutas)  # False
 ```
 
----
+## 10. Slicing: obtener sublistas
 
-## 📌 10. Slicing — obtener sublistas
-
-Sintaxis: `lista[inicio:fin]`
-Incluye `inicio`, excluye `fin`.
+La sintaxis es `lista[inicio:fin]`. Incluye `inicio` y excluye `fin`.
 
 ```python
 numeros = [10, 20, 30, 40, 50]
-
 print(numeros[1:4])  # [20, 30, 40]
 print(numeros[:3])   # [10, 20, 30]
 print(numeros[2:])   # [30, 40, 50]
 ```
 
----
-
-## 📌 11. Listas dentro de listas
+## 11. Listas dentro de listas
 
 ```python
 matriz = [
     [1, 2, 3],
     [4, 5, 6]
 ]
-
 print(matriz[0])     # [1, 2, 3]
 print(matriz[0][1])  # 2
 ```
 
----
+## 12. Ejemplo práctico: ordenar una lista paso a paso
 
-## 🧪 12. Ejemplo práctico: ordenando una lista paso a paso
-
-Ahora veamos un ejemplo más completo donde usamos:
-
-* listas
-* `len()`
-* bucles `for`
-* comparación
-* intercambio de valores
-
-Este código ordena una lista de menor a mayor:
+Este código junta todo lo anterior (listas, `len()`, bucles `for`, comparaciones e intercambio de valores) para ordenar una lista de menor a mayor:
 
 ```python
 lista = [1, 3, 2, 5]
 
 for i in range(len(lista)):
-    for j in range(i+1, len(lista)):
+    for j in range(i + 1, len(lista)):
         if lista[i] > lista[j]:
             aux = lista[i]
             lista[i] = lista[j]
             lista[j] = aux
 
-print(lista)
-```
-
-### 🔍 ¿Qué hace este código?
-
-1. **Definimos la lista:**
-
-   ```python
-   lista = [1, 3, 2, 5]
-   ```
-
-2. **Primer `for`: recorre los índices de la lista**
-
-   ```python
-   for i in range(len(lista)):
-   ```
-
-   * `len(lista)` → 4, porque la lista tiene 4 elementos.
-   * `range(len(lista))` → `range(4)` → genera: `0, 1, 2, 3`.
-   * Entonces `i` va tomando estos valores: 0, 1, 2, 3.
-
-   `i` representa la **posición actual** desde donde vamos a comparar.
-
-3. **Segundo `for`: compara con los elementos siguientes**
-
-   ```python
-   for j in range(i+1, len(lista)):
-   ```
-
-   * Empieza en `i + 1`, es decir, en el elemento que está **después** de `i`.
-   * Así evitamos comparar un elemento consigo mismo y repetidamente hacia atrás.
-
-   Por ejemplo:
-
-   * Si `i = 0`, entonces `j` va de `1` a `3`.
-   * Si `i = 1`, `j` va de `2` a `3`.
-   * Si `i = 2`, `j` va de `3` a `3` → solo `j = 3`.
-
-4. **La comparación:**
-
-   ```python
-   if lista[i] > lista[j]:
-   ```
-
-   * Compara los valores en las posiciones `i` y `j`.
-   * Si el valor en la posición `i` es **mayor** que el de `j`, están “al revés” para un orden ascendente.
-   * Entonces los intercambiamos.
-
-5. **Intercambio usando una variable auxiliar**
-
-   ```python
-   aux = lista[i]
-   lista[i] = lista[j]
-   lista[j] = aux
-   ```
-
-   Esto hace el famoso “swap”:
-
-   * Guardamos el valor de `lista[i]` en `aux`.
-   * Ponemos el valor de `lista[j]` en `lista[i]`.
-   * Luego ponemos el valor guardado en `aux` dentro de `lista[j]`.
-
-   Así no se pierde ningún valor.
-
----
-
-### 🔁 Mini recorrido de ejemplo
-
-Partimos con:
-
-```python
-lista = [1, 3, 2, 5]
-```
-
-* **i = 0** → `lista[i]` es `1`
-
-  * `j = 1` → comparamos `1` y `3` → no se cambia (1 < 3)
-  * `j = 2` → comparamos `1` y `2` → no se cambia (1 < 2)
-  * `j = 3` → comparamos `1` y `5` → no se cambia (1 < 5)
-
-  Lista sigue igual: `[1, 3, 2, 5]`
-
-* **i = 1** → `lista[i]` es `3`
-
-  * `j = 2` → comparamos `3` y `2` → **3 > 2**, entonces se intercambian
-    Lista pasa a ser: `[1, 2, 3, 5]`
-  * `j = 3` → comparamos `3` y `5` → no se cambia (3 < 5)
-
-* **i = 2** → `lista[i]` es `3`
-
-  * `j = 3` → comparamos `3` y `5` → no se cambia (3 < 5)
-
-* **i = 3** → ya está en el último valor, no habrá cambios.
-
-Resultado final:
-
-```python
 print(lista)  # [1, 2, 3, 5]
 ```
 
-Este es un ejemplo simple de algoritmo de ordenamiento, ideal para que un estudiante entienda:
+### Qué hace cada parte
 
-* cómo recorrer listas con índices
-* cómo comparar elementos
-* cómo intercambiar valores (`swap`)
+1. **El primer `for` recorre los índices.** `len(lista)` vale 4, así que `range(4)` genera 0, 1, 2 y 3. `i` es la posición desde donde comparamos.
+2. **El segundo `for` compara con los elementos siguientes.** Empieza en `i + 1`, así nunca comparamos un elemento consigo mismo ni hacia atrás. Si `i = 0`, `j` va de 1 a 3; si `i = 2`, solo toma el valor 3.
+3. **La comparación.** Si el valor en `i` es mayor que el valor en `j`, están al revés para un orden ascendente, así que se intercambian.
+4. **El intercambio (swap).** Guardamos `lista[i]` en `aux`, ponemos `lista[j]` en `lista[i]` y luego lo guardado en `lista[j]`. Así no se pierde ningún valor.
 
----
+### Mini recorrido
 
-## 📚 13. Diccionario de Funciones y Métodos de Listas en Python
+Partimos con `[1, 3, 2, 5]`:
 
-Para cerrar, aquí va un resumen de los métodos y funciones más usadas.
+- Con `i = 0` el valor es 1. Se compara con 3, 2 y 5; nunca es mayor, así que nada cambia.
+- Con `i = 1` el valor es 3. Contra 2 sí es mayor: se intercambian y la lista queda `[1, 2, 3, 5]`. Contra 5, nada.
+- Con `i = 2` el valor es 3. Contra 5, nada.
+- Con `i = 3` ya estamos en el último valor.
 
-### 🔹 `len(lista)`
+Resultado: `[1, 2, 3, 5]`. Es un algoritmo simple, ideal para entender cómo recorrer con índices, comparar elementos e intercambiar valores.
 
-Devuelve el número de elementos.
+## 13. Resumen de funciones y métodos
 
-```python
-numeros = [5, 10, 15]
-print(len(numeros))  # 3
-```
+| Método | Qué hace | Ejemplo |
+|---|---|---|
+| `len(lista)` | Número de elementos | `len([5, 10, 15])` da `3` |
+| `append(x)` | Agrega `x` al final | `nombres.append("Pedro")` |
+| `insert(i, x)` | Inserta `x` en la posición `i` | `[10, 30].insert(1, 20)` |
+| `remove(x)` | Elimina la primera aparición de `x` | `[1, 2, 2, 3]` queda `[1, 2, 3]` |
+| `pop(i)` / `pop()` | Elimina y devuelve un elemento | `frutas.pop(1)` da `"pera"` |
+| `clear()` | Deja la lista vacía | `numeros.clear()` |
+| `index(x)` | Índice de la primera aparición | `frutas.index("pera")` da `1` |
+| `count(x)` | Cuántas veces aparece `x` | `[1, 2, 2, 3, 2].count(2)` da `3` |
+| `sort()` | Ordena la lista | `[5, 1, 4, 2]` queda `[1, 2, 4, 5]` |
+| `reverse()` | Invierte el orden | `[1, 2, 3]` queda `[3, 2, 1]` |
+| `copy()` | Crea una copia independiente | `copia = original.copy()` |
+| `list(iterable)` | Convierte algo en lista | `list(range(5))` |
+| `min()`, `max()`, `sum()` | Mínimo, máximo y suma | `sum([5, 10, 3])` da `18` |
 
----
-
-### 🔹 `append(x)`
-
-Agrega `x` al final.
-
-```python
-nombres = ["Ana", "Luis"]
-nombres.append("Pedro")
-print(nombres)
-```
-
----
-
-### 🔹 `insert(indice, x)`
-
-Inserta `x` en esa posición.
-
-```python
-numeros = [10, 30]
-numeros.insert(1, 20)
-print(numeros)  # [10, 20, 30]
-```
-
----
-
-### 🔹 `remove(x)`
-
-Elimina la **primera** aparición de `x`.
-
-```python
-numeros = [1, 2, 2, 3]
-numeros.remove(2)
-print(numeros)  # [1, 2, 3]
-```
-
----
-
-### 🔹 `pop(indice)` / `pop()`
-
-Elimina y devuelve un elemento.
-
-```python
-frutas = ["manzana", "pera", "plátano"]
-x = frutas.pop(1)
-print(x)       # "pera"
-print(frutas)  # ["manzana", "plátano"]
-```
-
----
-
-### 🔹 `clear()`
-
-Deja la lista vacía.
-
-```python
-numeros = [1, 2, 3]
-numeros.clear()
-print(numeros)  # []
-```
-
----
-
-### 🔹 `index(x)`
-
-Devuelve el índice de la primera aparición.
-
-```python
-frutas = ["manzana", "pera", "plátano"]
-print(frutas.index("pera"))  # 1
-```
-
----
-
-### 🔹 `count(x)`
-
-Cuenta cuántas veces aparece `x`.
-
-```python
-numeros = [1, 2, 2, 3, 2]
-print(numeros.count(2))  # 3
-```
-
----
-
-### 🔹 `sort()`
-
-Ordena la lista.
-
-```python
-numeros = [5, 1, 4, 2]
-numeros.sort()
-print(numeros)  # [1, 2, 4, 5]
-```
-
----
-
-### 🔹 `reverse()`
-
-Invierte el orden.
-
-```python
-nums = [1, 2, 3]
-nums.reverse()
-print(nums)  # [3, 2, 1]
-```
-
----
-
-### 🔹 `copy()`
-
-Crea una copia independiente.
-
-```python
-original = [1, 2, 3]
-copia = original.copy()
-copia.append(4)
-
-print(original)  # [1, 2, 3]
-print(copia)     # [1, 2, 3, 4]
-```
-
----
-
-### 🔹 `list(iterable)`
-
-Convierte algo en lista.
-
-```python
-r = range(5)
-numeros = list(r)
-print(numeros)  # [0, 1, 2, 3, 4]
-```
-
----
-
-### 🔹 Funciones útiles: `min()`, `max()`, `sum()`
-
-```python
-numeros = [5, 10, 3]
-
-print(min(numeros))  # 3
-print(max(numeros))  # 10
-print(sum(numeros))  # 18
-```
-
----
-
-¡Y eso es todo por ahora!
+Con esto ya puedes trabajar con listas en casi cualquier programa. Lo demás sale practicando ;)

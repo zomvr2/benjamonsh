@@ -1,74 +1,88 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { useMDXComponents } from "@/mdx-components";
 import BlogHeader from "@/components/blog/blogHeader";
+import ContactBand from "@/components/ContactBand";
+import { getAllPosts, getPost } from "@/lib/blogFunctions";
+import { SITE_URL } from "@/lib/site";
 
-import fs from "fs/promises";
-import path from "path";
-import matter from "gray-matter";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import type { Metadata } from "next";
-import readingTime from "reading-time";
+type Params = { params: Promise<{ slug: string }> };
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const filePath = path.join(process.cwd(), "src", "content", `${slug}.mdx`);
-  const fileContent = await fs.readFile(filePath, "utf-8");
-  const { data } = matter(fileContent);
+export function generateStaticParams() {
+  return getAllPosts().map((p) => ({ slug: p.slug }));
+}
 
-  const title = data.title || "Untitled";
-  const description = data.description || "Blog post description";
-  const cover = data.cover;
-  const tags = data.tags || [];
-  const date = data.date;
-
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const post = getPost((await params).slug);
+  if (!post) return {};
+  const { title, description, cover, tags, date, slug } = post;
   return {
     title,
     description,
     keywords: tags,
-    authors: [{ name: "Benjamin Delgado" }],
-    alternates: {
-      canonical: `/blog/${slug}`,
-    },
+    authors: [{ name: "Benjamín Delgado" }],
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
-      title,
-      description,
-      url: `https://benjamonsh.vercel.app/blog/${slug}`,
-      siteName: "Benjamonsh",
+      title, description,
+      url: `${SITE_URL}/blog/${slug}`,
+      siteName: "benjamonsh",
       locale: "es_CL",
       type: "article",
       publishedTime: date,
       modifiedTime: date,
-      authors: ["Benjamin Delgado"],
+      authors: ["Benjamín Delgado"],
       tags,
-      images: cover ? [{
-        url: cover,
-        alt: title,
-      }] : [],
+      images: cover ? [{ url: cover, alt: title }] : [],
     },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      creator: "@benjamonsh",
-      images: cover ? [cover] : [],
-    },
+    twitter: { card: "summary_large_image", title, description, creator: "@benjamonsh", images: cover ? [cover] : [] },
   };
 }
 
-export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const filePath = path.join(process.cwd(), "src", "content", `${slug}.mdx`);
-  const fileContent = await fs.readFile(filePath, "utf-8");
-  const { data, content } = matter(fileContent);
+export default async function BlogPage({ params }: Params) {
+  const post = getPost((await params).slug);
+  if (!post) notFound();
   const components = useMDXComponents();
 
-  const rt = readingTime(content).time;
+  const posts = getAllPosts();
+  const i = posts.findIndex((p) => p.slug === post.slug);
+  const newer = i > 0 ? posts[i - 1] : null;
+  const older = i + 1 < posts.length ? posts[i + 1] : null;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    image: post.cover || undefined,
+    keywords: post.tags.join(", "),
+    author: { "@type": "Person", name: "Benjamín Delgado", url: SITE_URL },
+  };
 
   return (
-    <main className="px-5 md:px-[60px]">
-      <BlogHeader data={data} rt={rt} />
-      <section className="max-w-[1024px] mx-auto py-7">
-        <MDXRemote source={content} components={components} />
-      </section>
-    </main>
+    <>
+      <article>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <BlogHeader post={post} />
+        <div className="wrap">
+          <div className="prose">
+            <MDXRemote source={post.content} components={components}
+              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
+          </div>
+        </div>
+      </article>
+      {(older || newer) && (
+        <nav className="wrap" aria-label="Más artículos" style={{ paddingBottom: "clamp(3rem,6vw,5rem)" }}>
+          <div className="post-nav">
+            {older && <Link href={`/blog/${older.slug}`}><small>Anterior</small><strong>{older.title}</strong></Link>}
+            {newer && <Link href={`/blog/${newer.slug}`}><small>Siguiente</small><strong>{newer.title}</strong></Link>}
+          </div>
+        </nav>
+      )}
+      <ContactBand ink />
+    </>
   );
 }

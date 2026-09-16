@@ -1,16 +1,15 @@
+import Link from "next/link";
 import { getAllPosts } from "@/lib/blogFunctions";
-import BlogCarousel from "@/components/home/BlogCarousel";
+import PostList from "@/components/blog/PostList";
 
 export default function BlogSection() {
-  const posts = getAllPosts().slice(0, 10);
-
+  const posts = getAllPosts();
   return (
-    <section className="py-12">
-      <div className="md:max-w-[1024px] md:mx-auto mb-7">
-        <h3 className="text-lg text-center md:text-left text-blue-800 font-bold">Blog</h3>
-        <h2 className="text-3xl text-center md:text-left font-bold">Explorando lo que me interesa.</h2>
-      </div>
-      <BlogCarousel posts={posts} />
+    <section className="wrap section" id="blog" aria-labelledby="blog-t" style={{ paddingTop: 0 }}>
+      <div className="strip"><span id="blog-t">Blog</span><span>{posts.length} artículos</span></div>
+      <h2 className="section-title">Escribo sobre lo que me interesa.</h2>
+      <PostList posts={posts.slice(0, 4)} showTags={false} />
+      <Link className="more" href="/blog">Ver todos los artículos</Link>
     </section>
   );
 }

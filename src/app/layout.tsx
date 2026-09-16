@@ -1,50 +1,47 @@
 import "@/app/globals.css";
+import type { Metadata, Viewport } from "next";
 import Analytics from "@/components/Analytics";
+import { SITE_URL } from "@/lib/site";
 
-export const metadata = {
+const description =
+  "Soy Benjamín Delgado. Diseño y desarrollo sitios web y apps móviles con React Native y Expo para negocios que necesitan resultados rápido.";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Benjamonsh - Desarrollo Web y Apps Móviles",
-    template: "%s | Benjamonsh"
+    default: "benjamonsh — Webs y apps que funcionan, en días",
+    template: "%s — benjamonsh",
   },
-  description: "Convierto las ideas del cliente en algo funcional y atractivo, junto con amabilidad y buena disposición para realizar cambios según preferencias del cliente. Desarrollo páginas web, diseño con Figma y aplicaciones móviles con React Native Expo.",
+  description,
   keywords: ["desarrollo web", "aplicaciones móviles", "React Native", "Expo", "Figma", "diseño web", "desarrollo de apps"],
-  authors: [{ name: "Benjamin Delgado", url: "https://benjamonsh.vercel.app" }],
-  creator: "Benjamonsh",
-  publisher: "Benjamonsh",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  metadataBase: new URL("https://benjamonsh.vercel.app"),
-  alternates: {
-    canonical: "/",
-  },
+  authors: [{ name: "Benjamín Delgado", url: SITE_URL }],
+  creator: "benjamonsh",
+  publisher: "benjamonsh",
+  formatDetection: { email: false, address: false, telephone: false },
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Benjamonsh - Desarrollo Web y Apps Móviles",
-    description: "Convierto las ideas del cliente en algo funcional y atractivo, junto con amabilidad y buena disposición para realizar cambios según preferencias del cliente.",
-    url: "https://benjamonsh.vercel.app",
-    siteName: "Benjamonsh",
+    title: "benjamonsh — Webs y apps que funcionan, en días",
+    description,
+    url: SITE_URL,
+    siteName: "benjamonsh",
     locale: "es_CL",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Benjamonsh - Desarrollo Web y Apps Móviles",
-    description: "Convierto las ideas del cliente en algo funcional y atractivo, junto con amabilidad y buena disposición para realizar cambios según preferencias del cliente.",
+    title: "benjamonsh — Webs y apps que funcionan, en días",
+    description,
     creator: "@benjamonsh",
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 },
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#ec3013",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

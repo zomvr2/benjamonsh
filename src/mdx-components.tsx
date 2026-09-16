@@ -1,44 +1,44 @@
-import type { MDXComponents } from 'mdx/types'
+import type { MDXComponents } from "mdx/types";
+import { Fragment, type ReactNode } from "react";
 
-const components: MDXComponents = {
-  h1: ({ children }) => (
-    <h1 className="flex flex-row gap-2 items-center text-3xl font-extrabold my-4">
-      <div className="self-stretch w-1 bg-[#6C48C5] rounded" />
-      <span>{children}</span>
-    </h1>
-  ),
-  h2: ({ children }) => (
-    <h2 className="text-2xl font-bold mb-4">{children}</h2>
-  ),
-  h3: ({ children }) => (
-    <h3 className="text-xl font-semibold mb-4">{children}</h3>
-  ),
-  p: ({ children }) => (
-    <p className="font-normal text-lg mb-2">{children}</p>
-  ),
-  em: ({ children }) => (
-    <em className="italic text-[#6C48C5] font-medium">{children}</em>
-  ),
-  hr: () => (
-    <hr className="border-t border-gray-300 my-6" />
-  ),
-  ol: ({ children }) => (
-    <ol className="list-none flex flex-col gap-1 ml-3 my-2">{children}</ol>
-  ),
-  li: ({ children }) => (
-    <li className="flex flex-row gap-2">
-      <span className="font-bold text-[#C68FE6]">•</span>
-      <span className="font-normal text-lg">{children}</span>
-    </li>
-  ),
-  img: ({ alt, src }) => (
-    <span className="inline-block my-6 w-full">
-      <img src={src} alt={alt} className="rounded-xl mx-auto block" />
-      <span className="block text-center text-sm text-gray-600 mt-2">{alt}</span>
-    </span>
-  ),
+// Resaltado mínimo: comentarios en gris y cadenas en blanco. Un solo color por pieza.
+function highlight(code: string): ReactNode[] {
+  const token = /("(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*')|(#[^\n]*|\/\/[^\n]*)/g;
+  const out: ReactNode[] = [];
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = token.exec(code))) {
+    if (m.index > last) out.push(<Fragment key={`t${last}`}>{code.slice(last, m.index)}</Fragment>);
+    out.push(<span key={`s${m.index}`} className={m[1] ? "s" : "c"}>{m[0]}</span>);
+    last = token.lastIndex;
+  }
+  if (last < code.length) out.push(<Fragment key={`t${last}`}>{code.slice(last)}</Fragment>);
+  return out;
 }
 
+const components: MDXComponents = {
+  code: ({ className, children, ...props }) => {
+    if (className?.startsWith("language-") && typeof children === "string") {
+      return <code className={className} {...props}>{highlight(children.replace(/\n$/, ""))}</code>;
+    }
+    return <code className={className} {...props}>{children}</code>;
+  },
+  table: ({ children }) => (
+    <div className="table-scroll"><table>{children}</table></div>
+  ),
+  img: ({ alt, src }) => (
+    <figure>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={src} alt={alt ?? ""} style={{ filter: "grayscale(1)" }} />
+      {alt && <figcaption className="hint" style={{ marginTop: ".5rem" }}>{alt}</figcaption>}
+    </figure>
+  ),
+  a: ({ href, children }) => {
+    const external = href?.startsWith("http");
+    return <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{children}</a>;
+  },
+};
+
 export function useMDXComponents(): MDXComponents {
-  return components
+  return components;
 }

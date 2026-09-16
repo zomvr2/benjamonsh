@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# benjamonsh.dev
 
-## Getting Started
+Sitio personal de Benjamín Delgado (benjamonsh). Next.js 15, MDX y Tailwind 4, con el diseño del Manual de marca v1.0.
 
-First, run the development server:
+## Desarrollo
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Dónde está cada cosa
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `src/app/globals.css`: sistema visual (colores, Archivo, radio 0, filos de 2 px).
+- `src/lib/site.ts`: correo, redes y proyectos.
+- `src/content/*.mdx`: artículos del blog.
+- `src/app/`: páginas (inicio, proyectos, blog, temas, contacto, enlaces, 404, sitemap y robots).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Publicar un artículo
 
-## Learn More
+Crea `src/content/mi-articulo.mdx` con este encabezado:
 
-To learn more about Next.js, take a look at the following resources:
+```yaml
+---
+title: "Título en minúscula inicial"
+description: "Una o dos frases."
+date: "2026-09-15"
+cover: "https://…"
+color: "cian"          # cian, violeta, ambar o verde: un solo color por artículo
+tags: ["tema", "otro-tema"]
+---
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Las tablas usan sintaxis Markdown (GFM). La foto de portada se muestra en blanco y negro.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Reglas de marca rápidas
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Radio 0, todo alineado a la izquierda, sin degradados ni sombras, un color por pieza,
+«benjamonsh» siempre en minúscula y máximo un guiño `;)` por texto, al cierre.
