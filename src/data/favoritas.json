@@ -1,12 +1,3 @@
 [
-<<<<<<< HEAD
-  { "name": "Akellas", "artists": "FaceBrooklyn", "spotifyId": "6y0HWXD9L1VocIivzrznIT", "image": "", "added": "2026-09-16" },
-  { "name": "INDOrrrr", "artists": "Abrildefresa", "spotifyId": "3et5CLQNao5XFTUdC7x7fk", "image": "", "added": "2026-09-16" },
-  { "name": "KIKIBOYYYYY", "artists": "Abrildefresa", "spotifyId": "3fljQiJN8UnHjkqa01SpwT", "image": "", "added": "2026-09-16" },
-  { "name": "Icono", "artists": "Abrildefresa", "spotifyId": "6nEfUHrjohafrLeq884vyr", "image": "", "added": "2026-09-16" },
-  { "name": "Escala", "artists": "Abrildefresa", "spotifyId": "6VYe3CyriXVeFmZaORgQK7", "image": "", "added": "2026-09-16" },
-  { "name": "29/2", "artists": "Abrildefresa", "spotifyId": "1jAXoJOn5ulibhT4aMxW21", "image": "", "added": "2026-09-16" }
-=======
   { "name": "Mi Vida Mi Muerte", "artists": "Neton Vega", "image": "https://lastfm-img.freetls.fastly.net/i/u/300x300/08b271291e31572aa64715ddbb6ba402.jpg", "added": "2026-09-16" }
->>>>>>> 747fb4c39d4dd7e7d01d4d33eecb241e72745203
 ]
