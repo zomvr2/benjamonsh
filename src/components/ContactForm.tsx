@@ -2,7 +2,7 @@
 import { useRef, useState, type FormEvent } from "react";
 import { EMAIL } from "@/lib/site";
 
-const TIPOS = ["Sitio web", "App móvil", "Diseño en Figma", "Otra cosa"];
+const TIPOS = ["Sitio web", "App móvil", "Otra cosa"];
 const PLAZOS = ["Lo antes posible", "Este mes", "Sin apuro"];
 
 export default function ContactForm() {

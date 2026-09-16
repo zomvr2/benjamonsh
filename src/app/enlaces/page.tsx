@@ -4,6 +4,8 @@ import Footer from "@/components/Footer";
 import NowPlaying from "@/components/NowPlaying";
 import { getAllPosts } from "@/lib/blogFunctions";
 import { EMAIL, PROJECTS, SOCIAL } from "@/lib/site";
+import favorites from "@/data/favoritas.json";
+import type { FavoriteTrack } from "@/lib/music";
 
 export const metadata = {
   title: "Enlaces",
@@ -22,7 +24,7 @@ export default function Enlaces() {
             <span className="links-wink" aria-hidden="true">;)</span>
             <h1>benjamonsh</h1>
             <p className="lede">Webs y apps que funcionan, en días. Todo lo mío, en un solo lugar.</p>
-            <NowPlaying />
+            <NowPlaying favorites={favorites as FavoriteTrack[]} />
             <ul className="links-list">
               <li><Link href="/contacto"><strong>Cuéntame tu proyecto</strong><span>Formulario</span></Link></li>
               <li><Link href="/proyectos"><strong>Proyectos</strong><span>{PROJECTS.length} publicados</span></Link></li>

@@ -7,7 +7,7 @@ import { PROJECTS } from "@/lib/site";
 
 export const metadata = {
   title: "Proyectos",
-  description: "Sitios web y apps móviles que he diseñado y desarrollado.",
+  description: "Sitios web y apps móviles que he desarrollado.",
   alternates: { canonical: "/proyectos" },
 };
 
@@ -17,7 +17,7 @@ export default function Proyectos() {
       <Header current="/proyectos" />
       <main id="contenido">
         <PageHead label="Proyectos" meta={`${PROJECTS.length} publicados`} title="Proyectos."
-          lede="Sitios web y apps que he diseñado y construido de principio a fin." />
+          lede="Sitios web y apps que he desarrollado de principio a fin." />
         <section className="wrap section">
           <ProjectList>
             <div className="slot">

@@ -4,7 +4,7 @@ import Analytics from "@/components/Analytics";
 import { SITE_URL } from "@/lib/site";
 
 const description =
-  "Soy Benjamín Delgado. Diseño y desarrollo sitios web y apps móviles con React Native y Expo para negocios que necesitan resultados rápido.";
+  "Soy Benjamín Delgado. Desarrollo apps móviles con Expo y React Native, y sitios web de alta calidad en poco tiempo, para negocios que necesitan resultados rápido.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s — benjamonsh",
   },
   description,
-  keywords: ["desarrollo web", "aplicaciones móviles", "React Native", "Expo", "Figma", "diseño web", "desarrollo de apps"],
+  keywords: ["desarrollo web", "aplicaciones móviles", "React Native", "Expo", "desarrollo de apps", "desarrollo de sitios web"],
   authors: [{ name: "Benjamín Delgado", url: SITE_URL }],
   creator: "benjamonsh",
   publisher: "benjamonsh",

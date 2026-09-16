@@ -1,5 +1,6 @@
 import type { MDXComponents } from "mdx/types";
-import { Fragment, type ReactNode } from "react";
+import { Children, Fragment, isValidElement, type ReactNode } from "react";
+import { CodeBlock } from "@/components/CodeBlock";
 
 // Resaltado mínimo: comentarios en gris y cadenas en blanco. Un solo color por pieza.
 function highlight(code: string): ReactNode[] {
@@ -17,6 +18,24 @@ function highlight(code: string): ReactNode[] {
 }
 
 const components: MDXComponents = {
+  // Una imagen sola en su párrafo se muestra como <figure>, que no puede ir dentro de <p>.
+  p: ({ children }) => {
+    const items = Children.toArray(children);
+    const onlyImage = items.length === 1 && isValidElement(items[0]) && (items[0].props as { src?: unknown }).src !== undefined;
+    return onlyImage ? <>{children}</> : <p>{children}</p>;
+  },
+  // Bloque de código: el hijo de <pre> es el elemento <code> con el texto sin procesar,
+  // así que el botón copia el texto original y el resaltado se mantiene.
+  pre: ({ children, ...props }) => {
+    const code = isValidElement(children) ? (children.props as { className?: string; children?: unknown }) : null;
+    if (typeof code?.children !== "string") return <pre {...props}>{children}</pre>;
+    const language = code.className?.match(/language-(\S+)/)?.[1];
+    return (
+      <CodeBlock text={code.children.replace(/\n$/, "")} language={language}>
+        <pre {...props}>{children}</pre>
+      </CodeBlock>
+    );
+  },
   code: ({ className, children, ...props }) => {
     if (className?.startsWith("language-") && typeof children === "string") {
       return <code className={className} {...props}>{highlight(children.replace(/\n$/, ""))}</code>;
@@ -29,7 +48,7 @@ const components: MDXComponents = {
   img: ({ alt, src }) => (
     <figure>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt ?? ""} style={{ filter: "grayscale(1)" }} />
+      <img src={src} alt={alt ?? ""} />
       {alt && <figcaption className="hint" style={{ marginTop: ".5rem" }}>{alt}</figcaption>}
     </figure>
   ),

@@ -2,32 +2,16 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
+import { ACCENTS, postStatus, type AccentName, type Post, type PostMeta } from "@/lib/blogShared";
+
+export { ACCENTS, postStatus };
+export type { AccentName, Post, PostMeta };
 
 const CONTENT_DIR = path.join(process.cwd(), "src", "content");
 
-export type AccentName = "cian" | "violeta" | "ambar" | "verde";
-
-// Cada artículo usa un único color secundario, solo en su propia página.
-export const ACCENTS: Record<AccentName, { bg: string; fg: string }> = {
-  cian: { bg: "var(--cian)", fg: "var(--tinta)" },
-  violeta: { bg: "var(--violeta)", fg: "var(--blanco)" },
-  ambar: { bg: "var(--ambar)", fg: "var(--tinta)" },
-  verde: { bg: "var(--verde)", fg: "var(--tinta)" },
-};
-
-export interface PostMeta {
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  cover?: string;
-  color: AccentName;
-  tags: string[];
-  readingTime: number;
-}
-
-export interface Post extends PostMeta {
-  content: string;
+function toDateString(value: unknown): string {
+  if (value instanceof Date) return value.toISOString().slice(0, 10);
+  return typeof value === "string" ? value : "";
 }
 
 function readPost(slug: string): Post | null {
@@ -39,14 +23,19 @@ function readPost(slug: string): Post | null {
     slug,
     title: data.title || slug,
     description: data.description || "",
-    date: data.date || "",
+    date: toDateString(data.date),
+    updated: toDateString(data.updated) || undefined,
     cover: data.cover || "",
     color,
     tags: data.tags || [],
+    draft: data.draft === true,
     readingTime: readingTime(content).time,
     content,
   };
 }
+
+// Solo lo visible: sin borradores ni artículos programados para una fecha futura.
+const isVisible = (p: PostMeta) => postStatus(p) === "publicado";
 
 export function getAllPosts(): PostMeta[] {
   if (!fs.existsSync(CONTENT_DIR)) return [];
@@ -54,13 +43,14 @@ export function getAllPosts(): PostMeta[] {
     .readdirSync(CONTENT_DIR)
     .filter((f) => f.endsWith(".mdx"))
     .map((f) => readPost(f.replace(/\.mdx$/, "")))
-    .filter((p): p is Post => p !== null)
+    .filter((p): p is Post => p !== null && isVisible(p))
     .map(({ content: _content, ...meta }) => meta)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export function getPost(slug: string): Post | null {
-  return readPost(decodeURIComponent(slug));
+  const post = readPost(decodeURIComponent(slug));
+  return post && isVisible(post) ? post : null;
 }
 
 export function getAllTags(): string[] {

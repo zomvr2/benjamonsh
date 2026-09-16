@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { PostMeta } from "@/lib/blogFunctions";
+import type { PostMeta } from "@/lib/blogShared";
 import { formatDate, formatReadingTime } from "@/lib/time";
 import TagList from "@/components/blog/TagList";
 

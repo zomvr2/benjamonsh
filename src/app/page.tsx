@@ -37,7 +37,7 @@ export default function Home() {
               <span className="line">en días.</span>
             </h1>
             <div className="hero-foot">
-              <p>Soy Benjamín Delgado. Diseño y desarrollo sitios web y apps móviles para negocios que no pueden esperar un trimestre.</p>
+              <p>Soy Benjamín Delgado. Desarrollo apps móviles con Expo y React Native, y sitios web de alta calidad en poco tiempo, para negocios que no pueden esperar un trimestre.</p>
               <div className="actions">
                 <Link className="btn" href="/contacto">Cuéntame tu proyecto</Link>
                 <Link className="btn btn--line" href="/proyectos">Ver proyectos</Link>
@@ -47,12 +47,11 @@ export default function Home() {
         </section>
 
         <section className="wrap section" aria-labelledby="que-hago">
-          <div className="strip"><span id="que-hago">Qué hago</span><span>3 servicios</span></div>
+          <div className="strip"><span id="que-hago">Qué hago</span><span>2 servicios</span></div>
           <h2 className="section-title">Lo rápido se nota en el plazo, no en el acabado.</h2>
-          <div className="grid-rules grid-3">
-            <div><h3>Sitios web</h3><p>Páginas rápidas, fáciles de actualizar y hechas para que tus clientes te encuentren y te escriban.</p></div>
-            <div><h3>Apps móviles</h3><p>Apps para iOS y Android con React Native y Expo, desde la primera versión hasta la tienda.</p></div>
-            <div><h3>Diseño en Figma</h3><p>Pantallas y prototipos para que veas y pruebes tu producto antes de escribir una línea de código.</p></div>
+          <div className="grid-rules grid-2">
+            <div><h3>Sitios web</h3><p>Sitios de alta calidad listos en poco tiempo: rápidos, fáciles de actualizar y hechos para que tus clientes te encuentren y te escriban.</p></div>
+            <div><h3>Apps móviles</h3><p>Apps para iOS y Android con Expo y React Native, desde la primera versión hasta la publicación en las tiendas.</p></div>
           </div>
         </section>
 

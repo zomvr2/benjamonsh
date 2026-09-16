@@ -18,7 +18,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const post = getPost((await params).slug);
   if (!post) return {};
-  const { title, description, cover, tags, date, slug } = post;
+  const { title, description, cover, tags, date, updated, slug } = post;
   return {
     title,
     description,
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       locale: "es_CL",
       type: "article",
       publishedTime: date,
-      modifiedTime: date,
+      modifiedTime: updated || date,
       authors: ["Benjamín Delgado"],
       tags,
       images: cover ? [{ url: cover, alt: title }] : [],
@@ -60,6 +60,7 @@ export default async function BlogPage({ params }: Params) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
+    dateModified: post.updated || post.date,
     image: post.cover || undefined,
     keywords: post.tags.join(", "),
     author: { "@type": "Person", name: "Benjamín Delgado", url: SITE_URL },
