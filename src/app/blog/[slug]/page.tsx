@@ -44,6 +44,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function BlogPage({ params }: Params) {
   const post = getPost((await params).slug);
   if (!post) notFound();
+  // useMDXComponents is the standard @next/mdx convention name (mdx-components.tsx),
+  // not a React hook — it's a plain function safe to call in this Server Component.
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const components = useMDXComponents();
 
   const posts = getAllPosts();
