@@ -1,0 +1,879 @@
+---
+title: "Python desde cero hasta bucles"
+description: "Tutorial práctico de Python desde cero, aprendiendo variables, tipos de datos, condicionales, listas y bucles for y while paso a paso."
+date: "2026-09-16"
+cover: ""
+color: "violeta"
+tags: ["python", "variables", "condicionales", "bucles", "listas"]
+draft: true
+---
+
+## 1. ¿Qué es Python?
+
+Python es un lenguaje de programación conocido por tener una sintaxis simple y fácil de leer.
+
+Un programa básico puede verse así:
+
+```python
+print("Hola mundo")
+```
+
+Salida:
+
+```text
+Hola mundo
+```
+
+La función `print()` permite mostrar información en pantalla.
+
+## 2. Comentarios
+
+Los comentarios sirven para escribir explicaciones dentro del código.
+
+Python ignora todo lo que esté después de `#`.
+
+```python
+# Esto es un comentario
+
+print("Hola")  # También puede escribirse aquí
+```
+
+Los comentarios son útiles para recordar qué hace una parte del programa.
+
+## 3. Variables
+
+Una variable permite guardar información.
+
+```python
+nombre = "Benjamín"
+edad = 20
+```
+
+Podemos mostrar las variables con `print()`:
+
+```python
+print(nombre)
+print(edad)
+```
+
+También podemos combinarlas:
+
+```python
+print("Mi nombre es", nombre)
+print("Tengo", edad, "años")
+```
+
+En Python no es necesario indicar explícitamente el tipo de variable.
+
+```python
+numero = 10
+nombre = "Pedro"
+altura = 1.75
+```
+
+Python determina automáticamente qué tipo de dato contiene cada variable.
+
+## 4. Tipos de datos básicos
+
+### Enteros: `int`
+
+Son números sin decimales.
+
+```python
+edad = 20
+cantidad = 5
+temperatura = -3
+```
+
+### Decimales: `float`
+
+Son números con parte decimal.
+
+```python
+altura = 1.75
+precio = 2990.5
+```
+
+### Texto: `str`
+
+Los textos se escriben entre comillas.
+
+```python
+nombre = "Benjamín"
+ciudad = "Copiapó"
+```
+
+### Booleanos: `bool`
+
+Solo pueden tener dos valores:
+
+```python
+True
+False
+```
+
+Ejemplo:
+
+```python
+mayor_de_edad = True
+tiene_licencia = False
+```
+
+## 5. Saber el tipo de una variable
+
+La función `type()` permite conocer el tipo de dato.
+
+```python
+edad = 20
+nombre = "Benjamín"
+
+print(type(edad))
+print(type(nombre))
+```
+
+## 6. Operaciones matemáticas
+
+```python
+a = 10
+b = 3
+```
+
+### Suma
+
+```python
+resultado = a + b
+```
+
+### Resta
+
+```python
+resultado = a - b
+```
+
+### Multiplicación
+
+```python
+resultado = a * b
+```
+
+### División
+
+```python
+resultado = a / b
+```
+
+### División entera
+
+```python
+print(10 // 3)
+```
+
+Resultado:
+
+```text
+3
+```
+
+### Resto de una división
+
+Se utiliza `%`.
+
+```python
+print(10 % 3)
+```
+
+Resultado:
+
+```text
+1
+```
+
+Esto es especialmente útil para detectar números pares.
+
+```python
+numero = 8
+
+if numero % 2 == 0:
+    print("Es par")
+```
+
+### Potencia
+
+Se utiliza `**`.
+
+```python
+print(2 ** 3)
+```
+
+Resultado:
+
+```text
+8
+```
+
+## 7. Entrada de datos con `input()`
+
+La función `input()` permite pedir información al usuario.
+
+```python
+nombre = input("Ingrese su nombre: ")
+
+print("Hola", nombre)
+```
+
+`input()` siempre devuelve texto.
+
+Por eso, para trabajar con números debemos convertir el valor.
+
+```python
+edad = int(input("Ingrese su edad: "))
+altura = float(input("Ingrese su altura: "))
+```
+
+## 8. Conversión de tipos
+
+Las conversiones más utilizadas son:
+
+```python
+int()
+float()
+str()
+```
+
+Ejemplo:
+
+```python
+edad = int(input("Ingrese su edad: "))
+
+print("El próximo año tendrás", edad + 1, "años")
+```
+
+## 9. Operadores de comparación
+
+Los operadores de comparación devuelven `True` o `False`.
+
+```python
+5 == 5
+5 != 3
+5 > 3
+5 < 10
+5 >= 5
+5 <= 10
+```
+
+Los principales son:
+
+```text
+==  Igual
+!=  Distinto
+>   Mayor que
+<   Menor que
+>=  Mayor o igual
+<=  Menor o igual
+```
+
+## 10. Condicionales
+
+Los condicionales permiten ejecutar código dependiendo de una condición.
+
+```python
+edad = 20
+
+if edad >= 18:
+    print("Eres mayor de edad")
+```
+
+La indentación es obligatoria en Python.
+
+### `if` y `else`
+
+```python
+edad = int(input("Ingrese su edad: "))
+
+if edad >= 18:
+    print("Mayor de edad")
+else:
+    print("Menor de edad")
+```
+
+### `elif`
+
+Permite agregar condiciones adicionales.
+
+```python
+nota = 5.5
+
+if nota >= 6:
+    print("Muy buena nota")
+elif nota >= 4:
+    print("Aprobado")
+else:
+    print("Reprobado")
+```
+
+Python revisa las condiciones desde arriba hacia abajo.
+
+## 11. Operadores lógicos
+
+### `and`
+
+Las dos condiciones deben cumplirse.
+
+```python
+edad = 20
+tiene_entrada = True
+
+if edad >= 18 and tiene_entrada:
+    print("Puede entrar")
+```
+
+### `or`
+
+Es suficiente con que una condición sea verdadera.
+
+```python
+dia = "sábado"
+
+if dia == "sábado" or dia == "domingo":
+    print("Es fin de semana")
+```
+
+### `not`
+
+Invierte un valor booleano.
+
+```python
+lloviendo = False
+
+if not lloviendo:
+    print("No está lloviendo")
+```
+
+## 12. Strings
+
+Un `string` es una cadena de texto.
+
+```python
+nombre = "Python"
+```
+
+Podemos acceder a sus caracteres mediante posiciones.
+
+```python
+print(nombre[0])
+```
+
+Resultado:
+
+```text
+P
+```
+
+Las posiciones comienzan desde `0`.
+
+```text
+P y t h o n
+0 1 2 3 4 5
+```
+
+Podemos obtener la cantidad de caracteres con `len()`:
+
+```python
+print(len(nombre))
+```
+
+También existen métodos útiles:
+
+```python
+nombre.upper()
+nombre.lower()
+nombre.strip()
+```
+
+## 13. Listas
+
+Una lista permite almacenar varios valores.
+
+```python
+numeros = [10, 20, 30, 40]
+```
+
+Podemos acceder a cada posición:
+
+```python
+print(numeros[0])
+```
+
+Resultado:
+
+```text
+10
+```
+
+Podemos agregar elementos con `.append()`:
+
+```python
+numeros.append(50)
+```
+
+Modificar elementos:
+
+```python
+numeros[1] = 100
+```
+
+Y saber cuántos elementos contiene:
+
+```python
+print(len(numeros))
+```
+
+## 14. Introducción a los bucles
+
+Los bucles permiten repetir código.
+
+Sin bucles:
+
+```python
+print("Hola")
+print("Hola")
+print("Hola")
+print("Hola")
+print("Hola")
+```
+
+Con un bucle:
+
+```python
+for i in range(5):
+    print("Hola")
+```
+
+## 15. Bucle `for`
+
+El `for` suele utilizarse cuando sabemos cuántas veces queremos repetir algo.
+
+```python
+for i in range(5):
+    print(i)
+```
+
+Resultado:
+
+```text
+0
+1
+2
+3
+4
+```
+
+`range(5)` genera los valores desde `0` hasta `4`.
+
+### `range(inicio, fin)`
+
+```python
+for i in range(1, 5):
+    print(i)
+```
+
+Resultado:
+
+```text
+1
+2
+3
+4
+```
+
+### `range(inicio, fin, salto)`
+
+```python
+for i in range(0, 10, 2):
+    print(i)
+```
+
+Resultado:
+
+```text
+0
+2
+4
+6
+8
+```
+
+## 16. Recorrer listas con `for`
+
+```python
+numeros = [10, 20, 30]
+
+for numero in numeros:
+    print(numero)
+```
+
+En cada vuelta, `numero` toma un elemento diferente de la lista.
+
+```text
+Vuelta 1 → numero = 10
+Vuelta 2 → numero = 20
+Vuelta 3 → numero = 30
+```
+
+## 17. Acumuladores
+
+Un acumulador permite ir guardando un resultado.
+
+```python
+numeros = [10, 20, 30]
+
+suma = 0
+
+for numero in numeros:
+    suma = suma + numero
+
+print(suma)
+```
+
+Resultado:
+
+```text
+60
+```
+
+También podemos escribir:
+
+```python
+suma += numero
+```
+
+en lugar de:
+
+```python
+suma = suma + numero
+```
+
+## 18. Contadores
+
+Un contador sirve para registrar cuántas veces ocurre algo.
+
+```python
+contador = 0
+
+for numero in range(1, 11):
+
+    if numero % 2 == 0:
+        contador += 1
+
+print("Cantidad de números pares:", contador)
+```
+
+## 19. Bucle `while`
+
+`while` ejecuta código mientras una condición sea verdadera.
+
+```python
+contador = 0
+
+while contador < 5:
+    print(contador)
+    contador += 1
+```
+
+Resultado:
+
+```text
+0
+1
+2
+3
+4
+```
+
+El proceso es:
+
+```text
+contador = 0
+↓
+¿contador < 5?
+↓
+Sí
+↓
+ejecuta el código
+↓
+contador aumenta
+↓
+vuelve a comprobar
+```
+
+## 20. Bucles infinitos
+
+Debemos asegurarnos de que la condición del `while` pueda dejar de cumplirse.
+
+Este código nunca termina:
+
+```python
+contador = 0
+
+while contador < 5:
+    print(contador)
+```
+
+`contador` nunca cambia.
+
+La forma correcta sería:
+
+```python
+contador = 0
+
+while contador < 5:
+    print(contador)
+    contador += 1
+```
+
+## 21. `break`
+
+`break` permite terminar un bucle inmediatamente.
+
+```python
+while True:
+
+    numero = int(input("Ingrese 0 para salir: "))
+
+    if numero == 0:
+        break
+
+    print("Ingresaste:", numero)
+```
+
+## 22. `continue`
+
+`continue` salta directamente a la siguiente repetición.
+
+```python
+for numero in range(1, 6):
+
+    if numero == 3:
+        continue
+
+    print(numero)
+```
+
+Resultado:
+
+```text
+1
+2
+4
+5
+```
+
+## 23. Bucles anidados
+
+Es posible colocar un bucle dentro de otro.
+
+```python
+for i in range(3):
+
+    for j in range(3):
+        print(i, j)
+```
+
+Resultado:
+
+```text
+0 0
+0 1
+0 2
+1 0
+1 1
+1 2
+2 0
+2 1
+2 2
+```
+
+## 24. Ejemplo: tabla de multiplicar
+
+```python
+numero = int(input("Ingrese un número: "))
+
+for i in range(1, 11):
+
+    resultado = numero * i
+
+    print(numero, "x", i, "=", resultado)
+```
+
+## 25. Ejemplo: promedio de notas
+
+```python
+cantidad = int(input("¿Cuántas notas ingresará?: "))
+
+suma = 0
+
+for i in range(cantidad):
+
+    nota = float(input("Ingrese una nota: "))
+
+    suma += nota
+
+promedio = suma / cantidad
+
+print("Promedio:", promedio)
+```
+
+## 26. Ejemplo: contar números positivos
+
+```python
+contador = 0
+
+for i in range(5):
+
+    numero = int(input("Ingrese un número: "))
+
+    if numero > 0:
+        contador += 1
+
+print("Cantidad de positivos:", contador)
+```
+
+## 27. Ejercicios
+
+### Ejercicio 1
+
+Pide un número y determina si es positivo, negativo o cero.
+
+```python
+numero = int(input("Ingrese un número: "))
+
+if numero > 0:
+    print("El número es positivo")
+elif numero < 0:
+    print("El número es negativo")
+else:
+    print("El número es cero")
+```
+
+### Ejercicio 2
+
+Mostrar los números del `1` al `10`.
+
+```python
+for i in range(1, 11):
+    print(i)
+```
+
+### Ejercicio 3
+
+Mostrar los números pares entre `1` y `20`.
+
+```python
+for numero in range(1, 21):
+
+    if numero % 2 == 0:
+        print(numero)
+```
+
+### Ejercicio 4
+
+Pedir cinco números y mostrar su suma.
+
+```python
+suma = 0
+
+for i in range(5):
+
+    numero = int(input("Ingrese un número: "))
+
+    suma += numero
+
+print("La suma es:", suma)
+```
+
+### Ejercicio 5
+
+Pedir números hasta que el usuario escriba `0`.
+
+```python
+numero = -1
+
+while numero != 0:
+
+    numero = int(input("Ingrese un número: "))
+
+print("Programa terminado")
+```
+
+## 28. Resumen
+
+Hasta este punto deberías manejar:
+
+```python
+# Mostrar información
+print()
+
+# Variables
+nombre = "Benjamín"
+edad = 20
+
+# Entrada de datos
+nombre = input("Nombre: ")
+
+# Conversión
+int()
+float()
+str()
+
+# Condicionales
+if
+elif
+else
+
+# Comparaciones
+==
+!=
+>
+<
+>=
+<=
+
+# Operadores lógicos
+and
+or
+not
+
+# Listas
+numeros = [1, 2, 3]
+
+# Agregar elementos
+numeros.append(4)
+
+# Bucle for
+for i in range(10):
+    print(i)
+
+# Bucle while
+while condicion:
+    codigo
+
+# Terminar un bucle
+break
+
+# Saltar una repetición
+continue
+```
+
+La base aprendida puede resumirse en cuatro ideas:
+
+```text
+Guardar información → Variables
+
+Tomar decisiones → if / elif / else
+
+Guardar varios datos → Listas
+
+Repetir acciones → for / while
+```
+
+Dominando estos conceptos ya puedes comenzar a resolver programas pequeños y luego avanzar hacia funciones, diccionarios, archivos y programación orientada a objetos.
