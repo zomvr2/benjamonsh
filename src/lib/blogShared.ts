@@ -43,3 +43,26 @@ export function postStatus(meta: { draft?: boolean; date?: string }, today = tod
   if (meta.date && meta.date > today) return "programado";
   return "publicado";
 }
+
+/**
+ * MDX lee "<" como el inicio de una etiqueta JSX, así que textos como "<3" o "a < b"
+ * rompen la compilación (y el build). Escapa los "<" que no pueden abrir una etiqueta,
+ * sin tocar bloques de código ni `código en línea`.
+ */
+export function escapeStrayLt(source: string): string {
+  let inFence = false;
+  return source
+    .split("\n")
+    .map((line) => {
+      if (/^\s*(```|~~~)/.test(line)) {
+        inFence = !inFence;
+        return line;
+      }
+      if (inFence) return line;
+      return line
+        .split(/(`[^`]*`)/)
+        .map((part, i) => (i % 2 ? part : part.replace(/(?<!\\)<(?![A-Za-z_$/>])/g, "\\<")))
+        .join("");
+    })
+    .join("\n");
+}

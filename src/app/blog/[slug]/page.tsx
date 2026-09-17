@@ -7,6 +7,7 @@ import { useMDXComponents } from "@/mdx-components";
 import BlogHeader from "@/components/blog/blogHeader";
 import ContactBand from "@/components/ContactBand";
 import { getAllPosts, getPost } from "@/lib/blogFunctions";
+import { escapeStrayLt } from "@/lib/blogShared";
 import { SITE_URL } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -73,7 +74,7 @@ export default async function BlogPage({ params }: Params) {
         <BlogHeader post={post} />
         <div className="wrap">
           <div className="prose">
-            <MDXRemote source={post.content} components={components}
+            <MDXRemote source={escapeStrayLt(post.content)} components={components}
               options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
           </div>
         </div>
