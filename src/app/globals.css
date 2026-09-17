@@ -19,7 +19,7 @@
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
-/* benjamonsh.dev — sistema visual basado en el Manual de marca v1.0
+/* benjamonsh.cl — sistema visual basado en el Manual de marca v1.0
    Reglas: radio 0, filos de 2px, sin sombras ni degradados, todo a la izquierda,
    Archivo en 400/600/800/900, papel y tinta el 90 %, un color por pieza. */
 

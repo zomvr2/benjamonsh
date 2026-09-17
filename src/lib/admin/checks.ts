@@ -67,7 +67,7 @@ export function runChecks(fm: Frontmatter, slug: string, content: string): Check
     add({ id: "kw", group: "SEO", level: inIntro ? "ok" : "warn", label: inIntro ? `«${keyword}» aparece en el primer párrafo` : `«${keyword}» no aparece en el primer párrafo`, hint: "El primer tema funciona como palabra clave principal." });
   }
   const links = [...content.matchAll(/\[[^\]]+\]\(([^)]+)\)/g)].map((m) => m[1]).filter((u) => !/\.(png|jpe?g|webp|gif|avif)$/i.test(u));
-  const internal = links.filter((u) => u.startsWith("/") || u.includes("benjamonsh.dev"));
+  const internal = links.filter((u) => u.startsWith("/") || /benjamonsh\.(cl|dev)/.test(u));
   add({ id: "internal", group: "SEO", level: internal.length ? "ok" : "warn", label: `${internal.length} ${internal.length === 1 ? "enlace interno" : "enlaces internos"}`, hint: "Enlaza al menos a otro artículo o página del sitio." });
 
   // ---------- Contenido ----------

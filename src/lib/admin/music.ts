@@ -42,7 +42,7 @@ export async function saveFavorites(input: unknown, sha: string | null, summary:
   return { favorites, sha: blobSha(text), commitUrl: commit.url };
 }
 
-const UA = "Mozilla/5.0 (compatible; benjamonsh-admin/1.0; +https://www.benjamonsh.dev)";
+const UA = "Mozilla/5.0 (compatible; benjamonsh-admin/1.0; +https://benjamonsh.cl)";
 
 const decode = (s: string) =>
   s.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#x27;|&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">");

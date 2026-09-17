@@ -1,4 +1,4 @@
-# benjamonsh.dev
+# benjamonsh.cl
 
 Sitio personal de Benjamín Delgado (benjamonsh). Next.js 15, MDX y Tailwind 4, con el diseño del Manual de marca v1.0.
 
@@ -31,7 +31,7 @@ artículos programados. Cada guardado es un commit en GitHub y Vercel despliega 
 3. Para los programados: crea un Deploy Hook (Settings → Git → Deploy Hooks, rama
    `master`), guárdalo en `VERCEL_DEPLOY_HOOK_URL` y define `CRON_SECRET`.
    `vercel.json` corre el cron cada madrugada y despliega si hoy sale un artículo.
-4. Despliega y entra a `https://www.benjamonsh.dev/admin`.
+4. Despliega y entra a `https://benjamonsh.cl/admin`.
 
 En local, `npm run dev` con `ADMIN_PASSWORD` y `ADMIN_SECRET` en `.env.local` y **sin**
 `GITHUB_TOKEN` hace que el panel escriba directo en `src/content` y `public/media/blog`.

@@ -41,7 +41,7 @@ async function recentRaw(limit: number): Promise<LfmTrack[]> {
   const qs = new URLSearchParams({ method: "user.getrecenttracks", user, api_key: apiKey, format: "json", limit: String(limit) });
   const res = await fetch(`${API}?${qs}`, {
     cache: "no-store",
-    headers: { "User-Agent": "benjamonsh.dev/1.0 (+https://www.benjamonsh.dev)" },
+    headers: { "User-Agent": "benjamonsh.cl/1.0 (+https://benjamonsh.cl)" },
     signal: AbortSignal.timeout(6000),
   });
   const data = (await res.json().catch(() => null)) as

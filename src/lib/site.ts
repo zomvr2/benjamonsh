@@ -1,5 +1,5 @@
-export const SITE_URL = "https://www.benjamonsh.dev";
-export const EMAIL = "zodev@proton.me";
+export const SITE_URL = "https://benjamonsh.cl";
+export const EMAIL = "hola@benjamonsh.cl";
 
 export const SOCIAL = [
   { name: "GitHub", url: "https://github.com/zomvr2", handle: "zomvr2" },

@@ -451,7 +451,7 @@ export default function Editor({ initial, env, knownTags, isNew = false }: {
         <section className="side-sec">
           <h2>Así se verá al compartir</h2>
           <div className="serp" aria-label="Resultado en Google">
-            <div className="u">benjamonsh.dev › blog › {slug || "…"}</div>
+            <div className="u">benjamonsh.cl › blog › {slug || "…"}</div>
             <div className="h">{fm.title || "Título del artículo"} — benjamonsh</div>
             <div className="s">{fm.date && <>{formatDate(fm.date)} — </>}{fm.description || "Sin descripción: Google elegirá un fragmento del texto."}</div>
           </div>
@@ -460,7 +460,7 @@ export default function Editor({ initial, env, knownTags, isNew = false }: {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               {fm.cover ? <img src={adminMediaSrc(fm.cover)} alt="" /> : null}
             </div>
-            <div className="txt"><small>benjamonsh.dev</small><strong>{fm.title || "Título del artículo"}</strong></div>
+            <div className="txt"><small>benjamonsh.cl</small><strong>{fm.title || "Título del artículo"}</strong></div>
           </div>
         </section>
 
