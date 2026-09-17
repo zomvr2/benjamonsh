@@ -18,6 +18,34 @@ function Shot({ project }: { project: Project }) {
   );
 }
 
+/** Si la URL del proyecto aparece mencionada en la descripción (ej. "auticuidado.cl"), la convierte en link a nueva pestaña. */
+function Description({ project }: { project: Project }) {
+  const { description, url } = project;
+  if (!url) return <p>{description}</p>;
+
+  let hostname = "";
+  try {
+    hostname = new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    hostname = "";
+  }
+
+  const idx = hostname ? description.indexOf(hostname) : -1;
+  if (idx === -1) return <p>{description}</p>;
+
+  const before = description.slice(0, idx);
+  const match = description.slice(idx, idx + hostname.length);
+  const after = description.slice(idx + hostname.length);
+
+  return (
+    <p>
+      {before}
+      <a href={url} target="_blank" rel="noopener noreferrer">{match}</a>
+      {after}
+    </p>
+  );
+}
+
 export default function ProjectList({ children }: { children?: React.ReactNode }) {
   return (
     <div className="projects">
@@ -27,7 +55,14 @@ export default function ProjectList({ children }: { children?: React.ReactNode }
           <div>
             <h3>{p.name}</h3>
             <p className="kind">{p.kind}</p>
-            <p>{p.description}</p>
+            <Description project={p} />
+            {p.badges && p.badges.length > 0 && (
+              <ul className="tags project-badges">
+                {p.badges.map((b) => (
+                  <li key={b} className="tag">{b}</li>
+                ))}
+              </ul>
+            )}
           </div>
         </article>
       ))}
