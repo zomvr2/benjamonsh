@@ -12,10 +12,19 @@ export interface Project {
   kind: string;
   image: string;
   description: string;
+  /** Para capturas de página completa: cuánto sube la imagen (ej. "-83%") para recorrer todo el sitio en un loop suave. */
+  scrollPan?: string;
 }
 
 // Edita aquí los proyectos: aparecen en el inicio y en /proyectos.
 export const PROJECTS: Project[] = [
+  {
+    name: "Munay Vet",
+    kind: "Sitio web de clínica veterinaria",
+    image: "/munayvet.jpg",
+    description: "Sitio web para Munay Vet, clínica veterinaria en Copiapó especializada en atención a domicilio, medicina preventiva y animales exóticos, publicado en munayvet.cl.",
+    scrollPan: "-83%",
+  },
   {
     name: "Auticuidado",
     kind: "Plataforma de salud digital",

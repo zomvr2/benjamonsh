@@ -1,15 +1,18 @@
 "use client";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { PROJECTS, type Project } from "@/lib/site";
 
 function Shot({ project }: { project: Project }) {
   const [failed, setFailed] = useState(false);
+  const style = project.scrollPan
+    ? ({ "--pan": project.scrollPan } as CSSProperties)
+    : undefined;
   return (
-    <div className="shot">
+    <div className={`shot${project.scrollPan ? " shot--scroll" : ""}`}>
       <span className="shot-fallback" aria-hidden="true">{project.name.toLowerCase()}</span>
       {!failed && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={project.image} alt={`Captura de ${project.name}`} loading="lazy" onError={() => setFailed(true)} />
+        <img src={project.image} alt={`Captura de ${project.name}`} loading="lazy" style={style} onError={() => setFailed(true)} />
       )}
     </div>
   );

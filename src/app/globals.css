@@ -283,6 +283,21 @@ a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: .18em
   object-fit: cover; object-position: top left;
   filter: contrast(1.05);
 }
+
+/* Capturas de página completa: recorren el sitio de arriba a abajo en loop. */
+.shot--scroll img {
+  inset: auto; top: 0; left: 0; right: auto; bottom: auto;
+  height: auto; object-fit: unset;
+  animation: shot-pan 16s ease-in-out infinite;
+}
+@keyframes shot-pan {
+  0%, 10%   { transform: translateY(0); }
+  45%, 55%  { transform: translateY(var(--pan, -70%)); }
+  90%, 100% { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shot--scroll img { animation: none; }
+}
 .shot-fallback {
   position: absolute; left: -0.04em; bottom: -0.02em;
   color: var(--papel); font-weight: 900; letter-spacing: -0.05em; line-height: .9;
@@ -543,7 +558,11 @@ textarea.input { min-height: 10rem; resize: vertical; }
   display: grid; grid-template-columns: 4rem minmax(0, 1fr) auto; gap: 1rem; align-items: center;
   padding: 1rem 0; border-bottom: 2px solid var(--blanco);
 }
-.now-card img { width: 4rem; height: 4rem; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.now-cover { position: relative; width: 4rem; height: 4rem; }
+.now-card .now-cover-img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+}
 .now-card strong { display: block; font-size: 1.375rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .now-card span { display: block; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -571,6 +590,40 @@ textarea.input { min-height: 10rem; resize: vertical; }
   .now-eq i:nth-child(3) { animation-delay: -.7s; }
 }
 @keyframes now-eq { from { transform: scaleY(.25); } to { transform: scaleY(1); } }
+
+/* Recuerdo lejano: al pasar el mouse (o enfocar «Escuchar»), la portada se
+   desdobla en un eco visual borroso y a la deriva, a la par del audio. */
+.now-card .now-cover-img--ghost {
+  z-index: 0; opacity: 0; mix-blend-mode: screen; pointer-events: none;
+}
+.now-card .now-cover-img--base { position: relative; z-index: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .now-card .now-cover-img { transition: filter .6s ease, transform .6s ease, opacity .6s ease; }
+}
+.now-cover.is-listening .now-cover-img--base {
+  filter: grayscale(.5) contrast(1.05) blur(1.5px) brightness(1.08);
+  transform: scale(1.05);
+}
+.now-cover.is-listening .now-cover-img--ghost {
+  opacity: .6;
+  filter: grayscale(.15) contrast(1.15) blur(7px) saturate(1.4);
+  transform: scale(1.18) translate(-3%, -2%) rotate(-1.5deg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .now-cover.is-listening .now-cover-img--ghost { animation: now-drift 4.5s ease-in-out infinite; }
+}
+@keyframes now-drift {
+  0%, 100% { transform: scale(1.18) translate(-3%, -2%) rotate(-1.5deg); }
+  50% { transform: scale(1.3) translate(3%, 2%) rotate(1.5deg); }
+}
+.now-cover-empty { transition: filter .4s ease; }
+.now-cover-empty.is-listening { filter: blur(.5px); }
+@media (prefers-reduced-motion: no-preference) {
+  .now-cover-empty.is-listening { animation: now-pulse 1.8s ease-in-out infinite; }
+}
+@keyframes now-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+/* En hover el cursor invita a quedarse ahí un momento. */
+@media (hover: hover) and (pointer: fine) { .now-card { cursor: pointer; } }
 
 /* ---------- Bloque de código con botón de copiar ---------- */
 /* El botón flota en la esquina superior derecha del bloque y no se mueve al desplazar el código. */

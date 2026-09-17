@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
+import type { PointerEvent as RPointerEvent } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import {
   DEFAULT_FAV_NOTE, favoriteKey, findFavorite, listenUrl, type FavoriteTrack, type NowPlayingData,
 } from "@/lib/music";
+import { useDreamyPreview } from "@/lib/useDreamyPreview";
 
 // Cada cuánto se pregunta a /api/now-playing mientras la pestaña está visible.
 const POLL = 10_000;
@@ -85,15 +87,13 @@ export default function NowPlaying({ favorites = [] }: { favorites?: FavoriteTra
         <div aria-live="polite">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div key={`${track.artists}|${track.name}`} {...motionProps}>
-              <div className="now-card">
-                <Cover src={track.image || fav?.image || ""} />
-                <div style={{ minWidth: 0 }}>
-                  <strong>{track.name}</strong>
-                  <span>{track.artists}</span>
-                </div>
-                <a href={listenUrl(fav ?? track)} target="_blank" rel="noopener noreferrer">Escuchar</a>
-              </div>
-              {fav && <p className="now-fav">{fav.note || DEFAULT_FAV_NOTE}</p>}
+              <TrackCard
+                image={track.image || fav?.image || ""}
+                name={track.name}
+                artists={track.artists}
+                href={listenUrl(fav ?? track)}
+                note={fav ? (fav.note || DEFAULT_FAV_NOTE) : undefined}
+              />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -120,15 +120,13 @@ export default function NowPlaying({ favorites = [] }: { favorites?: FavoriteTra
       <div aria-live="polite">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div key={favoriteKey(fav)} {...motionProps}>
-            <div className="now-card">
-              <Cover src={fav.image} />
-              <div style={{ minWidth: 0 }}>
-                <strong>{fav.name}</strong>
-                <span>{fav.artists}</span>
-              </div>
-              <a href={listenUrl(fav)} target="_blank" rel="noopener noreferrer">Escuchar</a>
-            </div>
-            <p className="now-fav">{fav.note || "Ahora no suena nada, pero esta nunca falla."}</p>
+            <TrackCard
+              image={fav.image}
+              name={fav.name}
+              artists={fav.artists}
+              href={listenUrl(fav)}
+              note={fav.note || "Ahora no suena nada, pero esta nunca falla."}
+            />
           </motion.div>
         </AnimatePresence>
       </div>
@@ -136,8 +134,67 @@ export default function NowPlaying({ favorites = [] }: { favorites?: FavoriteTra
   );
 }
 
-function Cover({ src }: { src: string }) {
-  if (!src) return <div className="now-cover-empty" aria-hidden="true">;)</div>;
-  // eslint-disable-next-line @next/next/no-img-element
-  return <img src={src} alt="" width={64} height={64} />;
+function TrackCard({
+  image, name, artists, href, note,
+}: { image: string; name: string; artists: string; href: string; note?: string }) {
+  // Al pasar el mouse (o enfocar «Escuchar») suena un fragmento lejano de la
+  // canción, con eco y grave, como si se colara desde la memoria — y la
+  // portada se desdobla en un eco visual borroso mientras tanto.
+  const { enter, leave, listening } = useDreamyPreview(name, artists);
+
+  const onPointerEnter = (e: RPointerEvent<HTMLDivElement>) => { if (e.pointerType !== "touch") enter(); };
+  const onPointerLeave = (e: RPointerEvent<HTMLDivElement>) => { if (e.pointerType !== "touch") leave(); };
+  const onPointerDown = (e: RPointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== "touch") return;
+    if (listening) leave(); else enter();
+  };
+
+  return (
+    <>
+      <div
+        className="now-card"
+        onPointerEnter={onPointerEnter}
+        onPointerLeave={onPointerLeave}
+        onPointerDown={onPointerDown}
+        onPointerCancel={leave}
+      >
+        <Cover src={image} listening={listening} />
+        <div style={{ minWidth: 0 }}>
+          <strong>{name}</strong>
+          <span>{artists}</span>
+        </div>
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          onFocus={enter}
+          onBlur={leave}
+          aria-label={`Escuchar «${name}» de ${artists} en Spotify (al enfocar suena un fragmento lejano)`}
+        >
+          Escuchar
+        </a>
+      </div>
+      {note && <p className="now-fav">{note}</p>}
+      <span className="visually-hidden" aria-live="polite">
+        {listening ? `Sonando un fragmento lejano de ${name}, de ${artists}.` : ""}
+      </span>
+    </>
+  );
+}
+
+function Cover({ src, listening }: { src: string; listening: boolean }) {
+  if (!src) {
+    return (
+      <div className={`now-cover-empty${listening ? " is-listening" : ""}`} aria-hidden="true">;)</div>
+    );
+  }
+  return (
+    <div className={`now-cover${listening ? " is-listening" : ""}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="now-cover-img now-cover-img--base" src={src} alt="" width={64} height={64} />
+      {/* Eco visual: una copia borrosa que aparece y se aleja mientras suena el preview. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="now-cover-img now-cover-img--ghost" src={src} alt="" width={64} height={64} aria-hidden="true" />
+    </div>
+  );
 }
