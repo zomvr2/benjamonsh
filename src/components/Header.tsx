@@ -2,6 +2,7 @@ import Link from "next/link";
 import Wordmark from "@/components/Wordmark";
 
 const ITEMS = [
+  { href: "/sobre-mi", label: "Sobre mí" },
   { href: "/proyectos", label: "Proyectos" },
   { href: "/blog", label: "Blog" },
   { href: "/enlaces", label: "Enlaces" },
