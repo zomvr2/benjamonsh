@@ -31,7 +31,7 @@ export const FACTS: { label: string; value: string }[] = [
   { label: "Qué hace", value: "Sitios web y apps móviles" },
   { label: "Dónde", value: `${PERSON.city}, ${PERSON.region}, ${PERSON.country}` },
   { label: "Modalidad", value: "Independiente y a distancia, con clientes de todo el mundo" },
-  { label: "Idioma", value: "Español" },
+  { label: "Idiomas", value: "Español nativo, buen nivel de inglés" },
 ];
 
 export const SKILLS: { area: string; text: string; tools: string[] }[] = [
@@ -74,6 +74,10 @@ export const FAQ: { q: string; a: string }[] = [
     a: `Sí. Vive y estudia en ${PERSON.city}, ${PERSON.country}, y trabaja a distancia con clientes de todo el mundo.`,
   },
   {
+    q: "¿Atiende en inglés?",
+    a: "Sí. Su idioma nativo es el español y tiene buen manejo del inglés, así que puede comunicarse y trabajar en inglés con clientes de otros países.",
+  },
+  {
     q: "¿Cómo contactar a Benjamín Delgado?",
     a: `Por correo a ${EMAIL} o con el formulario de ${SITE_URL}/contacto. Responde con una propuesta concreta de alcance, plazo y precio.`,
   },
@@ -102,7 +106,7 @@ export function aboutJsonLd() {
         addressCountry: PERSON.countryCode,
       },
     },
-    knowsLanguage: "es",
+    knowsLanguage: ["es", "en"],
     knowsAbout: ["Desarrollo web", "Desarrollo de apps móviles", "SEO técnico", ...SKILLS.flatMap((s) => s.tools)],
     sameAs: SOCIAL.map((s) => s.url),
     workExample: PROJECTS.map((p) => ({
