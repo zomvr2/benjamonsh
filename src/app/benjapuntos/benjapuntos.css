@@ -1,0 +1,57 @@
+/* Benjapuntos: pantalla de app independiente, sin Header/Footer del sitio. Mismas reglas del manual (radio 0, filos de 2 px, sin sombras). */
+
+.bp { min-height: 100svh; display: grid; grid-template-rows: auto 1fr; grid-template-columns: minmax(0, 1fr); }
+.bp-head { border-bottom: 2px solid var(--rule); position: sticky; top: 0; z-index: 30; background: var(--bg); }
+.bp-head .wrap { display: flex; align-items: center; gap: 1.5rem; min-height: 3.75rem; }
+.bp-head .wordmark { font-size: 1.25rem; }
+.bp-nav { display: flex; gap: 1.25rem; margin-left: auto; align-items: center; }
+.bp-nav button { font: 600 .9375rem/1 var(--font); color: var(--fg); background: none; border: 0; padding: .4rem 0; cursor: pointer; }
+.bp-nav button:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .25em; }
+.bp-main { padding-bottom: 4rem; }
+.bp-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: -0.04em; line-height: .95; margin: 1.5rem 0 0; }
+
+.bp-login { min-height: 100svh; display: grid; place-items: center; padding: var(--pad); }
+.bp-login-card { max-width: 26rem; width: 100%; }
+.bp-login-card .wordmark { font-size: 1.75rem; margin-bottom: 2rem; }
+
+.bp-balance { border: 2px solid var(--rule); padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem; display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap; }
+.bp-balance dt { font-size: .6875rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--soft); }
+.bp-balance dd { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.bp-balance dd small { font-size: 1rem; font-weight: 600; color: var(--soft); margin-left: .35rem; }
+
+.bp-offers { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 3.75rem 1.25rem; margin-top: 1rem; }
+.bp-offer { border: 2px solid var(--rule); padding: 1.25rem; display: grid; gap: .5rem; align-content: start; position: relative; }
+.bp-offer.has-img { padding-top: 6.5rem; }
+.bp-offer h3 { font-size: 1.1875rem; font-weight: 800; letter-spacing: -0.02em; }
+.bp-offer p { color: var(--muted); font-size: .9375rem; }
+.bp-offer .cost { font-weight: 700; font-variant-numeric: tabular-nums; margin-top: .25rem; }
+.bp-offer .btn { min-width: 0; width: 100%; justify-content: center; margin-top: .5rem; }
+
+/* Foto del producto "saliendo" del recuadro: drop-shadow (no box-shadow) recorta al alfa del PNG.
+   Tamaño fijo (no el del PNG original) para que todas las fotos se vean parecidas. */
+.bp-offer-img { position: absolute; top: -2.25rem; left: 50%; width: 8.5rem; height: 8.5rem; transform: translateX(-50%) rotate(-5deg); pointer-events: none; }
+.bp-offer-img img {
+  width: 100%; height: 100%; object-fit: contain; display: block;
+  filter: drop-shadow(5px 7px 0 var(--rule));
+  transition: transform .2s ease;
+}
+.bp-offer:hover .bp-offer-img img { transform: rotate(4deg) scale(1.08) translateY(-.15rem); }
+@media (prefers-reduced-motion: reduce) { .bp-offer-img img { transition: none; } }
+
+.bp-events { list-style: none; padding: 0; margin-top: 1rem; border-top: 2px solid var(--rule); }
+.bp-events li { display: flex; justify-content: space-between; gap: 1rem; padding: .75rem 0; border-bottom: 2px solid var(--hair); }
+.bp-events .amount { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bp-events .amount.is-grant { color: var(--fg); }
+.bp-events .amount.is-redeem { color: var(--acento-texto); }
+.bp-events .when { color: var(--soft); font-size: .8125rem; }
+
+.notice { border: 2px solid var(--rule); padding: 1rem 1.25rem; margin-top: 1.5rem; }
+.notice--error { border-color: var(--acento-texto); color: var(--acento-texto); font-weight: 600; }
+.notice code { font-family: var(--mono); font-size: .9em; background: var(--chip); padding: .05em .3em; color: var(--fg); }
+.notice ul { margin-top: .5rem; padding-left: 1.2rem; color: var(--fg); font-weight: 400; }
+
+.empty { border: 2px dashed var(--hair); padding: 2rem 1.5rem; color: var(--muted); }
+
+@media (max-width: 700px) {
+  .bp-head { position: static; }
+}

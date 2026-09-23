@@ -7,6 +7,7 @@ const ITEMS = [
   { href: "/admin", label: "Artículos" },
   { href: "/admin/medios", label: "Medios" },
   { href: "/admin/musica", label: "Música" },
+  { href: "/admin/benjapuntos", label: "Benjapuntos" },
 ];
 
 export default function AdminNav() {

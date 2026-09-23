@@ -494,6 +494,9 @@ a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: .18em
   padding: .8rem .9rem; appearance: none;
 }
 textarea.input { min-height: 10rem; resize: vertical; }
+/* El popup nativo del <select> no hereda bien --bg/--fg en todos los navegadores: se fija explícito. */
+select.input { color-scheme: light dark; background-color: var(--bg); }
+select.input option { background-color: var(--bg); color: var(--fg); }
 .choices { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
 .choice input { position: absolute; opacity: 0; pointer-events: none; }
 .choice span {

@@ -64,7 +64,7 @@ export default function Home() {
 
         <section className="wrap section" aria-labelledby="proceso-t" style={{ paddingTop: 0 }}>
           <div className="strip"><span id="proceso-t">Cómo trabajo</span><span>3 pasos</span></div>
-          <h2 className="section-title">Sin jerga y sin rodeos.</h2>
+          <h2 className="section-title">Directo, sin vueltas.</h2>
           <ol className="grid-rules grid-3" style={{ listStyle: "none", paddingLeft: 0 }}>
             <li><span className="step-n">1</span><h3>Me cuentas la idea</h3><p>Una conversación corta para entender qué necesitas, para quién y para cuándo.</p></li>
             <li><span className="step-n">2</span><h3>Te propongo la opción simple</h3><p>Alcance, plazo y precio claros. Si hay un camino más barato que funciona igual, te lo digo.</p></li>
