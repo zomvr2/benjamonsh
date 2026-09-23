@@ -14,6 +14,7 @@ export default function Footer() {
           <div className="foot-col">
             <h2>Sitio</h2>
             <ul>
+              <li><Link href="/sobre-mi">Sobre mí</Link></li>
               <li><Link href="/proyectos">Proyectos</Link></li>
               <li><Link href="/blog">Blog</Link></li>
               <li><Link href="/enlaces">Enlaces</Link></li>
