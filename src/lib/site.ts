@@ -2,6 +2,7 @@ export const SITE_URL = "https://benjamonsh.cl";
 export const EMAIL = "hola@benjamonsh.cl";
 
 export const SOCIAL = [
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/benjamonsh/", handle: "benjamonsh" },
   { name: "GitHub", url: "https://github.com/zomvr2", handle: "zomvr2" },
   { name: "Instagram", url: "https://www.instagram.com/benjamonsh/", handle: "@benjamonsh" },
   { name: "Spotify", url: "https://open.spotify.com/user/0h5li5o0jmc9r1pw12lxt4jvn", handle: "Mis playlists" },
