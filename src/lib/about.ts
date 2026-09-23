@@ -6,6 +6,8 @@ import { EMAIL, PROJECTS, SITE_URL, SOCIAL } from "@/lib/site";
 export const PERSON = {
   name: "Benjamín Delgado",
   alias: "benjamonsh",
+  /** Otras formas en que la gente busca el nombre (sin tilde, con dominio). Van al JSON-LD. */
+  altNames: ["Benjamin Delgado", "benjamonsh.cl"],
   jobTitle: "Desarrollador web y de apps móviles",
   // Si cambias la ciudad, revisa también el texto de BIO.
   city: "Coquimbo",
@@ -78,6 +80,10 @@ export const FAQ: { q: string; a: string }[] = [
     a: "Sí. Su idioma nativo es el español y tiene buen manejo del inglés, así que puede comunicarse y trabajar en inglés con clientes de otros países.",
   },
   {
+    q: "¿Cómo se escribe benjamonsh?",
+    a: "Se escribe b-e-n-j-a-m-o-n-s-h, todo en minúscula: «benja» + «mon» + «sh». A veces lo escriben benjamosh o benjamonch; la dirección correcta es benjamonsh.cl.",
+  },
+  {
     q: "¿Cómo contactar a Benjamín Delgado?",
     a: `Por correo a ${EMAIL} o con el formulario de ${SITE_URL}/contacto. Responde con una propuesta concreta de alcance, plazo y precio.`,
   },
@@ -86,12 +92,13 @@ export const FAQ: { q: string; a: string }[] = [
 export const ABOUT_URL = `${SITE_URL}/sobre-mi`;
 export const PERSON_ID = `${SITE_URL}/#persona`;
 
-export function aboutJsonLd() {
-  const person = {
+/** Ficha única de la persona. Va en el inicio y en /sobre-mi con el mismo @id para que Google las una. */
+export function personJsonLd() {
+  return {
     "@type": "Person",
     "@id": PERSON_ID,
     name: PERSON.name,
-    alternateName: PERSON.alias,
+    alternateName: [PERSON.alias, ...PERSON.altNames],
     url: SITE_URL,
     mainEntityOfPage: ABOUT_URL,
     email: `mailto:${EMAIL}`,
@@ -116,7 +123,26 @@ export function aboutJsonLd() {
       ...(p.url ? { url: p.url } : {}),
     })),
   };
+}
 
+/** Nombre del sitio en los resultados de Google (va solo en el inicio). */
+export function websiteJsonLd() {
+  return {
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#sitio`,
+    url: SITE_URL,
+    name: PERSON.alias,
+    alternateName: [PERSON.name, ...PERSON.altNames],
+    inLanguage: "es-CL",
+    publisher: { "@id": PERSON_ID },
+  };
+}
+
+export function homeJsonLd() {
+  return { "@context": "https://schema.org", "@graph": [websiteJsonLd(), personJsonLd()] };
+}
+
+export function aboutJsonLd() {
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -129,7 +155,7 @@ export function aboutJsonLd() {
         inLanguage: "es-CL",
         mainEntity: { "@id": PERSON_ID },
       },
-      person,
+      personJsonLd(),
       {
         "@type": "FAQPage",
         "@id": `${ABOUT_URL}#preguntas`,

@@ -4,21 +4,11 @@ import Footer from "@/components/Footer";
 import ContactBand from "@/components/ContactBand";
 import ProjectList from "@/components/ProjectList";
 import BlogSection from "@/components/home/BlogSection";
-import { EMAIL, PROJECTS, SITE_URL, SOCIAL } from "@/lib/site";
+import { PROJECTS } from "@/lib/site";
+import { homeJsonLd } from "@/lib/about";
 
 export const metadata = {
   alternates: { canonical: "/" },
-};
-
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Benjamín Delgado",
-  alternateName: "benjamonsh",
-  url: SITE_URL,
-  email: EMAIL,
-  jobTitle: "Desarrollador web y de apps móviles",
-  sameAs: SOCIAL.map((s) => s.url),
 };
 
 export default function Home() {
@@ -26,7 +16,7 @@ export default function Home() {
     <>
       <Header current="/" />
       <main id="contenido">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd()).replace(/</g, "\\u003c") }} />
 
         <section className="hero">
           <div className="wrap">
