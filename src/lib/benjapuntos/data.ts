@@ -1,6 +1,7 @@
 import { ID, Query, type Models } from "node-appwrite";
 import { createAdminClient } from "@/lib/appwrite/server";
 import { DATABASE_ID, OFFERS_COLLECTION_ID, POINTS_EVENTS_COLLECTION_ID } from "./config";
+import { deleteOfferImage } from "./images";
 
 export class BenjapuntosError extends Error {
   status: number;
@@ -105,13 +106,17 @@ export async function updateOffer(id: string, patch: OfferPatch): Promise<Offer>
   if (patch.active !== undefined) data.active = Boolean(patch.active);
   if (patch.imageUrl !== undefined) data.imageUrl = patch.imageUrl.trim() || "";
   const { databases } = createAdminClient();
+  const previous = data.imageUrl !== undefined ? await databases.getDocument<OfferDoc>(DATABASE_ID, OFFERS_COLLECTION_ID, id) : null;
   const doc = await databases.updateDocument<OfferDoc>(DATABASE_ID, OFFERS_COLLECTION_ID, id, data);
+  if (previous?.imageUrl && previous.imageUrl !== doc.imageUrl) await deleteOfferImage(previous.imageUrl);
   return mapOffer(doc);
 }
 
 export async function deleteOffer(id: string): Promise<void> {
   const { databases } = createAdminClient();
+  const doc = await databases.getDocument<OfferDoc>(DATABASE_ID, OFFERS_COLLECTION_ID, id);
   await databases.deleteDocument(DATABASE_ID, OFFERS_COLLECTION_ID, id);
+  await deleteOfferImage(doc.imageUrl);
 }
 
 /** Suma paginada: Appwrite tope 100 documentos por página, así que nunca hay que asumir que el saldo cabe en una sola. */

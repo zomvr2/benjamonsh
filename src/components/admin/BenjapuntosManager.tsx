@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { api, uploadImage } from "@/components/admin/client";
-import { adminMediaSrc } from "@/lib/admin/shared";
+import { api, prepareImage } from "@/components/admin/client";
 import Toast, { type ToastState } from "@/components/admin/Toast";
 import type { Offer, OfferInput, PointsEvent } from "@/lib/benjapuntos/data";
 import type { AppUser } from "@/lib/benjapuntos/users";
@@ -253,7 +252,7 @@ export default function BenjapuntosManager({
                 <td>
                   {offer.imageUrl
                     // eslint-disable-next-line @next/next/no-img-element
-                    ? <img className="thumb" src={adminMediaSrc(offer.imageUrl)} alt="" loading="lazy" />
+                    ? <img className="thumb" src={offer.imageUrl} alt="" loading="lazy" />
                     : <div className="thumb thumb--empty">;)</div>}
                 </td>
                 <td>
@@ -325,7 +324,11 @@ function OfferForm({
     setUploading(true);
     try {
       const trimmed = await trimTransparentPadding(file);
-      const { url } = await uploadImage(trimmed, "ofertas");
+      const img = await prepareImage(trimmed);
+      const { url } = await api<{ url: string }>("/api/admin/benjapuntos/imagen", {
+        method: "POST",
+        body: JSON.stringify({ filename: img.name, type: img.type, data: img.data }),
+      });
       onChange({ ...draft, imageUrl: url });
     } catch (e) {
       onError(`No se subió la foto: ${(e as Error).message}`);
@@ -370,7 +373,7 @@ function OfferForm({
           aria-label={draft.imageUrl ? "Cambiar foto" : "Subir foto"}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          {draft.imageUrl && <img src={adminMediaSrc(draft.imageUrl)} alt="" />}
+          {draft.imageUrl && <img src={draft.imageUrl} alt="" />}
           <span className="cta">{uploading ? <><span className="spin" /> Subiendo…</> : draft.imageUrl ? "Cambiar foto" : "Arrastra un PNG o haz clic"}</span>
           <input ref={fileInput} type="file" accept="image/*" hidden onChange={(e) => { upload(e.target.files?.[0]); e.target.value = ""; }} />
         </div>

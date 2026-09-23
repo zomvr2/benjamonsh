@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { adminMediaSrc } from "@/lib/admin/shared";
 import type { Offer, PointsEvent } from "@/lib/benjapuntos/data";
 
 function formatWhen(iso: string): string {
@@ -57,7 +56,7 @@ export default function Dashboard({ name, balance, offers, events }: { name: str
                 {offer.imageUrl && (
                   <div className="bp-offer-img">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={adminMediaSrc(offer.imageUrl)} alt="" />
+                    <img src={offer.imageUrl} alt="" />
                   </div>
                 )}
                 <h3>{offer.title}</h3>
