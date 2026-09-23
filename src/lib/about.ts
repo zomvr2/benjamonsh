@@ -7,18 +7,19 @@ export const PERSON = {
   name: "Benjamín Delgado",
   alias: "benjamonsh",
   jobTitle: "Desarrollador web y de apps móviles",
-  // Si cambias la ciudad, actualízala también en FACTS y FAQ.
-  city: "Copiapó",
-  region: "Región de Atacama",
+  // Si cambias la ciudad, revisa también el texto de BIO.
+  city: "Coquimbo",
+  region: "Región de Coquimbo",
   country: "Chile",
   countryCode: "CL",
 };
 
 /** Respuesta de una frase a «¿quién es Benjamín Delgado?». Es lo primero que lee un buscador o una IA. */
 export const SUMMARY =
-  "Benjamín Delgado (benjamonsh) es un desarrollador web y de apps móviles de Copiapó, Chile. Construye sitios web con Next.js y Astro, y apps para iOS y Android con Expo y React Native, para negocios que necesitan resultados en días y no en meses.";
+  `Benjamín Delgado (benjamonsh) es un desarrollador web y de apps móviles de ${PERSON.city}, ${PERSON.country}, que trabaja a distancia con clientes de todo el mundo. Construye sitios web con Next.js y Astro, y apps para iOS y Android con Expo y React Native, para negocios que necesitan resultados en días y no en meses.`;
 
 export const BIO = [
+  "Vivo y estudio en Coquimbo, Chile, y trabajo a distancia con clientes de todo el mundo.",
   "Hago productos digitales de principio a fin: desde la conversación inicial y el diseño hasta la base de datos, el despliegue y la publicación en las tiendas. Trabajo solo y directo con cada cliente, sin intermediarios, lo que me permite entregar rápido sin sacrificar el acabado.",
   "Mi proyecto más grande es Auticuidado, una plataforma de salud digital para personas neurodivergentes, sus familias y especialistas, financiada por CORFO a través del programa Semilla Inicia de la Región de Atacama. También desarrollé el sitio de Munay Vet, una clínica veterinaria de Copiapó, con puntaje 100 en SEO.",
   "Me importa que lo que hago funcione de verdad: sitios rápidos, fáciles de actualizar y pensados para que la gente te encuentre, y apps con código ordenado que puede crecer. Si existe un camino más simple o más barato que funciona igual, lo digo.",
@@ -29,7 +30,7 @@ export const FACTS: { label: string; value: string }[] = [
   { label: "También conocido como", value: PERSON.alias },
   { label: "Qué hace", value: "Sitios web y apps móviles" },
   { label: "Dónde", value: `${PERSON.city}, ${PERSON.region}, ${PERSON.country}` },
-  { label: "Modalidad", value: "Trabajo independiente, presencial o a distancia" },
+  { label: "Modalidad", value: "Independiente y a distancia, con clientes de todo el mundo" },
   { label: "Idioma", value: "Español" },
 ];
 
@@ -69,8 +70,8 @@ export const FAQ: { q: string; a: string }[] = [
     a: "Un sitio web suele estar listo en días. Las apps y plataformas más grandes se entregan por etapas, con avances que se pueden probar desde la primera semana. El plazo exacto se define al comienzo, junto con el alcance y el precio.",
   },
   {
-    q: "¿Trabaja solo con clientes de Copiapó?",
-    a: "No. Está en Copiapó, Región de Atacama, pero trabaja a distancia con clientes de todo Chile.",
+    q: "¿Trabaja con clientes fuera de Chile?",
+    a: `Sí. Vive y estudia en ${PERSON.city}, ${PERSON.country}, y trabaja a distancia con clientes de todo el mundo.`,
   },
   {
     q: "¿Cómo contactar a Benjamín Delgado?",
