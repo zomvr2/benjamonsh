@@ -41,16 +41,4 @@ export const PROJECTS: Project[] = [
     badges: ["100 SEO", "2/2 navegación agéntica"],
     scrollPan: "-83%",
   },
-  {
-    name: "Playbox",
-    kind: "Sitio web de películas",
-    image: "/playbox.png",
-    description: "Un sitio para explorar películas y decidir qué ver. Hecho con Next.js y Tailwind, publicado en Vercel.",
-  },
-  {
-    name: "Echo",
-    kind: "App móvil de música",
-    image: "/echo.png",
-    description: "Una app para escuchar música desde el teléfono, hecha con React Native y Supabase.",
-  },
 ];
