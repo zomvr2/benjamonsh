@@ -26,11 +26,11 @@ export const PROJECTS: Project[] = [
   {
     name: "Auticuidado",
     kind: "Plataforma de salud digital",
-    image: "/auticuidado.png",
+    image: "/auticuidado.webp",
     url: "https://auticuidado.cl",
     description: "Plataforma de salud digital para personas neurodivergentes, sus familias y especialistas, publicada en auticuidado.cl. Desarrollo full-stack de principio a fin: arquitectura y base de datos en PostgreSQL, autenticación, gestión de usuarios, agenda y servicios, con Next.js, Node.js y despliegue en Microsoft Azure.",
     badges: ["Proyecto CORFO", "Semilla Inicia Región de Atacama", "CORPROA · Atacama Talento Emprendedor"],
-    scrollPan: "-65.5%",
+    scrollPan: "-62%",
   },
   {
     name: "Munay Vet",
