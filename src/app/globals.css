@@ -722,8 +722,9 @@ html[data-scroll="up"] { --dir: -1; }
     :is(#contenido > section, #contenido > .wrap:not(.post-layout), .prose) > :not(.toc-side, script) {
       animation: desenfoque ease-in-out both;
       animation-timeline: view();
-      /* Al menos ~400px de recorrido: los bloques bajitos (un párrafo, un título) no se nublan de golpe. */
-      animation-range: exit -80px exit max(320px, 100%);
+      /* Anclado al borde inferior: solo se nubla cuando lo que queda del bloque está en los últimos 260px de arriba,
+         así un bloque alto no se desenfoca mientras aún se lee. */
+      animation-range: exit-crossing calc(100% - 260px) exit-crossing 100%;
       filter: blur(calc(var(--salida) * (3px + var(--dir) * 2px)));
       opacity: calc(1 - var(--salida) * .4);
     }
