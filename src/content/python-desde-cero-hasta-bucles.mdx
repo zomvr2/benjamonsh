@@ -1,13 +1,27 @@
 ---
-title: "Python desde cero hasta bucles"
-description: "Tutorial práctico de Python desde cero, aprendiendo variables, tipos de datos, condicionales, listas y bucles for y while paso a paso."
+title: "Python desde cero: variables, condicionales y bucles"
+description: "Aprende Python desde cero: variables, tipos de datos, condicionales, listas y bucles for y while, con ejemplos y ejercicios resueltos paso a paso."
 date: "2026-09-16"
+updated: "2026-11-14"
 cover: "/media/blog/python-desde-cero-hasta-bucles/portada.jpg"
 coverCredit: "Markus Spiske, dominio público (CC0), vía Wikimedia Commons"
 coverSource: "https://commons.wikimedia.org/wiki/File:Code_on_computer_monitor_(Unsplash).jpg"
 color: "violeta"
 tags: ["python", "variables", "condicionales", "bucles", "listas"]
 ---
+
+Esta guía te enseña Python desde cero, sin saber nada de programación. Vas a avanzar desde tu primer `print()` hasta escribir bucles `for` y `while`, con ejemplos y ejercicios resueltos en cada paso.
+
+Al terminar vas a poder guardar datos en variables, tomar decisiones con `if`, trabajar con listas y repetir instrucciones con bucles.
+
+## Antes de empezar: dónde escribir Python
+
+Tienes dos caminos:
+
+- **Instalarlo en tu computador.** Descarga la versión más reciente de Python 3 desde [python.org](https://www.python.org/downloads/). En Windows, marca la casilla «Add python.exe to PATH» durante la instalación. Después puedes escribir tus programas en un editor como [Visual Studio Code](https://code.visualstudio.com/).
+- **Usarlo en el navegador.** Si no quieres instalar nada, [Google Colab](https://colab.research.google.com/) te deja ejecutar Python gratis con tu cuenta de Google.
+
+Cualquiera de los dos sirve para seguir esta guía.
 
 ## 1. ¿Qué es Python?
 
@@ -2000,4 +2014,26 @@ Permiten repetir instrucciones
 
 Con estas herramientas ya puedes comenzar a crear programas pequeños por tu cuenta.
 
-El siguiente paso recomendable sería aprender funciones y practicar ejercicios que mezclen variables, listas, condicionales y bucles.
+El siguiente paso es aprender funciones y usar listas dentro de listas. Eso es justo lo que vemos en la segunda parte: [Matrices en Python: de listas a bucles anidados](/blog/python-de-listas-a-matrices).
+
+## Preguntas frecuentes
+
+### ¿Python es gratis?
+
+Sí. Python es software libre y de código abierto: puedes descargarlo y usarlo sin pagar, también para proyectos comerciales.
+
+### ¿Qué versión de Python debo aprender?
+
+Python 3. Python 2 dejó de recibir soporte oficial el 1 de enero de 2020, así que todo lo nuevo se escribe en Python 3. Los ejemplos de esta guía usan Python 3.
+
+### ¿Cuál es la diferencia entre `for` y `while`?
+
+`for` se usa cuando sabes cuántas veces quieres repetir algo o vas a recorrer una lista. `while` se usa cuando repites mientras se cumpla una condición y no sabes de antemano cuántas vueltas serán. Lo vimos en detalle en la sección 36.
+
+### ¿Por qué mi `input()` no suma bien los números?
+
+Porque `input()` siempre devuelve texto. Si escribes `5` y `3`, `"5" + "3"` da `"53"`. Convierte primero con `int()` o `float()`, como en la sección 9.
+
+### ¿Qué hago si mi programa no termina nunca?
+
+Probablemente creaste un bucle infinito: la condición del `while` nunca se vuelve falsa. Detén el programa con `Ctrl + C` (en Colab, con el botón de detener) y revisa que la variable de la condición cambie dentro del bucle (sección 38).

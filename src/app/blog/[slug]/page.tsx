@@ -7,7 +7,7 @@ import { useMDXComponents } from "@/mdx-components";
 import BlogHeader from "@/components/blog/blogHeader";
 import ContactBand from "@/components/ContactBand";
 import { getAllPosts, getPost } from "@/lib/blogFunctions";
-import { escapeStrayLt } from "@/lib/blogShared";
+import { escapeStrayLt, postHeadings } from "@/lib/blogShared";
 import { SITE_URL } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -50,6 +50,11 @@ export default async function BlogPage({ params }: Params) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const components = useMDXComponents();
 
+  const headings = postHeadings(post.content);
+  const toc = headings.length > 1 && (
+    <ol>{headings.map((h) => <li key={h.id}><a href={`#${h.id}`}>{h.text}</a></li>)}</ol>
+  );
+
   const posts = getAllPosts();
   const i = posts.findIndex((p) => p.slug === post.slug);
   const newer = i > 0 ? posts[i - 1] : null;
@@ -62,7 +67,8 @@ export default async function BlogPage({ params }: Params) {
     description: post.description,
     datePublished: post.date,
     dateModified: post.updated || post.date,
-    image: post.cover || undefined,
+    image: post.cover ? new URL(post.cover, SITE_URL).href : undefined,
+    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
     keywords: post.tags.join(", "),
     author: { "@type": "Person", name: "Benjamín Delgado", url: SITE_URL },
   };
@@ -72,10 +78,24 @@ export default async function BlogPage({ params }: Params) {
       <article>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <BlogHeader post={post} />
-        <div className="wrap">
-          <div className="sheet prose">
+        <div className="wrap post-layout">
+          {toc && (
+            <nav className="toc toc-side" aria-label="Contenido del artículo">
+              <p className="toc-title">En este artículo</p>
+              {toc}
+            </nav>
+          )}
+          <div className="sheet">
+            <div className="prose">
+            {toc && (
+              <details className="toc toc-inline">
+                <summary className="toc-title">En este artículo</summary>
+                {toc}
+              </details>
+            )}
             <MDXRemote source={escapeStrayLt(post.content)} components={components}
               options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
+            </div>
           </div>
         </div>
       </article>

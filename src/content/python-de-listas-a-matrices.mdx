@@ -1,6 +1,6 @@
 ---
-title: "Python: de listas a matrices"
-description: "Segunda parte del tutorial de Python: listas a fondo, funciones, listas de listas y matrices recorridas con bucles anidados, paso a paso."
+title: "Matrices en Python: de listas a bucles anidados"
+description: "Aprende a usar matrices en Python con listas de listas: índices, funciones, bucles anidados y ejercicios resueltos, y cuándo dar el salto a NumPy."
 date: "2026-11-14"
 cover: "/media/blog/python-de-listas-a-matrices/portada.jpg"
 coverCredit: "Markus Spiske, dominio público (CC0), vía Wikimedia Commons"
@@ -9,9 +9,9 @@ color: "violeta"
 tags: ["python", "listas", "funciones", "matrices", "bucles"]
 ---
 
-Esta es la continuación de [Python desde cero hasta bucles](/blog/python-desde-cero-hasta-bucles).
+En esta guía vas a aprender a trabajar con matrices en Python usando listas de listas, sin instalar nada extra.
 
-Allí aprendimos variables, condicionales, listas básicas y bucles.
+Es la continuación de [Python desde cero: variables, condicionales y bucles](/blog/python-desde-cero-hasta-bucles), donde aprendimos variables, condicionales, listas básicas y bucles.
 
 Ahora vamos a juntar todo eso para llegar a las matrices.
 
@@ -1336,7 +1336,7 @@ Resultado:
 5	10	15	20	25
 ```
 
-`"\t"` es una tabulación y ayuda a alinear las columnas.
+`"\t"` es una tabulación y ayuda a ordenar las columnas.
 
 ---
 
@@ -1402,7 +1402,63 @@ Intenta terminarlo antes de mirar una solución.
 
 ---
 
-## 41. Resumen
+## 41. El siguiente nivel: NumPy
+
+Las listas de listas son perfectas para aprender y para programas pequeños. Cuando trabajas con muchos números, lo habitual es usar [NumPy](https://numpy.org/), la biblioteca estándar de Python para cálculo numérico.
+
+Se instala aparte:
+
+```text
+pip install numpy
+```
+
+En Google Colab ya viene instalada.
+
+La misma matriz, escrita con NumPy:
+
+```python
+import numpy as np
+
+matriz = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+print(matriz.shape)
+print(matriz.sum())
+print(matriz.sum(axis=1))
+```
+
+Resultado:
+
+```text
+(2, 3)
+21
+[ 6 15]
+```
+
+- `shape` entrega filas y columnas de una vez.
+- `sum()` suma todo, sin bucles.
+- `sum(axis=1)` suma cada fila, lo mismo que hicimos a mano en la sección 25.
+
+Con NumPy también puedes operar la matriz completa:
+
+```python
+print(matriz * 2)
+```
+
+Resultado:
+
+```text
+[[ 2  4  6]
+ [ 8 10 12]]
+```
+
+No necesitas NumPy para seguir aprendiendo. Pero entender primero las listas de listas te ayuda a saber qué está haciendo NumPy por dentro.
+
+---
+
+## 42. Resumen
 
 En esta segunda parte aprendiste a trabajar con datos más grandes.
 
@@ -1459,3 +1515,45 @@ Recorren filas y columnas
 Con esto ya puedes representar tablas, tableros y datos de cursos completos.
 
 El siguiente paso recomendable sería aprender diccionarios y manejo de archivos, para guardar y leer información fuera del programa.
+
+## Preguntas frecuentes
+
+### ¿Python tiene un tipo de dato «matriz»?
+
+No como tal. En Python puro, una matriz es una lista de listas. Si necesitas un tipo de matriz real, con operaciones matemáticas incluidas, se usa NumPy (sección 41).
+
+### ¿Cómo creo una matriz llena de ceros?
+
+Con un bucle dentro de la lista:
+
+```python
+filas = 2
+columnas = 3
+matriz = [[0] * columnas for _ in range(filas)]
+```
+
+Evita escribir `[[0] * columnas] * filas`. Parece lo mismo, pero repite la misma fila en memoria: si cambias un valor, cambia en todas las filas.
+
+```python
+mala = [[0] * 3] * 2
+mala[0][0] = 9
+print(mala)
+```
+
+Resultado:
+
+```text
+[[9, 0, 0], [9, 0, 0]]
+```
+
+### ¿Cómo sé cuántas filas y columnas tiene una matriz?
+
+`len(matriz)` entrega la cantidad de filas y `len(matriz[0])` la cantidad de columnas de la primera fila. Lo vimos en la sección 19.
+
+### ¿Por qué me aparece `IndexError: list index out of range`?
+
+Porque estás pidiendo una fila o columna que no existe. Recuerda que las posiciones parten en 0: en una matriz de 3 filas, la última es `matriz[2]`, no `matriz[3]`.
+
+### ¿En qué orden van los índices?
+
+Siempre `matriz[fila][columna]`: primero la fila, después la columna.

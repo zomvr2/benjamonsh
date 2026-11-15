@@ -1,6 +1,14 @@
 import type { MDXComponents } from "mdx/types";
 import { Children, Fragment, isValidElement, type ReactNode } from "react";
 import { CodeBlock } from "@/components/CodeBlock";
+import { slugify } from "@/lib/blogShared";
+
+function textOf(node: ReactNode): string {
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(textOf).join("");
+  if (isValidElement(node)) return textOf((node.props as { children?: ReactNode }).children);
+  return "";
+}
 
 // Resaltado mínimo: comentarios en gris y cadenas en blanco. Un solo color por pieza.
 function highlight(code: string): ReactNode[] {
@@ -42,6 +50,8 @@ const components: MDXComponents = {
     }
     return <code className={className} {...props}>{children}</code>;
   },
+  // El id enlaza el título desde la tabla de contenido (postHeadings usa el mismo slugify).
+  h2: ({ children }) => <h2 id={slugify(textOf(children))}>{children}</h2>,
   table: ({ children }) => (
     <div className="table-scroll"><table>{children}</table></div>
   ),

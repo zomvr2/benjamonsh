@@ -70,3 +70,23 @@ export function escapeStrayLt(source: string): string {
     })
     .join("\n");
 }
+
+/** "¿Qué es `int`?" → "que-es-int". Mismo id en el título y en la tabla de contenido. */
+export function slugify(text: string): string {
+  return text.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+/** Títulos "## " del artículo (fuera de bloques de código), sin el formato markdown. */
+export function postHeadings(source: string): { id: string; text: string }[] {
+  let inFence = false;
+  const out: { id: string; text: string }[] = [];
+  for (const line of source.split("\n")) {
+    if (/^\s*(```|~~~)/.test(line)) inFence = !inFence;
+    const m = !inFence && line.match(/^##\s+(.+?)\s*#*\s*$/);
+    if (!m) continue;
+    const text = m[1].replace(/\[([^\]]*)\]\([^)]*\)/g, "$1").replace(/[`*]/g, "");
+    out.push({ id: slugify(text), text });
+  }
+  return out;
+}
