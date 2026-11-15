@@ -52,6 +52,13 @@ export function runChecks(fm: Frontmatter, slug: string, content: string): Check
     label: fm.cover ? "Tiene portada" : "Sin portada",
     hint: "La portada se usa al compartir en redes (Open Graph).",
   });
+  // Una portada externa casi nunca es propia: pide al menos el crédito.
+  if (/^https?:\/\//.test(fm.cover ?? "")) add({
+    id: "cover-credit", group: "SEO",
+    level: fm.coverCredit?.trim() ? "ok" : "warn",
+    label: fm.coverCredit?.trim() ? "Portada con crédito" : "Portada externa sin crédito",
+    hint: "Indica el autor o sitio de la foto y, si puedes, el enlace original.",
+  });
   add({
     id: "tags", group: "SEO",
     level: fm.tags.length === 0 ? "fail" : between(fm.tags.length, 2, 5) ? "ok" : "warn",

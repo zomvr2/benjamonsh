@@ -15,23 +15,25 @@ export default function Contacto() {
     <>
       <Header current="/contacto" />
       <main id="contenido">
-        <PageHead label="Contacto" meta="Correo o formulario" title="Cuéntame tu proyecto."
-          lede="Con tres datos me basta para proponerte algo concreto: qué necesitas, para cuándo y cómo te contacto." />
+        <PageHead title="cuéntame tu proyecto" lede="Tu nombre, qué necesitas, para cuándo y tu idea en un par de frases. Con eso te propongo algo concreto." />
         <div className="wrap">
           <div className="contact-grid">
-            <ContactForm />
-            <aside>
+            <div className="win">
+              <div className="win-bar"><div className="dots" aria-hidden="true"><i /><i /><i /></div><span className="win-title">mensaje nuevo para benja</span><span /></div>
+              <div className="form-body"><ContactForm /></div>
+            </div>
+            <aside className="aside-stack">
               <div className="aside-block">
-                <h2>Escríbeme directo</h2>
+                <h2>escríbeme directo</h2>
                 <p>Si prefieres tu propio correo, escribe a:</p>
                 <p style={{ marginTop: ".5rem" }}><a className="aside-mail" href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
               </div>
               <div className="aside-block">
-                <h2>Correcciones o ayuda</h2>
+                <h2>correcciones o ayuda</h2>
                 <p>¿Ya trabajamos juntos y algo no funciona? Usa el mismo correo y cuéntame qué pasó y en qué página.</p>
               </div>
               <div className="aside-block">
-                <h2>Qué pasa después</h2>
+                <h2>qué pasa después</h2>
                 <p>Te respondo con alcance, plazo y precio. Si te parece, nos ponemos manos a la obra.</p>
               </div>
             </aside>

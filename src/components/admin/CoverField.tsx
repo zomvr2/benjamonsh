@@ -48,7 +48,7 @@ export default function CoverField({ value, folder, onChange, onError, onBusy }:
         <input className="input" placeholder="…o pega una URL" value={value} onChange={(e) => onChange(e.target.value.trim())} aria-label="URL de la portada" />
         {value && <button type="button" className="btn btn--ghost btn--sm" onClick={() => onChange("")}>Quitar</button>}
       </div>
-      <p className="hint">Se muestra en blanco y negro. Mejor una foto de trabajo real, horizontal.</p>
+      <p className="hint">Se muestra a color bajo la cabecera. Mejor una foto de trabajo real, horizontal.</p>
     </div>
   );
 }

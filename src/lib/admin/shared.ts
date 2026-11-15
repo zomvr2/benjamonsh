@@ -16,6 +16,8 @@ export interface Frontmatter {
   date: string;
   updated?: string;
   cover?: string;
+  coverCredit?: string;
+  coverSource?: string;
   color: AccentName;
   tags: string[];
   draft?: boolean;
@@ -87,6 +89,8 @@ export function normalizeFrontmatter(data: Record<string, unknown>, slug: string
   };
   const updated = toDateString(data.updated);
   if (updated) fm.updated = updated;
+  if (typeof data.coverCredit === "string" && data.coverCredit) fm.coverCredit = data.coverCredit;
+  if (typeof data.coverSource === "string" && data.coverSource) fm.coverSource = data.coverSource;
   if (data.draft === true) fm.draft = true;
   return fm;
 }
@@ -103,6 +107,8 @@ export function serializePost(fm: Frontmatter, content: string): string {
   ];
   if (fm.updated && fm.updated !== fm.date) lines.push(`updated: ${q(fm.updated)}`);
   lines.push(`cover: ${q((fm.cover || "").trim())}`);
+  if (fm.coverCredit?.trim()) lines.push(`coverCredit: ${q(fm.coverCredit.trim())}`);
+  if (fm.coverSource?.trim()) lines.push(`coverSource: ${q(fm.coverSource.trim())}`);
   lines.push(`color: ${q(fm.color)}`);
   lines.push(`tags: [${fm.tags.map((t) => q(t)).join(", ")}]`);
   if (fm.draft) lines.push("draft: true");

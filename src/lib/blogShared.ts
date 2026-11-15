@@ -18,6 +18,10 @@ export interface PostMeta {
   date: string;
   updated?: string;
   cover?: string;
+  /** Autor o sitio de la foto de portada, si no es propia. */
+  coverCredit?: string;
+  /** Enlace a la foto original. */
+  coverSource?: string;
   color: AccentName;
   tags: string[];
   draft?: boolean;

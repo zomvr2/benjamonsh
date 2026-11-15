@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHead from "@/components/PageHead";
 import ProjectList from "@/components/ProjectList";
-import { PROJECTS } from "@/lib/site";
 
 export const metadata = {
   title: "Proyectos",
@@ -16,16 +15,15 @@ export default function Proyectos() {
     <>
       <Header current="/proyectos" />
       <main id="contenido">
-        <PageHead label="Proyectos" meta={`${PROJECTS.length} publicados`} title="Proyectos."
-          lede="Sitios web y apps que he desarrollado de principio a fin." />
-        <section className="wrap section">
+        <PageHead title="proyectos" lede="Sitios web y apps que he desarrollado de principio a fin, publicados y funcionando." />
+        <section className="wrap section" style={{ paddingTop: "clamp(1.5rem, 4vw, 3rem)" }}>
           <ProjectList>
             <div className="slot">
               <div>
-                <h3>Tu proyecto podría ser el siguiente.</h3>
+                <h3>tu proyecto podría ser el siguiente</h3>
                 <p>Cuéntame qué necesitas y te digo cómo lo haría, cuánto tardaría y cuánto costaría.</p>
               </div>
-              <Link className="btn" href="/contacto">Cuéntame tu idea</Link>
+              <Link className="btn" href="/contacto">cuéntame tu idea</Link>
             </div>
           </ProjectList>
         </section>

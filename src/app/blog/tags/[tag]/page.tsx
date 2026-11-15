@@ -27,13 +27,12 @@ export default async function TagPage({ params }: Params) {
   if (posts.length === 0) notFound();
   return (
     <>
-      <PageHead label={<Link href="/blog">Blog</Link>}
-        meta={`${posts.length} ${posts.length === 1 ? "artículo" : "artículos"}`} title={`#${tag}`}>
+      <PageHead crumb={<><Link href="/blog">blog</Link> · {posts.length} {posts.length === 1 ? "artículo" : "artículos"}</>} title={`#${tag}`}>
         <nav aria-label="Temas"><TagList tags={getAllTags()} current={tag} /></nav>
       </PageHead>
-      <section className="wrap section">
+      <section className="wrap section" style={{ paddingTop: "clamp(1.5rem, 4vw, 3rem)" }}>
         <PostList posts={posts} heading="h2" />
-        <Link className="more" href="/blog">Ver todos los artículos</Link>
+        <div style={{ textAlign: "center" }}><Link className="more" href="/blog">ver todos los artículos</Link></div>
       </section>
     </>
   );

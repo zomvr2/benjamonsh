@@ -26,6 +26,8 @@ function readPost(slug: string): Post | null {
     date: toDateString(data.date),
     updated: toDateString(data.updated) || undefined,
     cover: data.cover || "",
+    coverCredit: data.coverCredit || undefined,
+    coverSource: data.coverSource || undefined,
     color,
     tags: data.tags || [],
     draft: data.draft === true,

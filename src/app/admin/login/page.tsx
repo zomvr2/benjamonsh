@@ -13,7 +13,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     <main className="login">
       <div className="login-art" aria-hidden="true">
         <span className="wink">;)</span>
-        <h1>Escribe.<br />Publica.<br />Listo.</h1>
+        <h1>escribe.<br />publica.<br />listo.</h1>
       </div>
       <div className="login-form">
         <span className="wordmark">benjamonsh <span className="wink">;)</span></span>

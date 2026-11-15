@@ -76,13 +76,14 @@ export default function NowPlaying({ favorites = [] }: { favorites?: FavoriteTra
   if (track) {
     const fav = findFavorite(track, favorites);
     return (
-      <section className="now-playing" aria-labelledby="now-playing-title">
-        <div className="strip">
-          <span id="now-playing-title">
+      <section className="now-playing win" aria-labelledby="now-playing-title">
+        <div className="win-bar">
+          <div className="dots" aria-hidden="true"><i /><i /><i /></div>
+          <h2 className="win-title now-head-meta" id="now-playing-title">
             <span className="now-eq" aria-hidden="true"><i /><i /><i /></span>
-            Escuchando ahora
-          </span>
-          <span>{fav ? "Favorita" : "Last.fm"}</span>
+            escuchando ahora
+          </h2>
+          <span className="now-tag">{fav ? "favorita" : "last.fm"}</span>
         </div>
         <div aria-live="polite">
           <AnimatePresence mode="wait" initial={false}>
@@ -112,10 +113,11 @@ export default function NowPlaying({ favorites = [] }: { favorites?: FavoriteTra
   };
 
   return (
-    <section className="now-playing" aria-labelledby="now-playing-title">
-      <div className="strip">
-        <span id="now-playing-title">Una de mis favoritas</span>
-        {favCount > 1 ? <button type="button" className="now-next" onClick={another}>Otra</button> : <span>Spotify</span>}
+    <section className="now-playing win" aria-labelledby="now-playing-title">
+      <div className="win-bar">
+        <div className="dots" aria-hidden="true"><i /><i /><i /></div>
+        <h2 className="win-title" id="now-playing-title">una de mis favoritas</h2>
+        {favCount > 1 ? <button type="button" className="now-next" onClick={another}>otra</button> : <span className="now-tag">spotify</span>}
       </div>
       <div aria-live="polite">
         <AnimatePresence mode="wait" initial={false}>

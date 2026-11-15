@@ -1,0 +1,1461 @@
+---
+title: "Python: de listas a matrices"
+description: "Segunda parte del tutorial de Python: listas a fondo, funciones, listas de listas y matrices recorridas con bucles anidados, paso a paso."
+date: "2026-11-14"
+cover: "/media/blog/python-de-listas-a-matrices/portada.jpg"
+coverCredit: "Markus Spiske, dominio público (CC0), vía Wikimedia Commons"
+coverSource: "https://commons.wikimedia.org/wiki/File:Code_on_computer_monitor_(Unsplash).jpg"
+color: "violeta"
+tags: ["python", "listas", "funciones", "matrices", "bucles"]
+---
+
+Esta es la continuación de [Python desde cero hasta bucles](/blog/python-desde-cero-hasta-bucles).
+
+Allí aprendimos variables, condicionales, listas básicas y bucles.
+
+Ahora vamos a juntar todo eso para llegar a las matrices.
+
+El camino será este:
+
+```text
+Listas a fondo
+        ↓
+Funciones
+        ↓
+Listas dentro de listas
+        ↓
+Matrices
+```
+
+---
+
+## 1. Repaso rápido de listas
+
+Una lista guarda varios valores juntos.
+
+```python
+numeros = [4, 8, 15, 16, 23]
+```
+
+Cada elemento tiene una posición que comienza en `0`.
+
+```text
+Valor:      4   8   15   16   23
+Posición:   0   1    2    3    4
+```
+
+```python
+print(numeros[0])
+print(numeros[3])
+```
+
+Resultado:
+
+```text
+4
+16
+```
+
+---
+
+## 2. Posiciones negativas
+
+Python también permite contar desde el final.
+
+```text
+Valor:      4    8   15   16   23
+Posición:  -5   -4   -3   -2   -1
+```
+
+Por ejemplo:
+
+```python
+numeros = [4, 8, 15, 16, 23]
+
+print(numeros[-1])
+print(numeros[-2])
+```
+
+Resultado:
+
+```text
+23
+16
+```
+
+`-1` siempre es el último elemento, sin importar el largo de la lista.
+
+---
+
+## 3. Cortar una lista
+
+Podemos obtener una parte de la lista usando:
+
+```python
+lista[inicio:fin]
+```
+
+Igual que en `range()`, el `fin` no se incluye.
+
+```python
+numeros = [4, 8, 15, 16, 23]
+
+print(numeros[1:4])
+```
+
+Resultado:
+
+```text
+[8, 15, 16]
+```
+
+Si omitimos el inicio, comienza desde `0`:
+
+```python
+print(numeros[:2])
+```
+
+Resultado:
+
+```text
+[4, 8]
+```
+
+Si omitimos el fin, llega hasta el final:
+
+```python
+print(numeros[2:])
+```
+
+Resultado:
+
+```text
+[15, 16, 23]
+```
+
+---
+
+## 4. Saber si un elemento está en la lista
+
+Usamos `in`.
+
+```python
+frutas = ["manzana", "pera", "plátano"]
+
+print("pera" in frutas)
+print("uva" in frutas)
+```
+
+Resultado:
+
+```text
+True
+False
+```
+
+Es muy útil dentro de un `if`:
+
+```python
+if "pera" in frutas:
+    print("Tenemos pera")
+```
+
+---
+
+## 5. Más métodos de listas
+
+Ya conocemos `append()`.
+
+Veamos otros muy usados.
+
+### Insertar en una posición
+
+```python
+letras = ["a", "c"]
+
+letras.insert(1, "b")
+
+print(letras)
+```
+
+Resultado:
+
+```text
+['a', 'b', 'c']
+```
+
+### Eliminar un valor
+
+```python
+letras = ["a", "b", "c"]
+
+letras.remove("b")
+
+print(letras)
+```
+
+Resultado:
+
+```text
+['a', 'c']
+```
+
+### Sacar el último elemento
+
+```python
+letras = ["a", "b", "c"]
+
+ultimo = letras.pop()
+
+print(ultimo)
+print(letras)
+```
+
+Resultado:
+
+```text
+c
+['a', 'b']
+```
+
+### Ordenar
+
+```python
+notas = [5.5, 3.9, 6.8, 4.2]
+
+notas.sort()
+
+print(notas)
+```
+
+Resultado:
+
+```text
+[3.9, 4.2, 5.5, 6.8]
+```
+
+---
+
+## 6. Funciones útiles con listas
+
+Python trae funciones que trabajan directamente con listas.
+
+```python
+notas = [5.5, 3.9, 6.8, 4.2]
+
+print(sum(notas))
+print(max(notas))
+print(min(notas))
+print(len(notas))
+```
+
+Resultado:
+
+```text
+20.4
+6.8
+3.9
+4
+```
+
+Con eso el promedio queda en una línea:
+
+```python
+promedio = sum(notas) / len(notas)
+
+print(promedio)
+```
+
+Resultado:
+
+```text
+5.1
+```
+
+---
+
+## 7. Recorrer una lista con su posición
+
+A veces necesitamos el valor y también su posición.
+
+Podemos combinar `range()` con `len()`:
+
+```python
+nombres = ["Ana", "Pedro", "Luis"]
+
+for i in range(len(nombres)):
+    print(i, nombres[i])
+```
+
+Resultado:
+
+```text
+0 Ana
+1 Pedro
+2 Luis
+```
+
+Paso a paso:
+
+```text
+len(nombres) = 3
+range(3)     → 0, 1, 2
+
+Vuelta 1 → i = 0 → nombres[0] = "Ana"
+Vuelta 2 → i = 1 → nombres[1] = "Pedro"
+Vuelta 3 → i = 2 → nombres[2] = "Luis"
+```
+
+Esta forma de recorrer será clave para las matrices.
+
+---
+
+## 8. Crear una lista con un bucle
+
+Podemos partir con una lista vacía e ir llenándola.
+
+```python
+cuadrados = []
+
+for i in range(1, 6):
+    cuadrados.append(i ** 2)
+
+print(cuadrados)
+```
+
+Resultado:
+
+```text
+[1, 4, 9, 16, 25]
+```
+
+También podemos llenarla con datos del usuario:
+
+```python
+notas = []
+
+for i in range(3):
+    nota = float(input("Ingrese una nota: "))
+    notas.append(nota)
+
+print(notas)
+```
+
+---
+
+## 9. ¿Qué es una función?
+
+Una función es un bloque de código con nombre.
+
+La escribimos una vez y la usamos cuantas veces queramos.
+
+Ya usamos varias sin saberlo:
+
+```python
+print()
+len()
+input()
+```
+
+Ahora vamos a crear las nuestras.
+
+---
+
+## 10. Crear una función con `def`
+
+```python
+def saludar():
+    print("Hola")
+    print("Bienvenido")
+```
+
+Esto solo define la función.
+
+Para ejecutarla hay que llamarla:
+
+```python
+saludar()
+saludar()
+```
+
+Resultado:
+
+```text
+Hola
+Bienvenido
+Hola
+Bienvenido
+```
+
+Igual que en un `if`, el código de la función va con sangría.
+
+---
+
+## 11. Parámetros
+
+Un parámetro es un dato que le entregamos a la función.
+
+```python
+def saludar(nombre):
+    print("Hola", nombre)
+
+saludar("Ana")
+saludar("Pedro")
+```
+
+Resultado:
+
+```text
+Hola Ana
+Hola Pedro
+```
+
+Podemos tener varios:
+
+```python
+def presentar(nombre, edad):
+    print(nombre, "tiene", edad, "años")
+
+presentar("Ana", 21)
+```
+
+Resultado:
+
+```text
+Ana tiene 21 años
+```
+
+---
+
+## 12. `return`
+
+Hasta ahora las funciones solo mostraban cosas.
+
+Con `return` una función entrega un resultado que podemos guardar.
+
+```python
+def sumar(a, b):
+    return a + b
+
+resultado = sumar(3, 4)
+
+print(resultado)
+```
+
+Resultado:
+
+```text
+7
+```
+
+La diferencia es importante:
+
+```text
+print  → muestra el valor en pantalla
+return → devuelve el valor para seguir usándolo
+```
+
+Por ejemplo:
+
+```python
+total = sumar(3, 4) * 2
+
+print(total)
+```
+
+Resultado:
+
+```text
+14
+```
+
+---
+
+## 13. Funciones que reciben listas
+
+Una función puede recibir una lista completa.
+
+```python
+def promedio(lista):
+    return sum(lista) / len(lista)
+
+notas = [5.0, 6.0, 4.0]
+
+print(promedio(notas))
+```
+
+Resultado:
+
+```text
+5.0
+```
+
+Otro ejemplo, contar pares:
+
+```python
+def contar_pares(lista):
+    contador = 0
+
+    for numero in lista:
+        if numero % 2 == 0:
+            contador += 1
+
+    return contador
+
+print(contar_pares([1, 2, 3, 4, 6]))
+```
+
+Resultado:
+
+```text
+3
+```
+
+---
+
+## 14. Listas dentro de listas
+
+Una lista puede guardar cualquier cosa.
+
+Incluso otras listas.
+
+```python
+datos = [[1, 2], [3, 4], [5, 6]]
+```
+
+Cada elemento de `datos` es una lista:
+
+```python
+print(datos[0])
+print(datos[2])
+```
+
+Resultado:
+
+```text
+[1, 2]
+[5, 6]
+```
+
+Y como `datos[0]` es una lista, podemos pedirle una posición:
+
+```python
+print(datos[0][1])
+```
+
+Resultado:
+
+```text
+2
+```
+
+Leído de izquierda a derecha:
+
+```text
+datos[0]    → [1, 2]
+datos[0][1] → 2
+```
+
+---
+
+## 15. ¿Qué es una matriz?
+
+Una matriz es una tabla de valores ordenados en filas y columnas.
+
+Por ejemplo:
+
+```text
+1  2  3
+4  5  6
+7  8  9
+```
+
+Esta matriz tiene `3` filas y `3` columnas.
+
+En Python la representamos como una lista de filas:
+
+```python
+matriz = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+```
+
+Cada lista interna es una fila.
+
+---
+
+## 16. Filas y columnas
+
+Las posiciones se numeran desde `0`, igual que siempre.
+
+```text
+              columna 0   columna 1   columna 2
+fila 0            1           2           3
+fila 1            4           5           6
+fila 2            7           8           9
+```
+
+Para acceder a un valor usamos:
+
+```python
+matriz[fila][columna]
+```
+
+Primero la fila, después la columna.
+
+---
+
+## 17. Acceder a un elemento
+
+```python
+matriz = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+print(matriz[0][0])
+print(matriz[1][2])
+print(matriz[2][1])
+```
+
+Resultado:
+
+```text
+1
+6
+8
+```
+
+Por ejemplo, `matriz[1][2]`:
+
+```text
+fila 1    → [4, 5, 6]
+columna 2 → 6
+```
+
+---
+
+## 18. Modificar un elemento
+
+Igual que en una lista normal:
+
+```python
+matriz = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+matriz[1][1] = 0
+
+print(matriz)
+```
+
+Resultado:
+
+```text
+[[1, 2, 3], [4, 0, 6], [7, 8, 9]]
+```
+
+---
+
+## 19. Tamaño de una matriz
+
+`len(matriz)` entrega la cantidad de filas.
+
+`len(matriz[0])` entrega la cantidad de columnas.
+
+```python
+matriz = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+
+filas = len(matriz)
+columnas = len(matriz[0])
+
+print("Filas:", filas)
+print("Columnas:", columnas)
+```
+
+Resultado:
+
+```text
+Filas: 2
+Columnas: 3
+```
+
+---
+
+## 20. Recorrer las filas
+
+Un `for` sobre la matriz entrega una fila en cada vuelta.
+
+```python
+matriz = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for fila in matriz:
+    print(fila)
+```
+
+Resultado:
+
+```text
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
+```
+
+---
+
+## 21. Bucles anidados
+
+Para llegar a cada número necesitamos un `for` dentro de otro `for`.
+
+```python
+for fila in matriz:
+    for valor in fila:
+        print(valor)
+```
+
+Resultado:
+
+```text
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+El bucle de afuera elige la fila.
+
+El bucle de adentro recorre esa fila completa.
+
+```text
+fila = [1, 2, 3] → valor = 1, 2, 3
+fila = [4, 5, 6] → valor = 4, 5, 6
+fila = [7, 8, 9] → valor = 7, 8, 9
+```
+
+---
+
+## 22. Recorrer con índices
+
+Igual que con listas, podemos recorrer usando posiciones.
+
+```python
+for i in range(len(matriz)):
+    for j in range(len(matriz[i])):
+        print("Posición", i, j, "→", matriz[i][j])
+```
+
+Resultado:
+
+```text
+Posición 0 0 → 1
+Posición 0 1 → 2
+Posición 0 2 → 3
+Posición 1 0 → 4
+Posición 1 1 → 5
+Posición 1 2 → 6
+Posición 2 0 → 7
+Posición 2 1 → 8
+Posición 2 2 → 9
+```
+
+Por costumbre se usa:
+
+```text
+i → fila
+j → columna
+```
+
+Necesitamos índices cuando queremos saber dónde está un valor o modificarlo.
+
+---
+
+## 23. Mostrar una matriz como tabla
+
+Imprimir la lista completa no se ve muy bien.
+
+Podemos usar `end` en `print()` para no saltar de línea:
+
+```python
+for fila in matriz:
+    for valor in fila:
+        print(valor, end=" ")
+    print()
+```
+
+Resultado:
+
+```text
+1 2 3
+4 5 6
+7 8 9
+```
+
+`end=" "` deja un espacio en vez de un salto de línea.
+
+El `print()` vacío del final hace el salto al terminar cada fila.
+
+---
+
+## 24. Sumar todos los elementos
+
+Usamos un acumulador, igual que en la primera parte.
+
+```python
+matriz = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+suma = 0
+
+for fila in matriz:
+    for valor in fila:
+        suma += valor
+
+print("Suma total:", suma)
+```
+
+Resultado:
+
+```text
+Suma total: 45
+```
+
+---
+
+## 25. Suma de cada fila
+
+Cada fila es una lista, así que podemos usar `sum()`.
+
+```python
+for i in range(len(matriz)):
+    print("Fila", i, "suma", sum(matriz[i]))
+```
+
+Resultado:
+
+```text
+Fila 0 suma 6
+Fila 1 suma 15
+Fila 2 suma 24
+```
+
+---
+
+## 26. Suma de cada columna
+
+Las columnas no son listas, así que hay que recorrerlas a mano.
+
+La idea es fijar una columna `j` y bajar por todas las filas.
+
+```python
+filas = len(matriz)
+columnas = len(matriz[0])
+
+for j in range(columnas):
+    suma = 0
+
+    for i in range(filas):
+        suma += matriz[i][j]
+
+    print("Columna", j, "suma", suma)
+```
+
+Resultado:
+
+```text
+Columna 0 suma 12
+Columna 1 suma 15
+Columna 2 suma 18
+```
+
+Fíjate en el orden de los bucles:
+
+```text
+Por filas    → afuera i, adentro j
+Por columnas → afuera j, adentro i
+```
+
+---
+
+## 27. Buscar el mayor valor
+
+```python
+matriz = [
+    [3, 9, 2],
+    [7, 1, 8]
+]
+
+mayor = matriz[0][0]
+
+for fila in matriz:
+    for valor in fila:
+        if valor > mayor:
+            mayor = valor
+
+print("Mayor:", mayor)
+```
+
+Resultado:
+
+```text
+Mayor: 9
+```
+
+Partimos suponiendo que el mayor es el primer elemento y lo vamos reemplazando cuando aparece uno más grande.
+
+---
+
+## 28. Crear una matriz con bucles
+
+Para crear una matriz de ceros de `3` filas y `4` columnas:
+
+```python
+filas = 3
+columnas = 4
+
+matriz = []
+
+for i in range(filas):
+    fila = []
+
+    for j in range(columnas):
+        fila.append(0)
+
+    matriz.append(fila)
+
+print(matriz)
+```
+
+Resultado:
+
+```text
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+```
+
+Paso a paso:
+
+```text
+1. creamos una fila vacía
+2. le agregamos columnas
+3. agregamos esa fila a la matriz
+4. repetimos por cada fila
+```
+
+---
+
+## 29. Cuidado con copiar filas
+
+Podría parecer más corto hacer esto:
+
+```python
+fila = [0, 0, 0]
+
+matriz = [fila, fila, fila]
+
+matriz[0][0] = 5
+
+print(matriz)
+```
+
+Resultado:
+
+```text
+[[5, 0, 0], [5, 0, 0], [5, 0, 0]]
+```
+
+¡Cambiaron las tres filas!
+
+Eso pasa porque las tres posiciones apuntan a la misma lista.
+
+```text
+matriz[0] ─┐
+matriz[1] ─┼──→ [0, 0, 0]
+matriz[2] ─┘
+```
+
+Por eso en el punto anterior creamos una `fila = []` nueva en cada vuelta.
+
+---
+
+## 30. Llenar una matriz con datos del usuario
+
+```python
+filas = int(input("Cantidad de filas: "))
+columnas = int(input("Cantidad de columnas: "))
+
+matriz = []
+
+for i in range(filas):
+    fila = []
+
+    for j in range(columnas):
+        valor = int(input("Valor en posición " + str(i) + "," + str(j) + ": "))
+        fila.append(valor)
+
+    matriz.append(fila)
+
+print(matriz)
+```
+
+Si ingresamos `2` filas, `2` columnas y los valores `1`, `2`, `3`, `4`:
+
+```text
+Cantidad de filas: 2
+Cantidad de columnas: 2
+Valor en posición 0,0: 1
+Valor en posición 0,1: 2
+Valor en posición 1,0: 3
+Valor en posición 1,1: 4
+[[1, 2], [3, 4]]
+```
+
+Usamos `str()` para unir números con texto usando `+`.
+
+---
+
+## 31. La diagonal principal
+
+En una matriz cuadrada, la diagonal principal son los elementos donde la fila y la columna son iguales.
+
+```text
+[1]  2   3
+ 4  [5]  6
+ 7   8  [9]
+```
+
+Es decir:
+
+```text
+matriz[0][0], matriz[1][1], matriz[2][2]
+```
+
+Como `i` y `j` son iguales, basta un solo bucle:
+
+```python
+matriz = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for i in range(len(matriz)):
+    print(matriz[i][i])
+```
+
+Resultado:
+
+```text
+1
+5
+9
+```
+
+---
+
+## 32. Transpuesta de una matriz
+
+La transpuesta convierte las filas en columnas.
+
+```text
+Original:        Transpuesta:
+1  2  3          1  4
+4  5  6          2  5
+                 3  6
+```
+
+Lo que estaba en `[i][j]` pasa a `[j][i]`.
+
+```python
+matriz = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+
+filas = len(matriz)
+columnas = len(matriz[0])
+
+transpuesta = []
+
+for j in range(columnas):
+    nueva_fila = []
+
+    for i in range(filas):
+        nueva_fila.append(matriz[i][j])
+
+    transpuesta.append(nueva_fila)
+
+print(transpuesta)
+```
+
+Resultado:
+
+```text
+[[1, 4], [2, 5], [3, 6]]
+```
+
+Cada columna de la original se convierte en una fila de la nueva.
+
+---
+
+## 33. Sumar dos matrices
+
+Dos matrices del mismo tamaño se suman posición por posición.
+
+```text
+1  2     5  6     6   8
+3  4  +  7  8  =  10  12
+```
+
+```python
+a = [
+    [1, 2],
+    [3, 4]
+]
+
+b = [
+    [5, 6],
+    [7, 8]
+]
+
+resultado = []
+
+for i in range(len(a)):
+    fila = []
+
+    for j in range(len(a[0])):
+        fila.append(a[i][j] + b[i][j])
+
+    resultado.append(fila)
+
+print(resultado)
+```
+
+Resultado:
+
+```text
+[[6, 8], [10, 12]]
+```
+
+---
+
+## 34. Matrices y funciones juntas
+
+Podemos guardar las operaciones en funciones para reutilizarlas.
+
+```python
+def mostrar(matriz):
+    for fila in matriz:
+        for valor in fila:
+            print(valor, end=" ")
+        print()
+
+
+def sumar_todo(matriz):
+    suma = 0
+
+    for fila in matriz:
+        suma += sum(fila)
+
+    return suma
+
+
+notas = [
+    [5.0, 6.0, 4.5],
+    [6.5, 7.0, 6.0]
+]
+
+mostrar(notas)
+print("Suma:", sumar_todo(notas))
+```
+
+Resultado:
+
+```text
+5.0 6.0 4.5
+6.5 7.0 6.0
+Suma: 35.0
+```
+
+---
+
+## 35. Ejemplo práctico: notas de un curso
+
+Cada fila es un estudiante y cada columna una evaluación.
+
+```python
+nombres = ["Ana", "Pedro", "Luis"]
+
+notas = [
+    [6.0, 5.5, 7.0],
+    [4.0, 3.5, 5.0],
+    [5.0, 6.0, 4.0]
+]
+
+for i in range(len(notas)):
+    promedio = sum(notas[i]) / len(notas[i])
+
+    if promedio >= 4:
+        estado = "Aprobado"
+    else:
+        estado = "Reprobado"
+
+    print(nombres[i], round(promedio, 1), estado)
+```
+
+Resultado:
+
+```text
+Ana 6.2 Aprobado
+Pedro 4.2 Aprobado
+Luis 5.0 Aprobado
+```
+
+`round(promedio, 1)` redondea a un decimal.
+
+Aquí se juntan casi todas las ideas: listas, matrices, bucles, condicionales y acumulación.
+
+---
+
+## 36. Ejemplo práctico: tablero de gato
+
+Una matriz también puede guardar texto.
+
+```python
+tablero = [
+    ["X", "O", "X"],
+    [" ", "X", "O"],
+    ["O", " ", "X"]
+]
+
+for fila in tablero:
+    print(" | ".join(fila))
+```
+
+Resultado:
+
+```text
+X | O | X
+  | X | O
+O |   | X
+```
+
+`" | ".join(fila)` une los elementos de la fila poniendo `" | "` entre ellos.
+
+¿Ganó la `X` por la diagonal?
+
+```python
+gano = True
+
+for i in range(3):
+    if tablero[i][i] != "X":
+        gano = False
+
+if gano:
+    print("X gana por la diagonal")
+```
+
+Resultado:
+
+```text
+X gana por la diagonal
+```
+
+---
+
+## 37. Ejercicio 1: contar positivos en una matriz
+
+```python
+matriz = [
+    [3, -1, 4],
+    [-5, 9, -2]
+]
+
+positivos = 0
+
+for fila in matriz:
+    for valor in fila:
+        if valor > 0:
+            positivos += 1
+
+print("Positivos:", positivos)
+```
+
+Resultado:
+
+```text
+Positivos: 3
+```
+
+---
+
+## 38. Ejercicio 2: tabla de multiplicar como matriz
+
+```python
+tabla = []
+
+for i in range(1, 6):
+    fila = []
+
+    for j in range(1, 6):
+        fila.append(i * j)
+
+    tabla.append(fila)
+
+for fila in tabla:
+    for valor in fila:
+        print(valor, end="\t")
+    print()
+```
+
+Resultado:
+
+```text
+1	2	3	4	5
+2	4	6	8	10
+3	6	9	12	15
+4	8	12	16	20
+5	10	15	20	25
+```
+
+`"\t"` es una tabulación y ayuda a alinear las columnas.
+
+---
+
+## 39. Ejercicio 3: buscar un valor
+
+Pide un número y di en qué posición está.
+
+```python
+matriz = [
+    [4, 7, 1],
+    [8, 2, 9]
+]
+
+buscado = int(input("Número a buscar: "))
+encontrado = False
+
+for i in range(len(matriz)):
+    for j in range(len(matriz[i])):
+        if matriz[i][j] == buscado:
+            print("Está en fila", i, "columna", j)
+            encontrado = True
+
+if not encontrado:
+    print("No está en la matriz")
+```
+
+Si ingresamos `2`:
+
+```text
+Número a buscar: 2
+Está en fila 1 columna 1
+```
+
+---
+
+## 40. Ejercicio para practicar solo
+
+Intenta crear un programa que:
+
+1. Pida el tamaño de una matriz cuadrada.
+2. La llene con datos del usuario.
+3. Muestre la matriz como tabla.
+4. Muestre la suma de su diagonal principal.
+5. Diga si la matriz es simétrica, es decir, si es igual a su transpuesta.
+
+Una posible idea inicial:
+
+```python
+def es_simetrica(matriz):
+    n = len(matriz)
+
+    for i in range(n):
+        for j in range(n):
+            # Aquí debes comparar matriz[i][j] con matriz[j][i]
+            pass
+
+    return True
+```
+
+`pass` significa "no hacer nada" y sirve para dejar un bloque pendiente.
+
+Intenta terminarlo antes de mirar una solución.
+
+---
+
+## 41. Resumen
+
+En esta segunda parte aprendiste a trabajar con datos más grandes.
+
+### Listas a fondo
+
+```python
+numeros[-1]
+numeros[1:4]
+"pera" in frutas
+sum(notas) / len(notas)
+```
+
+### Funciones
+
+```python
+def promedio(lista):
+    return sum(lista) / len(lista)
+```
+
+### Matrices
+
+```python
+matriz[fila][columna]
+```
+
+### Bucles anidados
+
+```python
+for fila in matriz:
+    for valor in fila:
+        print(valor)
+```
+
+Podemos resumirlo así:
+
+```text
+Listas
+    ↓
+Guardan varios valores
+
+Funciones
+    ↓
+Agrupan código reutilizable
+
+Listas de listas
+    ↓
+Forman matrices
+
+Bucles anidados
+    ↓
+Recorren filas y columnas
+```
+
+Con esto ya puedes representar tablas, tableros y datos de cursos completos.
+
+El siguiente paso recomendable sería aprender diccionarios y manejo de archivos, para guardar y leer información fuera del programa.

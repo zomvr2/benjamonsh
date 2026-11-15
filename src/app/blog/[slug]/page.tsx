@@ -73,21 +73,21 @@ export default async function BlogPage({ params }: Params) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <BlogHeader post={post} />
         <div className="wrap">
-          <div className="prose">
+          <div className="sheet prose">
             <MDXRemote source={escapeStrayLt(post.content)} components={components}
               options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
           </div>
         </div>
       </article>
       {(older || newer) && (
-        <nav className="wrap" aria-label="Más artículos" style={{ paddingBottom: "clamp(3rem,6vw,5rem)" }}>
+        <nav className="wrap" aria-label="Más artículos">
           <div className="post-nav">
-            {older && <Link href={`/blog/${older.slug}`}><small>Anterior</small><strong>{older.title}</strong></Link>}
-            {newer && <Link href={`/blog/${newer.slug}`}><small>Siguiente</small><strong>{newer.title}</strong></Link>}
+            {older && <Link href={`/blog/${older.slug}`}><small>← anterior</small><strong>{older.title}</strong></Link>}
+            {newer && <Link href={`/blog/${newer.slug}`}><small>siguiente →</small><strong>{newer.title}</strong></Link>}
           </div>
         </nav>
       )}
-      <ContactBand ink />
+      <ContactBand />
     </>
   );
 }

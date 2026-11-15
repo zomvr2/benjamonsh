@@ -1,7 +1,12 @@
 import "@/app/globals.css";
 import type { Metadata, Viewport } from "next";
+import { Atkinson_Hyperlegible_Mono, Atkinson_Hyperlegible_Next, Bricolage_Grotesque } from "next/font/google";
 import Analytics from "@/components/Analytics";
 import { SITE_URL } from "@/lib/site";
+
+const display = Bricolage_Grotesque({ subsets: ["latin", "latin-ext"], axes: ["opsz"], variable: "--font-display" });
+const text = Atkinson_Hyperlegible_Next({ subsets: ["latin", "latin-ext"], weight: ["400", "500", "600", "700"], variable: "--font-text" });
+const mono = Atkinson_Hyperlegible_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono" });
 
 const description =
   "Soy Benjamín Delgado. Desarrollo apps móviles con Expo y React Native, y sitios web de alta calidad en poco tiempo, para negocios que necesitan resultados rápido.";
@@ -41,12 +46,19 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ec3013",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f5f5" },
+    { media: "(prefers-color-scheme: dark)", color: "#161514" },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es-CL">
+    <html lang="es-CL" className={`${display.variable} ${text.variable} ${mono.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Aplica el tema guardado antes de pintar, sin parpadeo. */}
+        <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}` }} />
+      </head>
       <body>
         <Analytics />
         {children}

@@ -64,6 +64,8 @@ export default function Preview({ fm, slug, content }: { fm: Frontmatter; slug: 
     description: fm.description,
     date: fm.date,
     cover: adminMediaSrc(fm.cover),
+    coverCredit: fm.coverCredit,
+    coverSource: fm.coverSource,
     color: fm.color,
     tags: fm.tags,
     readingTime: Math.max(1, Math.round(words / 200)) * 60000,

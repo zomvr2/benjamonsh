@@ -45,7 +45,7 @@ export default function Editor({ initial, env, knownTags, isNew = false }: {
   const router = useRouter();
   const initialFm: Frontmatter = {
     title: initial.title, description: initial.description, date: initial.date, updated: initial.updated,
-    cover: initial.cover ?? "", color: initial.color, tags: initial.tags, draft: initial.draft,
+    cover: initial.cover ?? "", coverCredit: initial.coverCredit, coverSource: initial.coverSource, color: initial.color, tags: initial.tags, draft: initial.draft,
   };
   const [fm, setFm] = useState<Frontmatter>(initialFm);
   const [slug, setSlug] = useState(initial.slug);
@@ -446,6 +446,16 @@ export default function Editor({ initial, env, knownTags, isNew = false }: {
           <h2>Portada</h2>
           <CoverField value={fm.cover ?? ""} folder={mediaFolder} onChange={(v) => set("cover", v)}
             onError={(m) => setToast({ text: m, error: true })} onBusy={(d) => setUploads((n) => n + d)} />
+          <div className="field" style={{ marginTop: "1rem" }}>
+            <label htmlFor="cover-credit">Crédito de la foto</label>
+            <input id="cover-credit" className="input" placeholder="Autor o sitio (vacío si es tuya)"
+              value={fm.coverCredit ?? ""} onChange={(e) => set("coverCredit", e.target.value)} />
+          </div>
+          <div className="field">
+            <label htmlFor="cover-source">Enlace a la foto original</label>
+            <input id="cover-source" className="input" type="url" placeholder="https://…"
+              value={fm.coverSource ?? ""} onChange={(e) => set("coverSource", e.target.value)} />
+          </div>
         </section>
 
         <section className="side-sec">

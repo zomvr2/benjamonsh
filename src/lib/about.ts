@@ -20,6 +20,10 @@ export const PERSON = {
 export const SUMMARY =
   `Benjamín Delgado (benjamonsh) es un desarrollador web y de apps móviles de ${PERSON.city}, ${PERSON.country}, que trabaja a distancia con clientes de todo el mundo. Construye sitios web con Next.js y Astro, y apps para iOS y Android con Expo y React Native, para negocios que necesitan resultados en días y no en meses.`;
 
+/** La misma idea en primera persona: es lo que lee la gente en /sobre-mi. SUMMARY queda para buscadores y asistentes. */
+export const LEDE =
+  "Hago sitios web con Next.js y Astro, y apps para iOS y Android con Expo y React Native. Trabajo desde Coquimbo, a distancia, para negocios que necesitan resultados en días y no en meses.";
+
 export const BIO = [
   "Vivo y estudio en Coquimbo, Chile, y trabajo a distancia con clientes de todo el mundo.",
   "Hago productos digitales de principio a fin: desde la conversación inicial y el diseño hasta la base de datos, el despliegue y la publicación en las tiendas. Trabajo solo y directo con cada cliente, sin intermediarios, lo que me permite entregar rápido sin sacrificar el acabado.",
@@ -54,38 +58,55 @@ export const SKILLS: { area: string; text: string; tools: string[] }[] = [
   },
 ];
 
-export const FAQ: { q: string; a: string }[] = [
+// q/a en tercera persona: van al JSON-LD y a /llms.txt. tu/yo: cómo se muestran en el chat de /sobre-mi.
+export const FAQ: { q: string; a: string; tu: string; yo: string }[] = [
   {
     q: "¿Quién es benjamonsh?",
     a: SUMMARY,
+    tu: "¿y quién eres?",
+    yo: `Benjamín Delgado, pero en internet soy benjamonsh. Desarrollador independiente, de Coquimbo.`,
   },
   {
     q: "¿Qué servicios ofrece Benjamín Delgado?",
     a: "Desarrollo de sitios web (landing pages, sitios para negocios y plataformas a medida) y de apps móviles para iOS y Android. Se encarga del proyecto completo: diseño, desarrollo, base de datos, despliegue y publicación.",
+    tu: "¿qué haces exactamente?",
+    yo: `Sitios web (landing pages, sitios para negocios y plataformas a medida) y apps para iOS y Android. Me encargo de todo: diseño, desarrollo, base de datos, despliegue y publicación.`,
   },
   {
     q: "¿Con qué tecnologías trabaja?",
     a: "Next.js, React, Astro, TypeScript y Tailwind CSS en la web; Expo y React Native en móvil; y Node.js, PostgreSQL, Supabase, Appwrite, Vercel y Microsoft Azure en backend y nube.",
+    tu: "¿con qué trabajas?",
+    yo: `En la web, Next.js, React, Astro, TypeScript y Tailwind. En móvil, Expo y React Native. Y por detrás, Node.js, PostgreSQL, Supabase, Appwrite, Vercel y Azure.`,
   },
   {
     q: "¿Cuánto tarda un proyecto?",
     a: "Un sitio web suele estar listo en días. Las apps y plataformas más grandes se entregan por etapas, con avances que se pueden probar desde la primera semana. El plazo exacto se define al comienzo, junto con el alcance y el precio.",
+    tu: "¿cuánto te demoras?",
+    yo: `Un sitio web, días. Las apps y plataformas grandes van por etapas, y desde la primera semana ya puedes probar avances. El plazo exacto lo dejamos claro al comienzo, junto con el alcance y el precio.`,
   },
   {
     q: "¿Trabaja con clientes fuera de Chile?",
     a: `Sí. Vive y estudia en ${PERSON.city}, ${PERSON.country}, y trabaja a distancia con clientes de todo el mundo.`,
+    tu: "¿trabajas con gente fuera de Chile?",
+    yo: `Sí. Vivo en Coquimbo y trabajo a distancia, así que da lo mismo dónde estés.`,
   },
   {
     q: "¿Atiende en inglés?",
     a: "Sí. Su idioma nativo es el español y tiene buen manejo del inglés, así que puede comunicarse y trabajar en inglés con clientes de otros países.",
+    tu: "¿y en inglés?",
+    yo: `También. Mi idioma es el español, pero me manejo bien en inglés para hablar y trabajar.`,
   },
   {
     q: "¿Cómo se escribe benjamonsh?",
     a: "Se escribe b-e-n-j-a-m-o-n-s-h, todo en minúscula: «benja» + «mon» + «sh». A veces lo escriben benjamosh o benjamonch; la dirección correcta es benjamonsh.cl.",
+    tu: "¿cómo se escribe benjamonsh?",
+    yo: `b-e-n-j-a-m-o-n-s-h, todo en minúscula: «benja» + «mon» + «sh». Me han escrito benjamosh y benjamonch; la dirección correcta es benjamonsh.cl.`,
   },
   {
     q: "¿Cómo contactar a Benjamín Delgado?",
     a: `Por correo a ${EMAIL} o con el formulario de ${SITE_URL}/contacto. Responde con una propuesta concreta de alcance, plazo y precio.`,
+    tu: "¿cómo te contacto?",
+    yo: `Escríbeme a ${EMAIL} o usa el formulario de /contacto. Te respondo con alcance, plazo y precio concretos.`,
   },
 ];
 

@@ -1,18 +1,23 @@
 import Link from "next/link";
 import { EMAIL } from "@/lib/site";
 
-// En las páginas de artículo va en tinta para no sumar el rojo al color del artículo.
-export default function ContactBand({ ink = false }: { ink?: boolean }) {
+// Cierre de página: una ventana de «mensaje nuevo» ya dirigida a mi correo.
+export default function ContactBand() {
   return (
-    <section className={ink ? "band band--ink" : "band"} aria-labelledby="contacto-titulo" id="contacto">
-      <div className="wrap">
-        <h2 id="contacto-titulo">¿Tienes una idea? Cuéntamela.</h2>
-        <div className="band-foot">
-          <div>
-            <a className="band-mail" href={`mailto:${EMAIL}`}>{EMAIL}</a>
-            <p>Te respondo con una propuesta concreta ;)</p>
+    <section className="band wrap" aria-labelledby="contacto-titulo" id="contacto">
+      <div className="win compose">
+        <div className="win-bar"><div className="dots" aria-hidden="true"><i /><i /><i /></div><span className="win-title">mensaje nuevo</span><span /></div>
+        <div className="compose-fields">
+          <div><span>Para:</span><a href={`mailto:${EMAIL}`}>{EMAIL}</a></div>
+          <div><span>Asunto:</span>tu proyecto</div>
+        </div>
+        <div className="compose-body">
+          <h2 id="contacto-titulo">¿tienes una idea? cuéntamela.</h2>
+          <p>Te respondo con alcance, plazo y precio claros. Si hay un camino más simple que funciona igual, te lo digo ;)</p>
+          <div className="actions">
+            <Link className="btn" href="/contacto">cuéntame tu proyecto</Link>
+            <a className="btn btn--line" href={`mailto:${EMAIL}`}>escribir un correo</a>
           </div>
-          <Link className="btn btn--paper" href="/contacto">Cuéntame tu proyecto</Link>
         </div>
       </div>
     </section>

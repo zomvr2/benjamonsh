@@ -1,6 +1,6 @@
 # benjamonsh.cl
 
-Sitio personal de Benjamín Delgado (benjamonsh). Next.js 15, MDX y Tailwind 4, con el diseño del Manual de marca v1.0.
+Sitio personal de Benjamín Delgado (benjamonsh). Next.js 16, MDX y Tailwind 4, con el diseño del Manual de marca v2.0 (ver `DESIGN.md`).
 
 ## Desarrollo
 
@@ -11,7 +11,7 @@ npm run dev
 
 ## Dónde está cada cosa
 
-- `src/app/globals.css`: sistema visual (colores, Archivo, radio 0, filos de 2 px).
+- `src/app/globals.css`: sistema visual del manual v2.0 (tapete con puntos, píldoras Aqua, ventanas, burbujas). Fuentes en `src/app/layout.tsx`.
 - `src/lib/site.ts`: correo, redes y proyectos.
 - `src/content/*.mdx`: artículos del blog.
 - `src/app/`: páginas (inicio, proyectos, blog, temas, contacto, enlaces, 404, sitemap y robots).
@@ -68,15 +68,22 @@ title: "Título en minúscula inicial"
 description: "Una o dos frases."
 date: "2026-09-15"
 cover: "https://…"
-color: "cian"          # cian, violeta, ambar o verde: un solo color por artículo
+color: "cian"          # cian (bondi), violeta (uva), ambar (sol) o verde (lima)
 tags: ["tema", "otro-tema"]
 draft: true            # opcional: borrador, no se publica
 ---
 ```
 
-Las tablas usan sintaxis Markdown (GFM). La foto de portada se muestra en blanco y negro.
+Las tablas usan sintaxis Markdown (GFM). La foto de portada se muestra a color, bajo la cabecera del artículo.
 
 ## Reglas de marca rápidas
 
-Radio 0, todo alineado a la izquierda, sin degradados ni sombras, un color por pieza,
-«benjamonsh» siempre en minúscula y máximo un guiño `;)` por texto, al cierre.
+Manual de marca v2.0, completo en `DESIGN.md`. Lo esencial:
+
+- «benjamonsh» siempre en minúscula y máximo un guiño `;)` por texto, al cierre.
+- Cercano y amigable: títulos, menú y botones en minúscula; el texto corrido con mayúsculas normales.
+- Tapete gris `#f5f5f5` con puntos, ventanas macOS para capturas, burbujas para conversar.
+- Una sola acción en mandarina (píldora con brillo, texto oscuro); los sabores frutilla, sol, lima, uva y bondi solo en stickers y en el color de cada artículo.
+- Bricolage Grotesque para títulos, Atkinson Hyperlegible Next para texto, Atkinson Hyperlegible Mono solo para datos.
+- Stickers solo en el inicio y la 404; `/admin` y `/benjapuntos` van sobrios.
+- Nada de testimonios, clientes ni precios inventados.

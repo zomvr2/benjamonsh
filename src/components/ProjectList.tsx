@@ -7,13 +7,17 @@ function Shot({ project }: { project: Project }) {
   const style = project.scrollPan
     ? ({ "--pan": project.scrollPan } as CSSProperties)
     : undefined;
+  const host = project.url ? project.url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "") : project.name.toLowerCase();
   return (
-    <div className={`shot${project.scrollPan ? " shot--scroll" : ""}`}>
-      <span className="shot-fallback" aria-hidden="true">{project.name.toLowerCase()}</span>
-      {!failed && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={project.image} alt={`Captura de ${project.name}`} loading="lazy" style={style} onError={() => setFailed(true)} />
-      )}
+    <div className="win">
+      <div className="win-bar"><div className="dots" aria-hidden="true"><i /><i /><i /></div><span className="win-title">{host}</span><span /></div>
+      <div className={`shot${project.scrollPan ? " shot--scroll" : ""}`}>
+        <span className="shot-fallback" aria-hidden="true">{project.name.toLowerCase()}</span>
+        {!failed && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={project.image} alt={`Captura de ${project.name}`} loading="lazy" style={style} onError={() => setFailed(true)} />
+        )}
+      </div>
     </div>
   );
 }

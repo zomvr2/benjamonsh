@@ -13,11 +13,10 @@ export default function Blog() {
   const posts = getAllPosts();
   return (
     <>
-      <PageHead label="Blog" meta={`${posts.length} artículos`} title="Blog."
-        lede="Escribo sobre código, música, básquet y lo que me tenga pensando esa semana.">
+      <PageHead title="blog" lede={`Escribo sobre código, música, básquet y lo que me tenga pensando esa semana. ${posts.length} ${posts.length === 1 ? "artículo" : "artículos"} hasta ahora.`}>
         <nav aria-label="Temas"><TagList tags={getAllTags()} /></nav>
       </PageHead>
-      <section className="wrap section">
+      <section className="wrap section" style={{ paddingTop: "clamp(1.5rem, 4vw, 3rem)" }}>
         <PostList posts={posts} heading="h2" />
       </section>
     </>

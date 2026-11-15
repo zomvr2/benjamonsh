@@ -4,7 +4,9 @@ import Footer from "@/components/Footer";
 import ContactBand from "@/components/ContactBand";
 import ProjectList from "@/components/ProjectList";
 import BlogSection from "@/components/home/BlogSection";
-import { PROJECTS } from "@/lib/site";
+import Stickers from "@/components/home/Stickers";
+import ChatReveal from "@/components/home/ChatReveal";
+import type { CSSProperties } from "react";
 import { homeJsonLd } from "@/lib/about";
 
 export const metadata = {
@@ -18,48 +20,47 @@ export default function Home() {
       <main id="contenido">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd()).replace(/</g, "\\u003c") }} />
 
-        <section className="hero">
-          <div className="wrap">
-            <span className="hero-wink" aria-hidden="true">;)</span>
-            <h1>
-              <span className="line">Webs y apps</span>{" "}
-              <span className="line">que funcionan,</span>{" "}
-              <span className="line">en días.</span>
-            </h1>
-            <div className="hero-foot">
-              <p>Soy Benjamín Delgado. Desarrollo apps móviles con Expo y React Native, y sitios web de alta calidad en poco tiempo, para negocios que no pueden esperar un trimestre.</p>
-              <div className="actions">
-                <Link className="btn" href="/contacto">Cuéntame tu proyecto</Link>
-                <Link className="btn btn--line" href="/proyectos">Ver proyectos</Link>
-              </div>
-            </div>
+        <section className="hero wrap">
+          <Stickers />
+          <h1>hago webs y apps que funcionan, en días <span className="wink">;)</span></h1>
+          <p className="lede">Soy Benjamín, desarrollador independiente en Coquimbo. Me cuentas qué necesita tu negocio y lo construyo rápido y bien, sin intermediarios.</p>
+          <div className="actions">
+            <Link className="btn" href="/contacto">cuéntame tu proyecto</Link>
+            <Link className="btn btn--line" href="/proyectos">ver proyectos</Link>
           </div>
         </section>
 
-        <section className="wrap section" aria-labelledby="que-hago">
-          <div className="strip"><span id="que-hago">Qué hago</span><span>2 servicios</span></div>
-          <h2 className="section-title">Lo rápido se nota en el plazo, no en el acabado.</h2>
-          <div className="grid-rules grid-2">
-            <div><h3>Sitios web</h3><p>Sitios de alta calidad listos en poco tiempo: rápidos, fáciles de actualizar y hechos para que tus clientes te encuentren y te escriban.</p></div>
-            <div><h3>Apps móviles</h3><p>Apps para iOS y Android con Expo y React Native, desde la primera versión hasta la publicación en las tiendas.</p></div>
+        <section className="wrap section" aria-labelledby="que-hago" style={{ paddingTop: 0 }}>
+          <div className="section-head">
+            <h2 className="section-title" id="que-hago">esto es lo que hago</h2>
           </div>
+          <ChatReveal>
+            <p className="chat-time">hoy</p>
+            <p className="msg msg--visita" style={{ "--d": "0ms" } as CSSProperties}>hola! ¿qué haces exactamente?</p>
+            <div className="msg msg--benja" style={{ "--d": "280ms" } as CSSProperties}>
+              <strong>sitios web</strong>
+              <p>Sitios de alta calidad listos en poco tiempo: rápidos, fáciles de actualizar y hechos para que tus clientes te encuentren y te escriban.</p>
+            </div>
+            <div className="msg msg--benja" style={{ "--d": "380ms" } as CSSProperties}>
+              <strong>apps móviles</strong>
+              <p>Apps para iOS y Android con Expo y React Native, desde la primera versión hasta la publicación en las tiendas.</p>
+            </div>
+            <p className="msg msg--visita" style={{ "--d": "680ms" } as CSSProperties}>¿y cuánto se demora?</p>
+            <p className="msg msg--benja" style={{ "--d": "880ms" } as CSSProperties}>Días, no meses. Lo rápido se nota en el plazo, no en el acabado.</p>
+            <p className="msg msg--visita" style={{ "--d": "1180ms" } as CSSProperties}>¿y cómo partimos?</p>
+            <p className="msg msg--benja" style={{ "--d": "1380ms" } as CSSProperties}>Me cuentas la idea: qué necesitas, para quién y para cuándo.</p>
+            <p className="msg msg--benja" style={{ "--d": "1480ms" } as CSSProperties}>Te propongo la opción simple, con alcance, plazo y precio claros. Si hay un camino más barato que funciona igual, te lo digo.</p>
+            <p className="msg msg--benja" style={{ "--d": "1580ms" } as CSSProperties}>Y en días lo tienes funcionando, con avances que puedes probar desde el principio.</p>
+          </ChatReveal>
         </section>
 
         <section className="wrap section" id="proyectos" aria-labelledby="proyectos-t" style={{ paddingTop: 0 }}>
-          <div className="strip"><span id="proyectos-t">Proyectos</span><span>{PROJECTS.length} publicados</span></div>
-          <h2 className="section-title">Trabajo reciente.</h2>
+          <div className="section-head">
+            <h2 className="section-title" id="proyectos-t">trabajo reciente</h2>
+            <p>Proyectos reales, publicados y funcionando.</p>
+          </div>
           <ProjectList />
-          <Link className="more" href="/proyectos">Ver todos los proyectos</Link>
-        </section>
-
-        <section className="wrap section" aria-labelledby="proceso-t" style={{ paddingTop: 0 }}>
-          <div className="strip"><span id="proceso-t">Cómo trabajo</span><span>3 pasos</span></div>
-          <h2 className="section-title">Directo, sin vueltas.</h2>
-          <ol className="grid-rules grid-3" style={{ listStyle: "none", paddingLeft: 0 }}>
-            <li><span className="step-n">1</span><h3>Me cuentas la idea</h3><p>Una conversación corta para entender qué necesitas, para quién y para cuándo.</p></li>
-            <li><span className="step-n">2</span><h3>Te propongo la opción simple</h3><p>Alcance, plazo y precio claros. Si hay un camino más barato que funciona igual, te lo digo.</p></li>
-            <li><span className="step-n">3</span><h3>Lo tienes funcionando</h3><p>Entregas en días, con avances que puedes probar y código listo para crecer.</p></li>
-          </ol>
+          <div style={{ textAlign: "center" }}><Link className="more" href="/proyectos">ver todos los proyectos</Link></div>
         </section>
 
         <BlogSection />
