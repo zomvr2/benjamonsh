@@ -711,3 +711,18 @@ select.input option { background-color: var(--bg); color: var(--fg); }
 .choice span { transition: background .15s var(--ease-out), color .15s var(--ease-out), transform .16s var(--ease-out); }
 .choice span:active { transform: scale(.97); }
 
+/* Desenfoque al pasar: cada bloque se nubla mientras sale por arriba.
+   --salida (0→1) la mueve el scroll; --vel (ScrollVelocity.tsx) lo marca más al bajar rápido y lo suaviza al subir. */
+@property --salida { syntax: "<number>"; inherits: false; initial-value: 0; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    :is(#contenido > section, #contenido > .wrap:not(.post-layout), .prose) > :not(.toc-side, script) {
+      animation: desenfoque linear both;
+      animation-timeline: view();
+      animation-range: exit 20% exit 100%;
+      filter: blur(calc(var(--salida) * clamp(.5px, 2px + var(--vel, 0) * 6px, 8px)));
+      opacity: calc(1 - var(--salida) * .4);
+    }
+  }
+}
+@keyframes desenfoque { to { --salida: 1; } }

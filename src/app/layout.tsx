@@ -2,6 +2,7 @@ import "@/app/globals.css";
 import type { Metadata, Viewport } from "next";
 import { Atkinson_Hyperlegible_Mono, Atkinson_Hyperlegible_Next, Bricolage_Grotesque } from "next/font/google";
 import Analytics from "@/components/Analytics";
+import ScrollVelocity from "@/components/ScrollVelocity";
 import { SITE_URL } from "@/lib/site";
 
 const display = Bricolage_Grotesque({ subsets: ["latin", "latin-ext"], axes: ["opsz"], variable: "--font-display" });
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body>
         <Analytics />
+        <ScrollVelocity />
         {children}
       </body>
     </html>
