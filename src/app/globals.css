@@ -712,15 +712,19 @@ select.input option { background-color: var(--bg); color: var(--fg); }
 .choice span:active { transform: scale(.97); }
 
 /* Desenfoque al pasar: cada bloque se nubla mientras sale por arriba.
-   --salida (0→1) la mueve el scroll; --vel (ScrollVelocity.tsx) lo marca más al bajar rápido y lo suaviza al subir. */
+   --salida (0→1) la mueve el scroll; --dir (ScrollDirection.tsx) lo marca más al bajar y casi nada al subir. */
 @property --salida { syntax: "<number>"; inherits: false; initial-value: 0; }
+@property --dir { syntax: "<number>"; inherits: true; initial-value: 1; }
+html[data-scroll="up"] { --dir: -1; }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
+    html { transition: --dir .9s ease-in-out; }
     :is(#contenido > section, #contenido > .wrap:not(.post-layout), .prose) > :not(.toc-side, script) {
-      animation: desenfoque linear both;
+      animation: desenfoque ease-in-out both;
       animation-timeline: view();
-      animation-range: exit 20% exit 100%;
-      filter: blur(calc(var(--salida) * clamp(.5px, 2px + var(--vel, 0) * 6px, 8px)));
+      /* Al menos ~400px de recorrido: los bloques bajitos (un párrafo, un título) no se nublan de golpe. */
+      animation-range: exit -80px exit max(320px, 100%);
+      filter: blur(calc(var(--salida) * (3px + var(--dir) * 2px)));
       opacity: calc(1 - var(--salida) * .4);
     }
   }
