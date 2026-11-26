@@ -171,7 +171,6 @@ select.input { background-image: none; cursor: pointer; }
 .ed-preview { min-width: 0; overflow: hidden; background: var(--bg); }
 .ed-preview .prose { padding-inline: var(--pad); max-width: 46rem; }
 .ed-preview .post-card-hero h1 { font-size: clamp(2rem, 4.5vw, 4rem); overflow-wrap: anywhere; }
-.ed-preview .cover img { max-height: 22rem; }
 .ed-preview .preview-note { padding: .5rem var(--pad); font-size: .8125rem; font-weight: 600; color: var(--soft); border-bottom: 1px solid var(--hair); }
 .ed-preview .preview-error { margin: 1rem var(--pad); }
 .ed-preview a { pointer-events: none; }

@@ -7,32 +7,35 @@ export default function BlogHeader({ post }: { post: PostMeta }) {
   const accent = ACCENTS[post.color];
   return (
     <header className="post-hero wrap">
-      <div className="post-card-hero" style={{ "--accent": accent.bg, "--on-accent": accent.fg } as React.CSSProperties}>
-        <div className="crumb">
-          <Link href="/blog">← blog</Link>
-          <span>{formatReadingTime(post.readingTime)}</span>
+      {/* La portada va dentro de la tarjeta de color, al lado del título: no empuja el artículo hacia abajo. */}
+      <div className={`post-card-hero${post.cover ? " has-cover" : ""}`} style={{ "--accent": accent.bg, "--on-accent": accent.fg } as React.CSSProperties}>
+        <div className="hero-text">
+          <div className="crumb">
+            <Link href="/blog">← blog</Link>
+            <span>{formatReadingTime(post.readingTime)}</span>
+          </div>
+          <h1>{post.title}</h1>
+          <p className="lede">{post.description}</p>
+          <div className="post-meta">
+            <span>Por Benjamín Delgado</span>
+            <time dateTime={post.date}>{formatDate(post.date)}</time>
+            <TagList tags={post.tags} />
+          </div>
         </div>
-        <h1>{post.title}</h1>
-        <p className="lede">{post.description}</p>
-        <div className="post-meta">
-          <span>Por Benjamín Delgado</span>
-          <time dateTime={post.date}>{formatDate(post.date)}</time>
-          <TagList tags={post.tags} />
-        </div>
+        {post.cover && (
+          <figure className="cover">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={post.cover} alt="" />
+            {post.coverCredit && (
+              <figcaption className="cover-credit">
+                Foto: {/^https?:\/\//.test(post.coverSource ?? "")
+                  ? <a href={post.coverSource} target="_blank" rel="noopener noreferrer">{post.coverCredit}</a>
+                  : post.coverCredit}
+              </figcaption>
+            )}
+          </figure>
+        )}
       </div>
-      {post.cover && (
-        <figure className="cover">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={post.cover} alt="" />
-          {post.coverCredit && (
-            <figcaption className="cover-credit">
-              Foto: {/^https?:\/\//.test(post.coverSource ?? "")
-                ? <a href={post.coverSource} target="_blank" rel="noopener noreferrer">{post.coverCredit}</a>
-                : post.coverCredit}
-            </figcaption>
-          )}
-        </figure>
-      )}
     </header>
   );
 }

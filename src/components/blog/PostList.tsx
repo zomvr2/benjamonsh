@@ -11,9 +11,10 @@ export default function PostList({
   return (
     <ol className="posts" reversed>
       {posts.map((p) => (
-        <li className="post-card" key={p.slug} style={{ "--accent": ACCENTS[p.color].bg } as React.CSSProperties}>
+        <li className="post-card" key={p.slug} style={{ "--accent": ACCENTS[p.color].bg, "--on-accent": ACCENTS[p.color].fg } as React.CSSProperties}>
           <div className="post-thumb" aria-hidden="true">
-            {p.cover && <img src={p.cover} alt="" loading="lazy" decoding="async" />}
+            {/* Todas las tarjetas son un cartel: color del artículo + su tema en grande. La foto se queda en el artículo. */}
+            {p.tags[0] && <span className="post-thumb-tag" style={{ "--len": p.tags[0].length + 1 } as React.CSSProperties}>#{p.tags[0]}</span>}
           </div>
           <div className="post-body">
             <small className="post-date"><time dateTime={p.date}>{formatDate(p.date)}</time> · {formatReadingTime(p.readingTime)}</small>
