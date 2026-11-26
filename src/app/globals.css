@@ -454,12 +454,13 @@ input, textarea { caret-color: var(--mandarina); }
 .has-cover h1 { font-size: clamp(2.25rem, 4.6vw, 3.75rem); }
 .has-cover .post-meta .tags { margin-left: 0; }
 /* Foto en dos tonos: en gris y multiplicada sobre el color del artículo (negro → negro, blanco → color). */
+/* Proporción fija: la foto mide lo mismo en todos los artículos, sin importar el largo del texto. */
 .cover {
-  position: relative; display: flex; min-height: 0; margin: 0;
+  position: relative; align-self: center; aspect-ratio: 4 / 5; margin: 0;
   border-radius: 18px; overflow: hidden; background: var(--accent); isolation: isolate;
 }
 .cover img {
-  flex: 1; width: 100%; min-height: 14rem; max-height: 26rem; object-fit: cover;
+  display: block; width: 100%; height: 100%; object-fit: cover;
   filter: grayscale(1) contrast(1.25) brightness(1.7); mix-blend-mode: multiply;
 }
 .cover-credit {
@@ -470,7 +471,7 @@ input, textarea { caret-color: var(--mandarina); }
 .cover-credit a { color: inherit; text-decoration: underline; }
 @media (max-width: 760px) {
   .post-card-hero.has-cover { grid-template-columns: 1fr; }
-  .cover img { min-height: 0; aspect-ratio: 2 / 1; max-height: none; }
+  .cover { aspect-ratio: 2 / 1; }
   /* En móvil, solo las 3 primeras etiquetas: la cabecera no debe tapar toda la pantalla. */
   .post-card-hero .tags li:nth-child(n+4) { display: none; }
 }
