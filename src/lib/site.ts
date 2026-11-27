@@ -41,4 +41,12 @@ export const PROJECTS: Project[] = [
     badges: ["100 SEO", "2/2 navegación agéntica"],
     scrollPan: "-83%",
   },
+  {
+    name: "Oficina",
+    kind: "Orquestador de agentes de IA",
+    image: "/oficina.webp",
+    description: "Una oficina virtual donde un equipo de agentes de IA (Claude Code, Codex y OpenCode) trabaja en mis proyectos. Le escribo una idea, la Jefa la divide en subtareas y un router que aprende de los resultados elige qué agente hace cada una; cada uno trabaja en su propia rama de git, se corren los tests y otro motor revisa antes de integrar. Todo se ve en vivo en pixel art. Hecho con Next.js, Phaser, Fastify, SQLite con Drizzle y MCP.",
+    badges: ["En desarrollo", "Claude Code · Codex · OpenCode"],
+    scrollPan: "-66.6%",
+  },
 ];
