@@ -49,4 +49,12 @@ export const PROJECTS: Project[] = [
     badges: ["En desarrollo", "Claude Code · Codex · OpenCode"],
     scrollPan: "-66.6%",
   },
+  {
+    name: "Synqra",
+    kind: "App de escritorio para DJ",
+    image: "/synqra.webp",
+    description: "Software de DJ para Windows pensado para tocar en clubes: cuatro decks con mixer, ecualizador, loops, hot cues, sampler, efectos y automix. Al cargar un tema detecta tempo, tonalidad y frases (intro, subidas, bajadas, coros, outro), separa voz, batería, bajo y resto con IA (HTDemucs), y se controla con MIDI o HID, incluida la Reloop Beatmix. Hecho en Rust con egui, audio por WASAPI y ASIO, Ableton Link y scripts en Rhai.",
+    badges: ["En desarrollo", "Rust · egui", "Stems con IA"],
+    scrollPan: "-66.6%",
+  },
 ];
